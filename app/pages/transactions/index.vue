@@ -340,6 +340,12 @@ import autoTable from 'jspdf-autotable'
 
 definePageMeta({ layout: 'dashboard' })
 
+useSeoMeta({
+  title: 'Riwayat Transaksi ',
+  robots: 'noindex, nofollow'
+})
+
+
 const records = ref<AccountingItem[]>([])
 const availableTypes = ref<CategoryType[]>([])
 const availableCategories = ref<CategoryItem[]>([])
@@ -515,10 +521,17 @@ const submitForm = async () => {
   isSubmitting.value = true
   try {
     const token = localStorage.getItem('token') || ''
-    const payload = { ...form.value, amount: Number(form.value.amount), date: form.value.date || new Date().toISOString().split('T')[0] }
+    const payload: any = { 
+      amount: Number(form.value.amount),
+      description: form.value.description || '',
+      category_types_id: form.value.category_types_id,
+      category_id: form.value.category_id,
+      financial_id: form.value.financial_id,
+      date: form.value.date || new Date().toISOString().split('T')[0]
+    }
     const response = isEditing.value 
-      ? await updateAccountingRecord(selectedRecord.value!.id, payload, token)
-      : await createAccountingRecord(payload, token)
+      ? await updateAccountingRecord(selectedRecord.value!.id, payload as any, token)
+      : await createAccountingRecord(payload as any, token)
     if (response.ok) {
       alertSuccess(isEditing.value ? 'Data Diupdate' : 'Berhasil Dicatat')
       isFormModalOpen.value = false

@@ -1,6 +1,11 @@
-export interface AccountingItem {
+/**
+ * Public Investment API Helper
+ */
+
+export interface InvestmentItem {
   id: string
-  category_types: {
+  name: string
+  investment_category: {
     id: string
     name: string
     created_at: string
@@ -12,48 +17,34 @@ export interface AccountingItem {
     description: string
     created_at: string
   }
-  category: {
-    id: string
-    name: string
-    created_at: string
-  }
+  purchase_date: string
+  transaction_date: string
   amount: number
-  description: string
-  date: string
   created_at: string
 }
 
-export interface CreateAccountingPayload {
-  category_types_id: string
+export interface CreateInvestmentPayload {
+  name: string
+  investment_category_id: string
   financial_id: string
-  category_id: string
+  purchase_date: string
+  transaction_date: string
   amount: number
-  description: string
-  date: string
 }
 
 /**
- * GET /public/accounting
+ * GET /public/investment
  */
-export const getAccountingRecords = async (token: string, page: number = 1, pageSize: number = 10, search: string = '', month: number | null = null, year: number | null = null) => {
+export const getInvestments = async (token: string, page: number = 1, pageSize: number = 10, search: string = '') => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
   const params = new URLSearchParams()
   params.append('page', page.toString())
   params.append('page_size', pageSize.toString())
-  if (search) {
-    params.append('search', search)
-  }
-  if (month) {
-    params.append('month', month.toString())
-  }
-  if (year) {
-    params.append('year', year.toString())
-  }
+  if (search) params.append('search', search)
 
-
-  return await fetch(`${baseUrl}/public/accounting?${params.toString()}`, {
+  return await fetch(`${baseUrl}/public/investment?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -63,13 +54,13 @@ export const getAccountingRecords = async (token: string, page: number = 1, page
 }
 
 /**
- * POST /public/accounting
+ * POST /public/investment
  */
-export const createAccountingRecord = async (payload: CreateAccountingPayload, token: string) => {
+export const createInvestment = async (payload: CreateInvestmentPayload, token: string) => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
-  return await fetch(`${baseUrl}/public/accounting`, {
+  return await fetch(`${baseUrl}/public/investment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -81,13 +72,13 @@ export const createAccountingRecord = async (payload: CreateAccountingPayload, t
 }
 
 /**
- * PUT /public/accounting/:id
+ * PUT /public/investment/:id
  */
-export const updateAccountingRecord = async (id: string, payload: Partial<CreateAccountingPayload>, token: string) => {
+export const updateInvestment = async (id: string, payload: CreateInvestmentPayload, token: string) => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
-  return await fetch(`${baseUrl}/public/accounting/${id}`, {
+  return await fetch(`${baseUrl}/public/investment/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -99,13 +90,13 @@ export const updateAccountingRecord = async (id: string, payload: Partial<Create
 }
 
 /**
- * DELETE /public/accounting/:id
+ * DELETE /public/investment/:id
  */
-export const deleteAccountingRecord = async (id: string, token: string) => {
+export const deleteInvestment = async (id: string, token: string) => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
-  return await fetch(`${baseUrl}/public/accounting/${id}`, {
+  return await fetch(`${baseUrl}/public/investment/${id}`, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -113,15 +104,19 @@ export const deleteAccountingRecord = async (id: string, token: string) => {
     },
   })
 }
-
 /**
- * GET /public/accounting/last-6-months
+ * GET /public/investment-category
  */
-export const getAccountingLast6Months = async (token: string) => {
+export const getPublicInvestmentCategories = async (token: string, page: number = 1, pageSize: number = 10, search: string = '') => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
-  return await fetch(`${baseUrl}/public/accounting/last-6-months`, {
+  const params = new URLSearchParams()
+  params.append('page', page.toString())
+  params.append('page_size', pageSize.toString())
+  if (search) params.append('search', search)
+
+  return await fetch(`${baseUrl}/public/investment-category?${params.toString()}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -129,4 +124,3 @@ export const getAccountingLast6Months = async (token: string) => {
     },
   })
 }
-

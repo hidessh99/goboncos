@@ -10,13 +10,22 @@ import {
 const config = useRuntimeConfig()
 const appName = config.public.APP_NAME || 'GO Boncos'
 
+
 // SEO
-useHead({
+useSeoMeta({
   title: `${appName} - Catat Keuangan Tanpa Overthinking`,
-  meta: [
-    { name: 'description', content: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}.` }
-  ]
+  ogTitle: `${appName} - Catat Keuangan Tanpa Overthinking`,
+  description: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z.`,
+  ogDescription: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z.`,
+  ogImage: '/og-image.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: `${appName} - Catat Keuangan Tanpa Overthinking`,
+  twitterDescription: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}.`,
+  author: 'GO Boncos Team',
+  ogType: 'website',
+  ogLocale: 'id_ID',
 })
+
 
 definePageMeta({ layout: false })
 
@@ -73,7 +82,28 @@ const features = [
     icon: BarChart3
   }
 ]
+
+
+const faqs = [
+  {
+    question: `Berapa harga langganan ${appName}?`,
+    answer: 'Saat ini tersedia tiga pilihan langganan: 1 bulan Rp 19.000, 3 bulan Rp 49.000, dan 6 bulan Rp 99.000. Seluruh paket punya manfaat fitur yang sama.'
+  },
+  {
+    question: 'Apakah data keuangan gue aman di sini?',
+    answer: 'Keamanan lu itu prioritas. Data lu dienkripsi secara aman dan kita gak akan pernah share atau jual data transaksi ke pihak ketiga mana pun.'
+  },
+  {
+    question: 'Bisa otomatis narik data dari bank / e-wallet gak?',
+    answer: 'Untuk sekarang kita fokus ke mode input manual dan smart tracking. Tujuannya biar lu bisa lebih \'mindful\' dan ngerasain langsung kemana aja tuh duit lu pergi.'
+  },
+  {
+    question: 'Asisten AI-nya bisa bantu apa aja sih?',
+    answer: 'Macem-macem! Asisten AI bisa bantu input transaksi harian lo (pemasukan, pengeluaran, transfer), baca struk/mutasi untuk jadi draft transaksi, analisis habit pengeluaran, dan kasih peringatan kalau udah over budget.'
+  }
+]
 </script>
+
 
 <template>
   <div class="min-h-screen bg-white font-sans text-zinc-900 selection:bg-rose-100 selection:text-rose-900">
@@ -268,21 +298,30 @@ const features = [
       </section>
 
       <!-- FAQ Section -->
-      <section class="py-24 lg:py-32">
-        <div class="container mx-auto px-4 max-w-4xl">
-          <h2 class="text-3xl font-extrabold text-center mb-16">Masih Bingung?</h2>
-          <div class="space-y-4">
-             <div v-for="i in 3" :key="i" class="rounded-2xl border border-zinc-100 p-6 flex items-center justify-between group cursor-pointer hover:bg-zinc-50 transition-colors">
-               <div class="font-bold text-lg">
-                 {{ i === 1 ? 'Aplikasi ini gratis gak sih?' : i === 2 ? 'Aman gak dataku kalau nyambung bank?' : 'Gimana caranya biar gak boncos?' }}
-               </div>
-               <div class="h-8 w-8 rounded-full border border-zinc-200 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-                 <ChevronRight class="h-4 w-4" />
-               </div>
+      <section class="py-24 lg:py-32 bg-white">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="text-center mb-16 space-y-4">
+            <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900">
+              Frequently Asked <span class="text-rose-600">Questions.</span>
+            </h2>
+            <p class="text-zinc-500 text-sm sm:text-base max-w-2xl mx-auto font-medium">
+              Masih ragu buat pakai {{ appName }}? Cek jawaban dari pertanyaan yang sering ditanyain ini.
+            </p>
+          </div>
+
+          <div class="grid gap-6">
+             <div 
+               v-for="(faq, i) in faqs" 
+               :key="i" 
+               class="bg-white border border-zinc-100 rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 shadow-sm hover:shadow-md transition-all duration-300 group"
+             >
+                <h3 class="text-lg sm:text-xl font-bold text-zinc-900 mb-4 group-hover:text-rose-600 transition-colors">{{ faq.question }}</h3>
+                <p class="text-zinc-500 text-sm sm:text-base leading-relaxed font-medium">{{ faq.answer }}</p>
              </div>
           </div>
         </div>
       </section>
+
 
       <!-- CTA Footer Section -->
       <section id="testimoni" class="container mx-auto px-4 pb-24">

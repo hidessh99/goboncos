@@ -359,6 +359,12 @@ import autoTable from 'jspdf-autotable'
 
 definePageMeta({ layout: 'dashboard' })
 
+useSeoMeta({
+  title: 'Aset & Tabungan ',
+  robots: 'noindex, nofollow'
+})
+
+
 const financials = ref<FinancialItem[]>([])
 const categories = ref<FinancialCategory[]>([])
 const isLoading = ref(true)

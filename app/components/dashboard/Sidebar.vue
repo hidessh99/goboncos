@@ -22,13 +22,58 @@
     </SidebarHeader>
 
     <SidebarGroup>
-       <SidebarGroupLabel>Transaksi Area</SidebarGroupLabel>
+       <SidebarGroupLabel>Accounting Area</SidebarGroupLabel>
                 <!-- Kategori -->
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Transaksi">
+            <NuxtLink to="/transactions">
+              <LayoutGrid class="h-4 w-4" />
+              <span>Transaksi</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Laporan">
+            <NuxtLink to="/transactions/report">
+              <PieChart class="h-4 w-4" />
+              <span>Laporan</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Investasi">
+            <NuxtLink to="/transactions/investment">
+              <TrendingUp class="h-4 w-4" />
+              <span>Investasi</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Target">
+            <NuxtLink to="/transactions/goal">
+              <Target class="h-4 w-4" />
+              <span>Target</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Finance">
+            <NuxtLink to="/finance">
+              <LayoutGrid class="h-4 w-4" />
+              <span>Finance</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
           <SidebarMenuItem>
             <SidebarMenuButton as-child tooltip="Kategori">
             <NuxtLink to="/finance/category">
               <LayoutGrid class="h-4 w-4" />
-              <span>COBA page Kategori</span>
+              <span>Kategori</span>
             </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -153,141 +198,20 @@
               </CollapsibleContent>
             </Collapsible>
           </SidebarMenuItem>
-          <!-- server   submenu -->
+
+                    <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Investment">
+            <NuxtLink to="/admin/investment/category">
+              <LayoutGrid class="h-4 w-4" />
+              <span>Investment</span>
+            </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+
 
           <!-- server month  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminServerMonthOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>Month</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminServerMonthItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- server month with submenu -->
 
-          <!-- server alwayson  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminServeralwaysOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>AlwaysOn</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminServeralwaysItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- server alwayson with submenu -->
-
-          <!-- server payas  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminServerpayasOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>PayAs</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminServerpayasItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- server payas with submenu -->
-
-          <!-- server payas  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminSettingsOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>Settings</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminSettingsItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- server payas with submenu -->
-
-          <!-- Withdraw with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminWDOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <DollarSign class="h-4 w-4" />
-                  <span>Withdraw</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminWDItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
           <!-- server payas with submenu -->
         </SidebarMenu>
       </SidebarGroup>
@@ -496,7 +420,12 @@ import {
   Users,
   FileText,
   UserCheck,
+  PieChart,
+  TrendingUp,
+  Target,
 } from 'lucide-vue-next'
+
+
 
 
 import { useLocalStorage } from '@vueuse/core'
@@ -519,6 +448,7 @@ const LogOpen = ref(false)
 
 const AdminUserOpen = ref(false)
 const AdminFinanceOpen = ref(false)
+const AdminInvestmentOpen = ref(false)
 const AdminServeralwaysOpen = ref(false)
 const AdminServerMonthOpen = ref(false)
 const AdminServerpayasOpen = ref(false)
@@ -565,6 +495,13 @@ const AdminFinanceItems = [
   },
   
 
+]
+
+const AdminInvestmentItems = [
+  {
+    title: 'Category',
+    url: '/admin/investment/category',
+  },
 ]
 
 const AdminWDItems = [

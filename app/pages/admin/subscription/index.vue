@@ -345,6 +345,12 @@ import autoTable from 'jspdf-autotable'
 
 definePageMeta({ layout: 'dashboard' })
 
+useSeoMeta({
+  title: 'Admin - Pengelolaan Langganan ',
+  robots: 'noindex, nofollow'
+})
+
+
 const subscriptions = ref<SubscriptionItem[]>([])
 const isLoading = ref(true)
 const searchQuery = ref('')
