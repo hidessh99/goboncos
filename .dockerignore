@@ -1,0 +1,12 @@
+node_modules
+.nuxt
+.output
+.env
+dist
+*.log
+.github
+.git
+.gitignore
+Dockerfile
+README.md
+vendor
