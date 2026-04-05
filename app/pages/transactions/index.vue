@@ -175,8 +175,8 @@
       <DialogContent class="w-[95%] sm:max-w-2xl bg-white dark:bg-zinc-950 border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[28px] sm:rounded-[40px] p-0 overflow-hidden shadow-2xl transition-all max-h-[90vh] overflow-y-auto">
           <div class="p-5 sm:p-10 space-y-6 sm:space-y-10">
              <div class="space-y-1.5">
-                <h2 class="text-lg sm:text-2xl font-black tracking-tight uppercase leading-tight">{{ isEditing ? 'Update Rekam' : 'Pencatatan Baru' }}</h2>
-                <p class="text-zinc-400 text-[10px] sm:text-sm font-medium">Masukan detail transaksi Anda dengan teliti.</p>
+                <DialogTitle class="text-lg sm:text-2xl font-black tracking-tight uppercase leading-tight">{{ isEditing ? 'Update Rekam' : 'Pencatatan Baru' }}</DialogTitle>
+                <DialogDescription class="text-zinc-400 text-[10px] sm:text-sm font-medium">Masukan detail transaksi Anda dengan teliti agar data keuangan Anda tetap akurat.</DialogDescription>
              </div>
 
              <form @submit.prevent="submitForm" class="space-y-6 sm:space-y-8">
@@ -256,6 +256,8 @@
     <!-- Detail Dialog -->
     <Dialog :open="isDetailModalOpen" @update:open="isDetailModalOpen = $event">
       <DialogContent class="max-w-md bg-white dark:bg-zinc-950 border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-[32px] sm:rounded-[40px] p-0 overflow-hidden shadow-2xl transition-all">
+          <DialogTitle class="sr-only">Rincian Transaksi Keuangan</DialogTitle>
+          <DialogDescription class="sr-only">Informasi lengkap mengenai histori transaksi yang Anda pilih dari daftar jurnal.</DialogDescription>
           <div v-if="selectedRecord" class="flex flex-col">
             <div :class="`h-24 sm:h-28 w-full relative flex items-center justify-center ${getTypeBg(selectedRecord.category_types?.name)} text-white`">
                 <ReceiptText class="w-10 h-10" />

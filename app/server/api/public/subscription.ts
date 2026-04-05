@@ -9,7 +9,7 @@ export interface SubscriptionPlan {
 export const getSubscriptionPlans = async (token: string) => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
-  return await fetch(`${baseUrl}/public/subscription-plan`, {
+  return await fetch(`${baseUrl}/api/auth/subscription-plan`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

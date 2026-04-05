@@ -214,6 +214,7 @@
     <!-- Dialogs: High-Quality Detail & Form -->
     <Dialog :open="isDetailModalOpen" @update:open="isDetailModalOpen = $event">
       <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+        <DialogDescription class="sr-only">Rincian detail aset keuangan yang Anda pilih.</DialogDescription>
         <div v-if="selectedFinancial" class="p-10 space-y-8">
           <div class="flex flex-col items-center text-center space-y-6">
             <div :class="`w-24 h-24 rounded-[2rem] flex items-center justify-center text-4xl font-black text-white shadow-2xl rotate-3 shrink-0 ${getAvatarColor(selectedFinancial.name)}`">
@@ -255,6 +256,7 @@
 
     <Dialog :open="isFormModalOpen" @update:open="val => { if (!isSubmitting) isFormModalOpen = val }">
       <DialogContent class="w-[calc(100%-2rem)] sm:max-w-lg bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+        <DialogDescription class="sr-only">Formulir untuk memperbarui atau mendaftarkan aset keuangan baru ke dalam sistem.</DialogDescription>
         <div class="max-h-[90vh] overflow-y-auto">
           <!-- Header -->
           <div class="flex items-center gap-6 p-10 bg-zinc-50 dark:bg-zinc-800/30 border-b border-zinc-100 dark:border-zinc-800/50 sticky top-0 backdrop-blur-xl z-20">

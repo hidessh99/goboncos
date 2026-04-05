@@ -1,357 +1,280 @@
 <template>
-  <div class="p-4 sm:p-6 space-y-6">
-
-    <!-- Top Summary Card (Premium Responsive Bar) -->
-    <div class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 shadow-xl dark:shadow-2xl transition-all duration-300">
-      <!-- Info Left -->
-      <div class="flex items-center gap-4 w-full md:w-auto text-left">
-        <div class="w-12 h-12 rounded-2xl bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center text-white dark:text-zinc-900 shadow-lg shrink-0">
-          <Wallet class="w-6 h-6 shrink-0" />
-        </div>
-        <div class="min-w-0">
-          <h1 class="text-lg md:text-xl font-black text-zinc-900 dark:text-white tracking-widest antialiased uppercase leading-tight truncate">Target & Impian</h1>
-          <p class="text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-wider opacity-60">Rencana Finansial Terukur</p>
-        </div>
+  <div class="px-4 py-8 sm:px-8 space-y-10 max-w-7xl mx-auto transition-all duration-500">
+    <!-- Header Section: Premium Summary -->
+    <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 animate-in fade-in slide-in-from-top-4 duration-500">
+      <div class="space-y-3">
+        <h1 class="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white tracking-tighter uppercase leading-none antialiased">
+          Target & <span class="text-blue-600">Impian</span>
+        </h1>
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm font-medium">Visualisasikan rencana finansial masa depan Anda dengan data yang terukur.</p>
       </div>
 
-      <!-- Data & Action Right -->
-      <div class="flex flex-col sm:flex-row items-center gap-6 md:gap-10 w-full md:w-auto mt-4 md:mt-0">
-        <!-- Amounts Section -->
-        <div class="flex items-center justify-center sm:justify-end gap-8 md:gap-12 flex-1 md:flex-none w-full sm:w-auto">
-          <div class="text-center sm:text-right space-y-1">
-            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none">SUDAH TERKUMPUL</p>
-            <p class="text-lg md:text-xl font-black text-zinc-900 dark:text-white tabular-nums leading-none">Rp {{ formatCurrency(totalSaved) }}</p>
+      <!-- Quick Summary Stats -->
+      <div class="flex flex-wrap items-center gap-6 p-6 rounded-[2.5rem] bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-xl shadow-blue-500/5">
+        <div class="flex items-center gap-4 px-4">
+          <div class="w-12 h-12 rounded-[1.25rem] bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+             <Wallet class="w-6 h-6" />
           </div>
-          
-          <div class="hidden sm:block w-px h-10 bg-zinc-100 dark:bg-zinc-800"></div>
-
-          <div class="text-center sm:text-left space-y-1">
-            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none">SISA TARGET</p>
-            <p class="text-lg md:text-xl font-black text-red-500 tabular-nums leading-none">
-              Rp {{ formatCurrency(Math.max(0, totalTarget - totalSaved)) }}
-            </p>
+          <div>
+            <p class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-1">Sudah Terkumpul</p>
+            <p class="text-lg font-black text-zinc-900 dark:text-white tabular-nums leading-none">Rp {{ formatCurrency(totalSaved) }}</p>
           </div>
         </div>
+        
+        <div class="hidden sm:block w-px h-10 bg-zinc-100 dark:bg-zinc-800"></div>
 
-        <!-- Buttons Section -->
-        <div class="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
-          <div class="flex items-center gap-1 h-12 px-1 bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl border border-zinc-100 dark:border-zinc-800/50">
-            <Button 
-              variant="ghost"
-              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-white dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all shadow-sm"
-              title="Export PDF"
-              @click="exportToPdf"
-            >
-              <FileText class="w-4 h-4" />
-            </Button>
-            <Button 
-              variant="ghost"
-              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-white dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all shadow-sm"
-              title="Export Excel"
-              @click="exportToExcel"
-            >
-              <FileSpreadsheet class="w-4 h-4" />
-            </Button>
+        <div class="flex items-center gap-4 px-4">
+          <div class="w-12 h-12 rounded-[1.25rem] bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center text-rose-500">
+             <Target class="w-6 h-6" />
           </div>
-
-          <Button 
-            id="btn-tambah-target"
-            class="bg-zinc-900 dark:bg-white text-white dark:text-black hover:opacity-90 gap-2 h-12 px-6 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl transition-all active:scale-95 flex-1 sm:flex-none whitespace-nowrap"
-            @click="openCreateModal"
-          >
-            <Plus class="w-4 h-4" />
-            Target Baru
-          </Button>
+          <div>
+            <p class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-1">Kekurangan Target</p>
+            <p class="text-lg font-black text-rose-500 tabular-nums leading-none">Rp {{ formatCurrency(Math.max(0, totalTarget - totalSaved)) }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
 
-    <!-- Toolbar -->
-    <div class="bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-2xl shadow-sm p-4">
-      <div class="relative w-full sm:max-w-xs">
-        <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+    <!-- Toolbar: Search & Main Action -->
+    <section class="flex flex-col sm:flex-row items-center justify-between gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
+      <div class="relative w-full sm:max-w-md group">
+        <Search class="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 group-focus-within:text-blue-600 transition-colors" />
         <input 
-          id="search-goal"
           v-model="searchQuery"
-          placeholder="Cari impian Anda..." 
-          class="pl-9 bg-white dark:bg-zinc-800/50 border border-gray-200 dark:border-zinc-700 rounded-lg h-9 w-full text-sm outline-none focus:ring-2 focus:ring-zinc-500/20 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-zinc-500 transition-all font-medium"
+          placeholder="Cari impian atau rencana tabungan..." 
+          class="w-full h-15 pl-14 pr-6 rounded-[1.5rem] bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 font-bold text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500 placeholder:text-zinc-400 placeholder:font-medium shadow-sm"
         />
       </div>
-    </div>
 
-    <!-- Main Section -->
-    <div class="bg-white dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800 rounded-2xl shadow-sm overflow-hidden">
-      <!-- Table Section (Desktop) -->
-      <div class="px-4 pb-4 overflow-x-auto hidden md:block">
-        <div class="border border-gray-100 dark:border-zinc-800 rounded-xl overflow-hidden bg-white dark:bg-zinc-900 mt-4">
-          <Table>
-            <TableHeader>
-              <TableRow class="hover:bg-transparent border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/30">
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
-                   <div class="ml-2">Nama Target</div>
-                </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
-                   Terkumpul
-                </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
-                   Total Target
-                </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
-                   Batas Waktu
-                </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
-                   Progres
-                </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10 text-center">
-                   Aksi
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-if="isLoading">
-                <TableCell colspan="6" class="h-32 text-center text-zinc-500">
-                  <Loader2 class="w-6 h-6 animate-spin mx-auto text-zinc-500" />
-                  <p class="mt-2 text-sm font-medium">Memuat data target...</p>
-                </TableCell>
-              </TableRow>
-              <TableRow v-else-if="goals.length === 0">
-                <TableCell colspan="6" class="h-32 text-center">
-                  <div class="flex flex-col items-center gap-2">
-                    <Target class="w-8 h-8 text-gray-300 dark:text-zinc-600" />
-                    <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Belum ada target finansial.</p>
-                  </div>
-                </TableCell>
-              </TableRow>
-              <TableRow 
-                v-else 
-                v-for="item in goals" 
-                :key="item.id" 
-                class="border-gray-100 dark:border-zinc-800/60 hover:bg-gray-50/50 dark:hover:bg-zinc-800/40 cursor-pointer transition-colors" 
-                @click="openDetailModal(item)"
-              >
-                <TableCell class="py-2.5 pl-4">
-                  <div class="flex items-center gap-3">
-                    <div :class="`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0 shadow-sm ${getAvatarColor(item.name)}`">
-                      {{ item.name.charAt(0).toUpperCase() }}
-                    </div>
-                    <span class="text-[13px] font-semibold text-gray-900 dark:text-gray-100 truncate max-w-[150px] sm:max-w-none">{{ item.name }}</span>
-                  </div>
-                </TableCell>
-                <TableCell class="text-[13px] font-black text-emerald-600 dark:text-emerald-400 py-2.5 tabular-nums">
-                  Rp {{ formatCurrency(item.amount) }}
-                </TableCell>
-                <TableCell class="text-[13px] font-black text-gray-900 dark:text-zinc-100 py-2.5 tabular-nums">
-                  Rp {{ formatCurrency(item.total_goal) }}
-                </TableCell>
-                <TableCell class="text-[12px] text-gray-500 dark:text-zinc-500 py-2.5">
-                  {{ formatDate(item.goal_date) }}
-                </TableCell>
-                <TableCell class="py-2.5 min-w-[120px]">
-                  <div class="flex flex-col gap-1.5">
-                    <div class="flex justify-between items-center px-0.5">
-                      <span class="text-[10px] font-black text-zinc-400">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
-                    </div>
-                    <div class="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                      <div 
-                        class="h-full bg-zinc-900 dark:bg-white rounded-full transition-all duration-700"
-                        :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"
-                      ></div>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell class="py-2.5 pr-4 text-center">
-                  <div class="flex items-center justify-center gap-1.5" @click.stop>
-                    <button @click="openFundModal(item)" class="w-8 h-8 flex items-center justify-center rounded-lg text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors" title="Tambah Dana">
-                      <PlusCircle class="w-[18px] h-[18px]" />
-                    </button>
-                    <button @click="openEditModal(item)" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600 transition-colors">
-                      <Pencil class="w-[15px] h-[15px]" />
-                    </button>
-                    <button @click="confirmDelete(item.id)" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all">
-                      <Trash2 class="w-[15px] h-[15px]" />
-                    </button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+      <div class="flex items-center gap-3 w-full sm:w-auto">
+        <div class="flex items-center gap-2 p-1.5 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[1.25rem] shadow-sm">
+           <Button variant="ghost" class="w-11 h-11 p-0 rounded-xl text-zinc-400 hover:text-blue-600" title="Export PDF" @click="exportToPdf"><FileText class="w-5 h-5" /></Button>
+           <Button variant="ghost" class="w-11 h-11 p-0 rounded-xl text-zinc-400 hover:text-emerald-500" title="Export Excel" @click="exportToExcel"><FileSpreadsheet class="w-5 h-5" /></Button>
         </div>
+        <Button 
+          class="flex-1 sm:flex-none h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-black text-[11px] uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all gap-3"
+          @click="openCreateModal"
+        >
+          <Plus class="w-5 h-5" />
+          Target Baru
+        </Button>
+      </div>
+    </section>
+
+    <!-- Content: Adaptive Data Display -->
+    <main class="space-y-6">
+      <!-- Desktop Performance View -->
+      <div class="hidden lg:block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl shadow-blue-500/5 overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
+        <Table>
+          <TableHeader>
+            <TableRow class="hover:bg-transparent border-zinc-50 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30">
+              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 pl-10 flex items-center gap-2">
+                 Nama Impian <ChevronsUpDown class="w-3 h-3 opacity-30" />
+              </TableHead>
+              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Saldo Terkumpul</TableHead>
+              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Pencapaian</TableHead>
+              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Batas Waktu</TableHead>
+              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 text-center pr-10">Aksi</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow v-if="isLoading">
+               <TableCell colspan="5" class="h-64 text-center">
+                  <Loader2 class="w-10 h-10 animate-spin mx-auto text-blue-600 opacity-20" />
+               </TableCell>
+            </TableRow>
+            <TableRow v-else-if="goals.length === 0">
+               <TableCell colspan="5" class="h-64 text-center">
+                  <div class="flex flex-col items-center gap-4 grayscale opacity-40">
+                    <Target class="w-12 h-12 text-zinc-400" />
+                    <p class="text-[11px] font-black uppercase tracking-widest text-zinc-500">Belum Ada Target Finansial</p>
+                  </div>
+               </TableCell>
+            </TableRow>
+            <TableRow 
+              v-else 
+              v-for="item in goals" 
+              :key="item.id" 
+              class="border-zinc-50 dark:border-zinc-800/60 hover:bg-blue-50/20 dark:hover:bg-blue-900/10 cursor-pointer transition-all duration-300 group"
+              @click="openDetailModal(item)"
+            >
+              <TableCell class="py-7 pl-10">
+                <div class="flex items-center gap-5">
+                  <div :class="`w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-black text-white shrink-0 shadow-lg ${getAvatarColor(item.name)}`">
+                    {{ item.name.charAt(0).toUpperCase() }}
+                  </div>
+                  <div class="min-w-0">
+                    <span class="text-[15px] font-black text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 transition-colors block leading-none antialiased">{{ item.name }}</span>
+                    <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mt-2 block">Sasaran: Rp {{ formatCurrency(item.total_goal) }}</span>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell class="py-7 font-black text-blue-600 dark:text-blue-400 tabular-nums text-base">
+                Rp {{ formatCurrency(item.amount) }}
+              </TableCell>
+              <TableCell class="py-7 min-w-[200px]">
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center px-1">
+                    <span class="text-[10px] font-black text-zinc-500 dark:text-zinc-400 uppercase">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
+                  </div>
+                  <div class="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden shadow-inner">
+                    <div 
+                      class="h-full bg-blue-600 dark:bg-blue-500 rounded-full transition-all duration-1000 ease-out"
+                      :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"
+                    ></div>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell class="py-7 text-[13px] font-bold text-zinc-400 dark:text-zinc-500">
+                {{ formatDate(item.goal_date) }}
+              </TableCell>
+              <TableCell class="py-7 text-center pr-10">
+                <div class="flex items-center justify-center gap-2" @click.stop>
+                   <button @click="openFundModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-all shadow-sm" title="Tabung"><PlusCircle class="w-5 h-5" /></button>
+                   <button @click="openEditModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-500/10 transition-all"><Pencil class="w-5 h-5" /></button>
+                   <button @click="confirmDelete(item.id)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-500/10 transition-all"><Trash2 class="w-5 h-5" /></button>
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </div>
 
-      <!-- Card Section (Mobile) -->
-      <div class="px-4 py-4 md:hidden flex flex-col gap-4">
-        <div v-if="isLoading" class="py-12 text-center text-zinc-500">
-           <Loader2 class="w-8 h-8 animate-spin mx-auto text-zinc-500" />
-           <p class="mt-2 text-sm font-medium">Memuat data...</p>
-        </div>
-        <div v-else-if="goals.length === 0" class="py-12 text-center border border-dashed border-gray-200 dark:border-zinc-800 rounded-2xl">
-           <Target class="w-10 h-10 text-gray-300 dark:text-zinc-600 mx-auto" />
-           <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">Belum ada data target.</p>
-        </div>
+      <!-- Tablet/Mobile Grid View -->
+      <div class="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-700 delay-300">
         <div 
           v-for="item in goals" 
           :key="item.id"
-          class="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-2xl p-4 shadow-sm active:scale-[0.98] transition-all relative overflow-hidden"
+          class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] p-8 shadow-xl shadow-blue-500/5 active:scale-[0.98] transition-all space-y-6 relative overflow-hidden group"
           @click="openDetailModal(item)"
         >
           <div class="flex items-start justify-between">
-            <div class="flex items-center gap-3">
-              <div :class="`w-10 h-10 rounded-2xl flex items-center justify-center text-xs font-black text-white shrink-0 shadow-md ${getAvatarColor(item.name)}`">
+            <div class="flex items-center gap-5">
+              <div :class="`w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-xl font-black text-white shrink-0 shadow-lg ${getAvatarColor(item.name)}`">
                 {{ item.name.charAt(0).toUpperCase() }}
               </div>
-              <div class="min-w-0 pr-8">
-                <h4 class="text-[14px] font-bold text-gray-900 dark:text-white truncate leading-tight uppercase">{{ item.name }}</h4>
-                <p class="text-[11px] text-zinc-400 mt-1 font-bold text-emerald-600 tabular-nums">Rp {{ formatCurrency(item.amount) }} / Rp {{ formatCurrency(item.total_goal) }}</p>
+              <div class="min-w-0">
+                <h4 class="text-lg font-black text-zinc-900 dark:text-white truncate uppercase tracking-tighter leading-none">{{ item.name }}</h4>
+                <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-2">Target: {{ formatDate(item.goal_date) }}</p>
               </div>
             </div>
+            <span class="text-xl font-black text-blue-600 dark:text-blue-400 tabular-nums leading-none">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
           </div>
-          
-          <div class="mt-4 space-y-2">
-             <div class="flex justify-between items-center text-[10px] font-black text-zinc-400">
-                <span>{{ calculatePercent(item.amount, item.total_goal) }}% TERCAPAI</span>
-                <span>TARGET: {{ formatDate(item.goal_date) }}</span>
+
+          <div class="space-y-4">
+             <div class="bg-zinc-50 dark:bg-zinc-800/40 rounded-[1.5rem] p-5 flex flex-col items-center border border-zinc-100 dark:border-zinc-800/50">
+               <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-1.5">Terkumpul Sekarang</span>
+               <h3 class="text-2xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter">Rp {{ formatCurrency(item.amount) }}</h3>
+               <span class="text-[11px] font-medium text-zinc-400 mt-1 italic">/ Rp {{ formatCurrency(item.total_goal) }}</span>
              </div>
-             <div class="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                <div class="h-full bg-zinc-900 dark:bg-white rounded-full" :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"></div>
+
+             <div class="h-2.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden shadow-inner">
+               <div class="h-full bg-blue-600 dark:bg-blue-500 rounded-full transition-all duration-1000 ease-out" :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"></div>
              </div>
           </div>
 
-          <div class="mt-4 flex gap-2.5 pt-4 border-t border-gray-50 dark:border-zinc-800/60" @click.stop>
-             <Button variant="outline" class="flex-1 h-10 rounded-xl border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs font-bold gap-2" @click="openFundModal(item)">
-               <PlusCircle class="w-3.5 h-3.5" />
-               Tabung
-             </Button>
-             <Button variant="outline" class="flex-1 h-10 rounded-xl border-amber-200 text-amber-600 hover:bg-amber-50 text-xs font-bold gap-2" @click="openEditModal(item)">
-               <Pencil class="w-3.5 h-3.5" />
-               Edit
-             </Button>
-             <Button variant="outline" class="flex-1 h-10 rounded-xl border-red-200 text-red-500 hover:bg-red-50 text-xs font-bold gap-2" @click="confirmDelete(item.id)">
-               <Trash2 class="w-3.5 h-3.5" />
-               Hapus
-             </Button>
+          <div class="flex gap-3 pt-6 border-t border-zinc-50 dark:border-zinc-800/60" @click.stop>
+             <Button variant="outline" class="flex-1 h-12 rounded-2xl border-emerald-100 dark:border-emerald-900/30 text-emerald-600 text-[10px] font-black uppercase tracking-widest gap-2" @click="openFundModal(item)"><PlusCircle class="w-4 h-4" />Tabung</Button>
+             <Button variant="outline" class="w-12 h-12 p-0 rounded-2xl border-zinc-100 dark:border-zinc-800 text-zinc-400" @click="openEditModal(item)"><Pencil class="w-4 h-4" /></Button>
+             <Button variant="outline" class="w-12 h-12 p-0 rounded-2xl border-red-50 dark:border-red-900/10 text-red-400" @click="confirmDelete(item.id)"><Trash2 class="w-4 h-4" /></Button>
           </div>
         </div>
       </div>
 
-      <!-- Pagination -->
-      <div class="px-4 py-3 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between sm:px-6">
-        <div class="flex-1 flex justify-between sm:hidden">
-          <button @click="prevPage" :disabled="currentPage === 1" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition-colors">Sebelumnya</button>
-          <button @click="nextPage" :disabled="currentPage >= totalPages" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition-colors">Selanjutnya</button>
+      <!-- Pagination Hub -->
+      <footer class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 animate-in fade-in duration-1000">
+        <div class="flex items-center gap-4">
+           <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center text-[11px] font-black shadow-lg shadow-blue-500/20">
+              {{ currentPage }}
+           </div>
+           <p class="text-[11px] font-black text-zinc-400 uppercase tracking-widest">Halaman <span class="text-zinc-900 dark:text-white">{{ currentPage }}</span> dari {{ totalPages }}</p>
         </div>
-        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-          <div>
-            <p class="text-sm text-gray-700 dark:text-zinc-300">Halaman <span class="font-bold">{{ currentPage }}</span> dari <span class="font-bold">{{ totalPages }}</span></p>
-          </div>
-          <div class="flex gap-2">
-            <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1.5 border rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50 transition-colors">Sebelumnya</button>
-            <button @click="nextPage" :disabled="currentPage >= totalPages" class="px-3 py-1.5 border rounded-lg text-sm disabled:opacity-50 hover:bg-gray-50 transition-colors">Selanjutnya</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Detail Dialog -->
+        <div class="flex gap-2 w-full sm:w-auto">
+          <Button variant="outline" class="flex-1 sm:w-32 h-14 rounded-2xl border-zinc-100 dark:border-zinc-800 text-zinc-400 font-black text-[11px] uppercase tracking-widest disabled:opacity-30 transition-all" :disabled="currentPage === 1" @click="prevPage">Sebelumnya</Button>
+          <Button variant="outline" class="flex-1 sm:w-32 h-14 rounded-2xl border-zinc-100 dark:border-zinc-800 text-zinc-400 font-black text-[11px] uppercase tracking-widest disabled:opacity-30 transition-all" :disabled="currentPage >= totalPages" @click="nextPage">Selanjutnya</Button>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Modal Dialogs: Re-Architecting with High-End Styles -->
     <Dialog :open="isDetailModalOpen" @update:open="isDetailModalOpen = $event">
-      <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 rounded-[2rem] p-0 overflow-hidden outline-none border-none shadow-2xl">
-        <div v-if="selectedGoal" class="p-8 space-y-6">
-            <div class="flex flex-col items-center text-center space-y-4">
-              <div :class="`w-20 h-20 rounded-[2rem] flex items-center justify-center text-3xl font-black text-white shadow-2xl rotate-3 shrink-0 ${getAvatarColor(selectedGoal.name)}`">
+      <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+        <DialogTitle class="sr-only">Rincian Impian Finansial</DialogTitle>
+        <DialogDescription class="sr-only">Detail progres dan statistik target menabung yang Anda pilih.</DialogDescription>
+        <div v-if="selectedGoal" class="p-10 space-y-8 text-center">
+            <div class="flex flex-col items-center space-y-5">
+              <div :class="`w-24 h-24 rounded-[2.5rem] flex items-center justify-center text-4xl font-black text-white shadow-2xl rotate-3 shrink-0 ${getAvatarColor(selectedGoal.name)}`">
                 {{ selectedGoal.name.charAt(0).toUpperCase() }}
               </div>
-              <div>
-                <DialogTitle class="text-xl font-black text-gray-900 dark:text-white leading-tight uppercase tracking-tighter">{{ selectedGoal.name }}</DialogTitle>
-                <DialogDescription class="hidden">Detail rencana finansial untuk target {{ selectedGoal.name }}</DialogDescription>
-                <div class="flex items-center justify-center gap-1.5 mt-1.5">
-                   <span class="text-[10px] font-black py-0.5 px-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-full uppercase">{{ calculatePercent(selectedGoal.amount, selectedGoal.total_goal) }}% TERCAPAI</span>
-                </div>
+              <div class="space-y-1">
+                <h3 class="text-2xl font-black text-zinc-900 dark:text-white leading-tight uppercase tracking-tighter">{{ selectedGoal.name }}</h3>
+                <p class="text-[11px] font-black text-blue-600 uppercase tracking-[0.2em]">{{ calculatePercent(selectedGoal.amount, selectedGoal.total_goal) }}% Tercapai</p>
               </div>
             </div>
           
-          <div class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-               <div class="p-5 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50">
-                 <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-1">Terkumpul</span>
-                 <p class="text-[15px] font-black text-emerald-600 tabular-nums">Rp {{ formatCurrency(selectedGoal.amount) }}</p>
-               </div>
-               <div class="p-5 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50">
-                 <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-1">Total Target</span>
-                 <p class="text-[15px] font-black text-zinc-900 dark:text-white tabular-nums">Rp {{ formatCurrency(selectedGoal.total_goal) }}</p>
-               </div>
-            </div>
-
-            <div class="p-5 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50 text-center">
-              <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-1">Batas Waktu Impian</span>
-              <p class="text-[14px] font-bold text-zinc-700 dark:text-zinc-300">{{ formatDate(selectedGoal.goal_date) }}</p>
-            </div>
+          <div class="grid grid-cols-1 gap-4 text-left">
+             <div class="p-6 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50 flex flex-col items-center">
+               <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-2">Dana Sudah Siap</span>
+               <p class="text-3xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter">Rp {{ formatCurrency(selectedGoal.amount) }}</p>
+             </div>
+             <div class="grid grid-cols-2 gap-4">
+                <div class="p-6 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50">
+                  <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Total Target</span>
+                  <p class="text-[13px] font-black text-zinc-700 dark:text-zinc-200 tabular-nums">Rp {{ formatCurrency(selectedGoal.total_goal) }}</p>
+                </div>
+                <div class="p-6 rounded-[2rem] bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-100 dark:border-zinc-800/50 text-right">
+                  <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Deadline</span>
+                  <p class="text-[13px] font-black text-zinc-700 dark:text-zinc-200">{{ formatDate(selectedGoal.goal_date) }}</p>
+                </div>
+             </div>
           </div>
 
-          <Button variant="outline" class="w-full py-6 rounded-2xl font-black text-xs uppercase tracking-widest text-zinc-500" @click="isDetailModalOpen = false">Tutup Detail</Button>
+          <Button variant="outline" class="w-full h-16 rounded-[2rem] font-black text-[11px] uppercase tracking-widest text-zinc-400 border-zinc-100 dark:border-zinc-800" @click="isDetailModalOpen = false">Tutup Informasi</Button>
         </div>
       </DialogContent>
     </Dialog>
 
-    <!-- Create/Edit Form Dialog -->
     <Dialog :open="isFormModalOpen" @update:open="val => { if (!isSubmitting) isFormModalOpen = val }">
-      <DialogContent class="w-[calc(100%-2rem)] sm:max-w-xl bg-white dark:bg-zinc-900 border-zinc-100 dark:border-zinc-800 shadow-2xl rounded-[2rem] p-0 overflow-hidden outline-none">
-        <div class="max-h-[85vh] overflow-y-auto scrollbar-hide">
-          <!-- Header -->
-          <div class="flex items-center gap-4 p-6 sm:p-8 border-b border-zinc-50 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl sticky top-0 z-20">
-            <div :class="`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white shadow-xl ${isEditing ? 'bg-amber-500 shadow-amber-500/20' : 'bg-zinc-900 dark:bg-white dark:text-black shadow-zinc-900/10'}`">
-              <Target v-if="!isEditing" class="w-6 h-6 sm:w-7 sm:h-7" />
-              <Pencil v-else class="w-6 h-6 sm:w-7 sm:h-7" />
+      <DialogContent class="w-[calc(100%-2rem)] sm:max-w-xl bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+        <DialogTitle class="sr-only">Formulir Target Finansial</DialogTitle>
+        <DialogDescription class="sr-only">Input data untuk membuat atau memperbarui target rencana finansial Anda.</DialogDescription>
+        <div class="max-h-[90vh] overflow-y-auto scrollbar-hide">
+          <div class="flex items-center gap-6 p-10 bg-zinc-50 dark:bg-zinc-800/30 border-b border-zinc-100 dark:border-zinc-800/50 sticky top-0 backdrop-blur-xl z-20">
+            <div :class="`w-16 h-16 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl ${isEditing ? 'bg-amber-500' : 'bg-zinc-900 dark:bg-white dark:text-black'}`">
+              <Target v-if="!isEditing" class="w-8 h-8" />
+              <Pencil v-else class="w-8 h-8" />
             </div>
-            <div>
-              <DialogTitle class="text-[16px] sm:text-xl font-black text-zinc-900 dark:text-white leading-tight uppercase tracking-tighter">
-                {{ isEditing ? 'Update Target' : 'Buat Target Baru' }}
-              </DialogTitle>
-              <DialogDescription class="text-xs sm:text-sm text-zinc-400 dark:text-zinc-500 mt-1 font-medium">
-                Tentukan rencana finansial Anda hari ini.
-              </DialogDescription>
+            <div class="text-left">
+              <h2 class="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter leading-none">{{ isEditing ? 'Edit' : 'Catat' }} <span class="text-blue-600">Impian</span></h2>
+              <p class="text-[11px] font-black text-zinc-400 uppercase tracking-widest mt-1">Rencana Nyata Untuk Masa Depan</p>
             </div>
           </div>
 
-          <form @submit.prevent="submitForm" class="p-6 sm:p-8 space-y-6">
-            <div class="space-y-5 text-left">
-              <div class="space-y-2">
-                <label class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] block px-0.5">Nama Target / Impian <span class="text-red-500">*</span></label>
-                <input 
-                  v-model="form.name" 
-                  type="text" 
-                  placeholder="Contoh: Beli Laptop Baru, Liburan ke Bali" 
-                  class="w-full px-5 py-4 rounded-[1.25rem] border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-[13px] font-bold outline-none focus:ring-4 focus:ring-zinc-500/10 transition-all shadow-sm" 
-                  required
-                />
+          <form @submit.prevent="submitForm" class="p-10 space-y-8">
+            <div class="space-y-6 text-left">
+              <div class="space-y-3">
+                <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Nama Target / Asset Impian <span class="text-blue-600">*</span></label>
+                <input v-model="form.name" type="text" placeholder="E.g. Tabungan Rumah, Dana Pendidikan, Beli Mobil" class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-bold text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500" required />
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                 <div class="space-y-2">
-                    <label class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] block px-0.5">Total Target (Rp) <span class="text-red-500">*</span></label>
-                    <input 
-                      v-model="form.total_goal" 
-                      type="number" 
-                      placeholder="0" 
-                      class="w-full px-5 py-4 rounded-[1.25rem] border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-[13px] font-black outline-none focus:ring-4 focus:ring-zinc-500/10 transition-all shadow-sm tabular-nums" 
-                      required
-                    />
-                 </div>
-                 <div class="space-y-2">
-                    <label class="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] block px-0.5">Batas Waktu <span class="text-red-500">*</span></label>
-                    <input 
-                      v-model="form.goal_date" 
-                      type="date" 
-                      class="w-full px-5 py-4 rounded-[1.25rem] border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-[13px] font-bold outline-none focus:ring-4 focus:ring-zinc-500/10 transition-all shadow-sm" 
-                      required
-                    />
-                 </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-3">
+                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Total Target (Rp) <span class="text-blue-600">*</span></label>
+                    <input v-model="form.total_goal" type="number" placeholder="0" class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-black text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500 tabular-nums" required />
+                </div>
+                <div class="space-y-3">
+                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Batas Waktu Target <span class="text-blue-600">*</span></label>
+                    <input v-model="form.goal_date" type="date" class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-bold text-zinc-900 dark:text-white outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500" required />
+                </div>
               </div>
             </div>
 
-            <div class="flex gap-4 pt-6 border-t border-zinc-50 dark:border-zinc-800/50">
-              <Button type="button" variant="outline" class="flex-1 rounded-[1.25rem] py-8 font-black text-xs uppercase tracking-widest text-zinc-400 hover:bg-zinc-50 h-14" :disabled="isSubmitting" @click="isFormModalOpen = false">Batal</Button>
-              <Button type="submit" class="flex-1 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-[1.25rem] py-8 font-black text-xs uppercase tracking-widest shadow-2xl h-14" :disabled="isSubmitting || !form.name.trim()">
+            <div class="flex gap-4 pt-4 border-t border-zinc-50 dark:border-zinc-800/50">
+              <Button type="button" variant="outline" class="flex-1 h-15 rounded-2xl font-black text-[11px] uppercase tracking-widest border-zinc-100 dark:border-zinc-800" :disabled="isSubmitting" @click="isFormModalOpen = false">Batal</Button>
+              <Button type="submit" class="flex-1 h-15 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-black text-[11px] uppercase tracking-widest shadow-xl shadow-blue-500/20 active:scale-95 transition-all" :disabled="isSubmitting || !form.name.trim()">
                 <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin mr-2" />
-                {{ isEditing ? 'Confirm Update' : 'Record Now' }}
+                {{ isEditing ? 'Simpan' : 'Daftarkan' }}
               </Button>
             </div>
           </form>
@@ -359,37 +282,34 @@
       </DialogContent>
     </Dialog>
 
-    <!-- Fund Modal (Tambah Dana) -->
+    <!-- Fund Modal: Simplified & High Contrast -->
     <Dialog :open="isFundModalOpen" @update:open="val => { if (!isSubmitting) isFundModalOpen = val }">
-       <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[2.5rem] p-0 overflow-hidden outline-none">
-          <div class="p-10 space-y-8 text-center text-left">
-             <div class="w-20 h-20 rounded-[2rem] bg-zinc-900 dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto shadow-2xl mb-4 group ring-8 ring-zinc-50 dark:ring-white/5">
-                <PlusCircle class="w-10 h-10 group-hover:rotate-180 transition-transform duration-700" />
+       <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+          <DialogTitle class="sr-only">Tambah Tabungan Impian</DialogTitle>
+          <DialogDescription class="sr-only">Input nominal uang untuk ditambahkan ke dalam tabungan target Anda.</DialogDescription>
+          <div class="p-10 space-y-10 text-center">
+             <div class="w-20 h-20 rounded-[2rem] bg-blue-600 text-white flex items-center justify-center mx-auto shadow-2xl ring-8 ring-blue-500/5">
+                <PlusCircle class="w-10 h-10" />
              </div>
-             <div>
-                <DialogTitle class="text-2xl font-black text-zinc-900 dark:text-white leading-tight uppercase tracking-tighter">Tambah Dana Rencana</DialogTitle>
-                <DialogDescription class="text-zinc-500 font-bold mt-2 uppercase text-[10px] tracking-widest">Target: {{ activeGoal?.name }}</DialogDescription>
+             
+             <div class="space-y-2">
+                <h3 class="text-2xl font-black text-zinc-900 dark:text-white tracking-tighter uppercase leading-none">Tabung Sekarang</h3>
+                <p class="text-[11px] font-black text-zinc-400 uppercase tracking-widest italic">Untuk: {{ activeGoal?.name }}</p>
              </div>
 
-             <div class="space-y-2 text-left">
-                <label class="text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em] block px-0.5 ml-2">Masukkan Jumlah (Rp)</label>
+             <div class="space-y-3 text-left">
+                <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-2">Masukkan Nominal (Rp)</label>
                 <div class="relative group">
-                   <div class="absolute left-6 top-1/2 -translate-y-1/2 text-lg font-black text-zinc-400 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors duration-300">Rp</div>
-                   <input 
-                     v-model="fundAmount" 
-                     type="number" 
-                     placeholder="0" 
-                     class="w-full pl-16 pr-8 py-6 rounded-[2rem] border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-2xl font-black tabular-nums outline-none focus:border-zinc-900 dark:focus:border-white focus:ring-8 focus:ring-zinc-900/5 dark:focus:ring-white/5 transition-all duration-300" 
-                     autofocus
-                   />
+                   <div class="absolute left-6 top-1/2 -translate-y-1/2 text-xl font-black text-zinc-300 dark:text-zinc-700 group-focus-within:text-blue-600 transition-colors">Rp</div>
+                   <input v-model="fundAmount" type="number" placeholder="0" class="w-full h-20 pl-16 pr-8 rounded-[1.5rem] border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-3xl font-black tabular-nums transition-all outline-none focus:border-blue-500 focus:ring-8 focus:ring-blue-500/5" autofocus />
                 </div>
              </div>
 
              <div class="flex gap-4">
-                <Button variant="outline" class="flex-1 h-16 rounded-[1.25rem] font-black uppercase text-xs tracking-widest text-zinc-400 border-zinc-100 dark:border-zinc-800" @click="isFundModalOpen = false">Nanti Saja</Button>
-                <Button class="flex-1 h-16 rounded-[1.25rem] bg-zinc-900 dark:bg-white text-white dark:text-black font-black uppercase text-xs tracking-widest hover:opacity-90" :disabled="isSubmitting || fundAmount <= 0" @click="submitAddFund">
+                <Button variant="outline" class="flex-1 h-16 rounded-[1.25rem] font-black uppercase text-[10px] tracking-widest text-zinc-400 border-zinc-100 dark:border-zinc-800" @click="isFundModalOpen = false">Nanti Saja</Button>
+                <Button class="flex-1 h-16 rounded-[1.25rem] bg-blue-600 text-white font-black uppercase text-[10px] tracking-widest hover:bg-blue-700 shadow-xl shadow-blue-500/10" :disabled="isSubmitting || fundAmount <= 0" @click="submitAddFund">
                    <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin mr-2" />
-                   Tabung Sekarang!
+                   Simpan Dana
                 </Button>
              </div>
           </div>
@@ -398,25 +318,19 @@
 
     <!-- Delete Alert -->
     <AlertDialog :open="isDeleteDialogOpen" @update:open="isDeleteDialogOpen = $event">
-      <AlertDialogContent class="bg-white dark:bg-zinc-900 rounded-[2.5rem] border-none shadow-2xl p-10 max-w-[90vw] sm:max-w-md overflow-hidden relative">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-        <AlertDialogHeader class="space-y-6">
-          <div class="w-20 h-20 rounded-[2rem] bg-red-50/50 dark:bg-red-900/20 flex items-center justify-center text-red-500 mx-auto transform -rotate-6 shadow-sm border border-red-100 dark:border-red-900/30">
+      <AlertDialogContent class="bg-white dark:bg-zinc-900 rounded-[3rem] border-none shadow-2xl p-10 max-w-[90vw] sm:max-w-md">
+        <AlertDialogHeader class="space-y-6 text-center">
+          <div class="w-20 h-20 rounded-[2rem] bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500 mx-auto shadow-xl">
              <Trash2 class="w-10 h-10" />
           </div>
-          <div class="space-y-2 text-center relative z-10">
-            <AlertDialogTitle class="text-2xl font-black text-zinc-900 dark:text-white leading-tight uppercase tracking-tighter">Hapus Target?</AlertDialogTitle>
-            <AlertDialogDescription class="text-sm font-medium text-zinc-400 px-4 leading-relaxed italic">Semua data progres menabung untuk target ini akan hilang secara permanen.</AlertDialogDescription>
+          <div class="space-y-2">
+            <AlertDialogTitle class="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter leading-tight">Ikhlaskan Impian?</AlertDialogTitle>
+            <AlertDialogDescription class="text-sm font-medium text-zinc-500 dark:text-zinc-400 italic leading-relaxed px-4">Semua riwayat progres menabung untuk rincian impian ini akan dihapus permanen dari memori sistem.</AlertDialogDescription>
           </div>
         </AlertDialogHeader>
-        <AlertDialogFooter class="gap-4 mt-10">
-          <AlertDialogCancel class="flex-1 rounded-2xl h-14 font-black text-xs uppercase tracking-widest bg-zinc-50 dark:bg-zinc-800 border-none transition-all hover:scale-[1.02]">Batal</AlertDialogCancel>
-          <AlertDialogAction 
-            @click="executeDelete" 
-            class="flex-1 bg-red-500 hover:bg-red-600 text-white rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-xl shadow-red-500/30 transition-all hover:scale-[1.02]"
-          >
-            Ya, Hapus
-          </AlertDialogAction>
+        <AlertDialogFooter class="gap-4 mt-8">
+          <AlertDialogCancel class="flex-1 rounded-2xl h-14 font-black text-[11px] uppercase tracking-widest bg-zinc-50 dark:bg-zinc-800 border-none transition-all">Batal</AlertDialogCancel>
+          <AlertDialogAction @click="executeDelete" class="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-2xl h-14 font-black text-[11px] uppercase tracking-widest shadow-xl shadow-red-500/20 transition-all">Hapus Target</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -427,7 +341,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
 import {
-  Search, Eye, Pencil, Trash2, Loader2, Plus, Target, FileText, FileSpreadsheet, PlusCircle, Wallet
+  Search, Eye, Pencil, Trash2, Loader2, Plus, Target, FileText, FileSpreadsheet, PlusCircle, Wallet, ChevronsUpDown
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import {
@@ -441,7 +355,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { 
   getGoals, createGoal, updateGoal, deleteGoal, addGoalFund,
-  type GoalItem 
+  type GoalItem, type CreateGoalPayload
 } from '~/server/api/public/goal'
 import { alertSuccess, alertError, alertInfo } from '@/lib/alert'
 import * as XLSX from 'xlsx'
@@ -451,7 +365,7 @@ import autoTable from 'jspdf-autotable'
 definePageMeta({ layout: 'dashboard' })
 
 useSeoMeta({
-  title: 'Target & Impian ',
+  title: 'Target & Impian',
   robots: 'noindex, nofollow'
 })
 
@@ -474,23 +388,23 @@ const fundAmount = ref(0)
 const isDeleteDialogOpen = ref(false)
 const deleteItemId = ref<string | null>(null)
 
-const form = ref({
+const form = ref<CreateGoalPayload>({
   name: '',
   total_goal: 0,
-  goal_date: new Date().toISOString().split('T')[0]
+  goal_date: new Date().toISOString().split('T')[0] || ''
 })
 
 // Summary Calculations
 const totalSaved = computed(() => goals.value.reduce((acc, curr) => acc + curr.amount, 0))
 const totalTarget = computed(() => goals.value.reduce((acc, curr) => acc + curr.total_goal, 0))
 
-// ─── Avatar & Theme ────────────────────────────────────────────────────────
+// ─── Theme: Blue Premium ─────────────────────────────────────────────────────
 const gradients = [
-  'bg-gradient-to-br from-zinc-900 to-zinc-700',
-  'bg-gradient-to-br from-blue-900 to-blue-700',
-  'bg-gradient-to-br from-teal-900 to-teal-700',
-  'bg-gradient-to-br from-purple-900 to-purple-700',
-  'bg-gradient-to-br from-emerald-900 to-emerald-700',
+  'bg-gradient-to-br from-blue-600 to-indigo-700',
+  'bg-gradient-to-br from-zinc-800 to-zinc-950',
+  'bg-gradient-to-br from-sky-500 to-blue-700',
+  'bg-gradient-to-br from-indigo-600 to-violet-800',
+  'bg-gradient-to-br from-slate-700 to-slate-900',
 ]
 function getAvatarColor(name: string) {
   if (!name) return gradients[0]
@@ -515,7 +429,7 @@ const calculatePercent = (current: number, target: number) => {
   return Math.min(100, Math.floor((current / target) * 100))
 }
 
-// ─── Data Fetching ────────────────────────────────────────────────────────
+// ─── Logic: Data Integration ───────────────────────────────────────────────────
 const fetchGoals = async () => {
   isLoading.value = true
   try {
@@ -545,13 +459,10 @@ watch(searchQuery, () => {
 const prevPage = () => { if (currentPage.value > 1) { currentPage.value--; fetchGoals() } }
 const nextPage = () => { if (currentPage.value < totalPages.value) { currentPage.value++; fetchGoals() } }
 
-// ─── Export Handlers ────────────────────────────────────────────────────────
+// ─── Export Logic ─────────────────────────────────────────────────────────────
 const exportToPdf = () => {
-  if (goals.value.length === 0) {
-    alertError('Tidak ada data target untuk diexport.')
-    return
-  }
-  alertInfo('Menyiapkan dokumen PDF Target...')
+  if (goals.value.length === 0) { alertError('Tidak ada data.'); return }
+  alertInfo('Menyiapkan PDF Laporan Target...')
   try {
     const doc = new jsPDF()
     const tableData = goals.value.map(item => [
@@ -562,44 +473,37 @@ const exportToPdf = () => {
       `${calculatePercent(item.amount, item.total_goal)}%`
     ])
     autoTable(doc, {
-      head: [['Nama Target', 'Terkumpul', 'Total Target', 'Batas Waktu', 'Progres']],
+      head: [['Nama Impian', 'Terkumpul', 'Target', 'Batas Waktu', 'Progres']],
       body: tableData,
       theme: 'grid',
-      headStyles: { fillColor: [24, 24, 27] }, // Zinc 900
-      styles: { fontSize: 8, font: 'helvetica', fontStyle: 'bold' }
+      headStyles: { fillColor: [37, 99, 235] },
+      styles: { font: 'helvetica', fontSize: 9 }
     })
-    doc.save(`target-finansial-${new Date().getTime()}.pdf`)
+    doc.save(`Laporan-Impian-${new Date().getTime()}.pdf`)
     alertSuccess('Laporan PDF berhasil diunduh.')
-  } catch (err) {
-    alertError('Gagal membuat laporan PDF.')
-  }
+  } catch (err) { alertError('Gagal ekspor PDF.') }
 }
 
 const exportToExcel = () => {
-  if (goals.value.length === 0) {
-    alertError('Tidak ada data target untuk diexport.')
-    return
-  }
-  alertInfo('Menyiapkan file Excel Target...')
+  if (goals.value.length === 0) { alertError('Tidak ada data.'); return }
+  alertInfo('Membuat Dokumen Excel Impian...')
   try {
     const flatData = goals.value.map(item => ({
-      'Nama Target': item.name,
-      'Terkumpul': item.amount,
-      'Total Target': item.total_goal,
+      'Nama Impian': item.name,
+      'Dana Terkumpul': item.amount,
+      'Target Finansial': item.total_goal,
       'Batas Waktu': formatDate(item.goal_date),
-      'Progres': `${calculatePercent(item.amount, item.total_goal)}%`
+      'Progres (%)': calculatePercent(item.amount, item.total_goal)
     }))
     const worksheet = XLSX.utils.json_to_sheet(flatData)
     const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Target')
-    XLSX.writeFile(workbook, `report-target-${new Date().getTime()}.xlsx`)
-    alertSuccess('Laporan Excel berhasil diunduh.')
-  } catch (err) {
-    alertError('Gagal membuat file Excel.')
-  }
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Impian')
+    XLSX.writeFile(workbook, `Jurnal-Impian.xlsx`)
+    alertSuccess('File Excel berhasil disimpan.')
+  } catch (err) { alertError('Gagal ekspor Excel.') }
 }
 
-// ─── Handlers ───────────────────────────────────────────────────────────────
+// ─── Interaction Handlers ─────────────────────────────────────────────────────
 const openDetailModal = (item: GoalItem) => {
   selectedGoal.value = item
   isDetailModalOpen.value = true
@@ -607,22 +511,14 @@ const openDetailModal = (item: GoalItem) => {
 
 const openCreateModal = () => {
   isEditing.value = false
-  form.value = { 
-    name: '',
-    total_goal: 0,
-    goal_date: new Date().toISOString().split('T')[0]
-  }
+  form.value = { name: '', total_goal: 0, goal_date: new Date().toISOString().split('T')[0] || '' }
   isFormModalOpen.value = true
 }
 
 const openEditModal = (item: GoalItem) => {
   isEditing.value = true
   selectedGoal.value = item
-  form.value = { 
-    name: item.name, 
-    total_goal: item.total_goal,
-    goal_date: item.goal_date.split(' ')[0]
-  }
+  form.value = { name: item.name, total_goal: item.total_goal, goal_date: item.goal_date.split(' ')[0] || '' }
   isFormModalOpen.value = true
 }
 
@@ -630,28 +526,25 @@ const submitForm = async () => {
   isSubmitting.value = true
   try {
     const token = localStorage.getItem('token') || ''
-    const payload: any = { 
-      name: form.value.name,
-      total_goal: Number(form.value.total_goal),
-      goal_date: form.value.goal_date || ''
+    const payload: CreateGoalPayload = { 
+      name: form.value.name, 
+      total_goal: Number(form.value.total_goal), 
+      goal_date: form.value.goal_date 
     }
     const response = isEditing.value 
       ? await updateGoal(selectedGoal.value!.id, payload, token)
       : await createGoal(payload, token)
     
-    const result = await response.json()
-    if (response.ok && result.success) {
-      alertSuccess(isEditing.value ? 'Target diperbarui.' : 'Target baru dibuat.')
+    if (response.ok) {
+      alertSuccess(isEditing.value ? 'Impian diperbarui.' : 'Impian didaftarkan.')
       isFormModalOpen.value = false
       fetchGoals()
     } else {
-      alertError(result.message || 'Gagal menyimpan target.')
+      const res = await response.json()
+      alertError(res.message || 'Terjadi kesalahan.')
     }
-  } catch (error) {
-    alertError('Kesalahan jaringan.')
-  } finally {
-    isSubmitting.value = false
-  }
+  } catch (error) { alertError('Masalah koneksi.') }
+  finally { isSubmitting.value = false }
 }
 
 const openFundModal = (goal: GoalItem) => {
@@ -666,19 +559,15 @@ const submitAddFund = async () => {
   try {
     const token = localStorage.getItem('token') || ''
     const response = await addGoalFund(activeGoal.value.id, Number(fundAmount.value), token)
-    const result = await response.json()
-    if (response.ok && result.success) {
-      alertSuccess('Dana ditambahkan. Tetap semangat menabung!')
+    if (response.ok) {
+      alertSuccess('Dana ditambahkan. Semangat menabung!')
       isFundModalOpen.value = false
       fetchGoals()
     } else {
-      alertError(result.message || 'Gagal menambahkan dana.')
+      alertError('Gagal menambahkan dana.')
     }
-  } catch (error) {
-    alertError('Kesalahan jaringan.')
-  } finally {
-    isSubmitting.value = false
-  }
+  } catch (error) { alertError('Masalah koneksi.') }
+  finally { isSubmitting.value = false }
 }
 
 const confirmDelete = (id: string) => {
@@ -692,25 +581,17 @@ const executeDelete = async () => {
     const token = localStorage.getItem('token') || ''
     const response = await deleteGoal(deleteItemId.value, token)
     if (response.ok) {
-      alertSuccess('Target dihapus.')
+      alertSuccess('Target telah dihapus.')
       fetchGoals()
     }
-  } catch (error) {
-    alertError('Gagal menghapus data.')
-  } finally {
-    isDeleteDialogOpen.value = false
-  }
+  } catch (error) { alertError('Terjadi kesalahan.') }
+  finally { isDeleteDialogOpen.value = false }
 }
 
 onMounted(() => fetchGoals())
 </script>
 
 <style scoped>
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

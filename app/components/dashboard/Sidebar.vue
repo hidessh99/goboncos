@@ -128,14 +128,7 @@
       <SidebarGroup v-if="isMounted && canAccesswarehouse">
         <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Operasional</SidebarGroupLabel>
         <SidebarMenu class="gap-1 px-2">
-          <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Staff Management" class="h-11 rounded-xl transition-all duration-300 hover:bg-emerald-500/10 group">
-              <NuxtLink to="/employer/staff" class="flex items-center gap-3 w-full">
-                <Users class="h-4 w-4 text-emerald-500/50 group-hover:text-emerald-500 transition-colors" />
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-500/70 group-hover:text-emerald-500">Staff & Pegawai</span>
-              </NuxtLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+ 
         </SidebarMenu>
       </SidebarGroup>
     </SidebarContent>
