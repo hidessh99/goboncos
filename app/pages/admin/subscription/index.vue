@@ -66,9 +66,7 @@
                 <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
                    Plan
                 </TableHead>
-                <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10 text-center">
-                   Role
-                </TableHead>
+
                 <TableHead class="text-xs text-gray-500 dark:text-zinc-400 font-semibold h-10">
                    Masa Aktif
                 </TableHead>
@@ -82,13 +80,13 @@
             </TableHeader>
             <TableBody>
               <TableRow v-if="isLoading">
-                <TableCell colspan="6" class="h-32 text-center text-zinc-500">
+                <TableCell colspan="5" class="h-32 text-center text-zinc-500">
                   <Loader2 class="w-6 h-6 animate-spin mx-auto text-indigo-500" />
                   <p class="mt-2 text-sm font-medium">Memuat data langganan...</p>
                 </TableCell>
               </TableRow>
               <TableRow v-else-if="subscriptions.length === 0">
-                <TableCell colspan="6" class="h-32 text-center">
+                <TableCell colspan="5" class="h-32 text-center">
                   <div class="flex flex-col items-center gap-2">
                     <Zap class="w-8 h-8 text-gray-300 dark:text-zinc-600" />
                     <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Tidak ada data langganan ditemukan.</p>
@@ -116,11 +114,7 @@
                 <TableCell class="text-[13px] text-indigo-600 dark:text-indigo-400 py-2.5 font-bold">
                   {{ sub.subscription_plan?.name }}
                 </TableCell>
-                <TableCell class="py-2.5 text-center">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                    {{ sub.auth?.Role || 'USER' }}
-                  </span>
-                </TableCell>
+
                 <TableCell class="text-[12px] text-gray-500 dark:text-zinc-400 py-2.5">
                    <div class="flex flex-col">
                       <span class="font-medium">{{ formatDate(sub.start_date) }}</span>

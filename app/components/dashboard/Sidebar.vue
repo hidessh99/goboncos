@@ -146,13 +146,13 @@
                 class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground transition-all duration-300"
               >
                 <Avatar class="h-9 w-9 rounded-xl shadow-sm border border-sidebar-border/50">
-                  <AvatarImage src="" :alt="name" />
+                  <AvatarImage src="" :alt="displayName" />
                   <AvatarFallback class="rounded-xl bg-gradient-to-br from-zinc-800 to-black text-white text-[10px] font-black uppercase">
-                    {{ name.substring(0, 2) }}
+                    {{ displayName.substring(0, 2) }}
                   </AvatarFallback>
                 </Avatar>
                 <div v-if="state !== 'collapsed'" class="grid flex-1 text-left text-sm leading-tight ml-1">
-                  <span class="truncate font-black tracking-tight text-sidebar-foreground">{{ name }}</span>
+                  <span class="truncate font-black tracking-tight text-sidebar-foreground">{{ displayName }}</span>
                   <span class="truncate text-[10px] text-sidebar-foreground/50 font-bold uppercase tracking-wider">Akun Aktif</span>
                 </div>
                 <ChevronRight v-if="state !== 'collapsed'" class="ml-auto size-4 text-sidebar-foreground/30" />
@@ -167,13 +167,13 @@
               <DropdownMenuLabel class="p-0 font-normal">
                 <div class="flex items-center gap-3 px-3 py-3 text-left text-sm bg-sidebar-accent/30 rounded-xl mb-1">
                   <Avatar class="h-10 w-10 rounded-xl border-2 border-sidebar-border/20 shadow-lg">
-                    <AvatarImage src="" :alt="name" />
+                    <AvatarImage src="" :alt="displayName" />
                     <AvatarFallback class="rounded-xl bg-gradient-to-br from-zinc-800 to-black text-white text-xs font-black uppercase">
-                      {{ name.substring(0, 2) }}
+                      {{ displayName.substring(0, 2) }}
                     </AvatarFallback>
                   </Avatar>
                   <div class="grid flex-1 text-left text-sm leading-tight">
-                    <span class="truncate font-black tracking-tight text-sidebar-foreground uppercase text-xs">{{ name }}</span>
+                    <span class="truncate font-black tracking-tight text-sidebar-foreground uppercase text-xs">{{ displayName }}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>
@@ -567,6 +567,9 @@ const token = useLocalStorage('token', '')
 const role = useLocalStorage('role', '')
 const name = useLocalStorage('name', 'User')
 const email = useLocalStorage('email', 'user@example.com')
+
+const displayName = computed(() => isMounted.value ? name.value : 'User')
+const displayEmail = computed(() => isMounted.value ? email.value : 'user@example.com')
 
 
 // access cashier

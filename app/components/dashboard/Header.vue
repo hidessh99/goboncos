@@ -17,18 +17,20 @@
     <div class="flex items-center gap-2">
 
       <!-- Theme Toggle -->
-      <Button
-        variant="ghost"
-        size="icon"
-        :title="isDark ? 'Ganti ke Light Mode' : 'Ganti ke Dark Mode'"
-        class="h-8 w-8 text-gray-400 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800/60 transition-colors"
-        @click="toggleTheme"
-      >
-        <Transition name="theme-icon" mode="out-in">
-          <Sun v-if="isDark" class="w-4 h-4" />
-          <Moon v-else class="w-4 h-4" />
-        </Transition>
-      </Button>
+      <ClientOnly>
+        <Button
+          variant="ghost"
+          size="icon"
+          :title="isDark ? 'Ganti ke Light Mode' : 'Ganti ke Dark Mode'"
+          class="h-8 w-8 text-gray-400 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800/60 transition-colors"
+          @click="toggleTheme"
+        >
+          <Transition name="theme-icon" mode="out-in">
+            <Sun v-if="isDark" class="w-4 h-4 text-amber-400" />
+            <Moon v-else class="w-4 h-4 text-blue-500" />
+          </Transition>
+        </Button>
+      </ClientOnly>
 
       <!-- User Avatar -->
       <DropdownMenu>
