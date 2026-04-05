@@ -21,350 +21,200 @@
       <!-- Search Bar -->
     </SidebarHeader>
 
-    <SidebarGroup>
-       <SidebarGroupLabel>Accounting Area</SidebarGroupLabel>
-                <!-- Kategori -->
+
+    <SidebarContent class="scrollbar-hide">
+      <!-- Main Navigation -->
+      <SidebarGroup>
+        <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-4 mb-2">Akuntansi</SidebarGroupLabel>
+        <SidebarMenu class="gap-1 px-2">
+          <!-- Transaksi -->
           <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Transaksi">
-            <NuxtLink to="/transactions">
-              <LayoutGrid class="h-4 w-4" />
-              <span>Transaksi</span>
-            </NuxtLink>
+            <SidebarMenuButton as-child tooltip="Transaksi" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/transactions" class="flex items-center gap-3 w-full">
+                <ArrowLeftRight class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Transaksi</span>
+              </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
+          <!-- Akun Finance -->
           <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Laporan">
-            <NuxtLink to="/transactions/report">
-              <PieChart class="h-4 w-4" />
-              <span>Laporan</span>
-            </NuxtLink>
+            <SidebarMenuButton as-child tooltip="Keuangan" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/finance" class="flex items-center gap-3 w-full">
+                <DollarSign class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Akun Keuangan</span>
+              </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
+          <!-- Kategori -->
           <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Investasi">
-            <NuxtLink to="/transactions/investment">
-              <TrendingUp class="h-4 w-4" />
-              <span>Investasi</span>
-            </NuxtLink>
+            <SidebarMenuButton as-child tooltip="Kategori" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/finance/category" class="flex items-center gap-3 w-full">
+                <LayoutGrid class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Kategori</span>
+              </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Target">
-            <NuxtLink to="/transactions/goal">
-              <Target class="h-4 w-4" />
-              <span>Target</span>
-            </NuxtLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Finance">
-            <NuxtLink to="/finance">
-              <LayoutGrid class="h-4 w-4" />
-              <span>Finance</span>
-            </NuxtLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
-          <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Kategori">
-            <NuxtLink to="/finance/category">
-              <LayoutGrid class="h-4 w-4" />
-              <span>Kategori</span>
-            </NuxtLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-    </SidebarGroup>
-        
-
-    <SidebarContent>
-      <!-- cashier -->
-      <SidebarGroup v-if="isMounted && canAccesscashier">
-        <SidebarGroupLabel>Transaksi Area</SidebarGroupLabel>
-        <SidebarMenu>
-          <!-- Costumer with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="CostumerOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                <Users class="h-4 w-4" />
-                <span>Transaksi</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in CostumerItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          
-  
-
-          <!-- community  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="CommunityOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Users class="h-4 w-4" />
-                  <span>Community</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in CommunityItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <a :href="item.url" target="_blank" rel="noopener noreferrer">
-                        <span>{{ item.title }}</span>
-                      </a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- community  with submenu -->
         </SidebarMenu>
       </SidebarGroup>
 
-      <!-- admin Area -->
+      <!-- Perencanaan Group -->
+      <SidebarGroup>
+        <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Perencanaan</SidebarGroupLabel>
+        <SidebarMenu class="gap-1 px-2">
+          <!-- Investasi -->
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Investasi" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/transactions/investment" class="flex items-center gap-3 w-full">
+                <TrendingUp class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Investasi</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <!-- Target & Impian -->
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Target Impian" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/transactions/goal" class="flex items-center gap-3 w-full">
+                <Target class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Target Impian</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+
+      <!-- Insight Group -->
+      <SidebarGroup>
+        <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Analitik & Laporan</SidebarGroupLabel>
+        <SidebarMenu class="gap-1 px-2">
+          <!-- Laporan -->
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Laporan" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/transactions/report" class="flex items-center gap-3 w-full">
+                <PieChart class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Analitik</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+
+      <!-- Admin Area (Conditional) -->
       <SidebarGroup v-if="isMounted && canAccessAdminArea">
-        <SidebarGroupLabel>Admin Area</SidebarGroupLabel>
-        <SidebarMenu>
-          <!-- users  with submenu -->
+        <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Kontrol Admin</SidebarGroupLabel>
+        <SidebarMenu class="gap-1 px-2">
           <SidebarMenuItem>
-            <Collapsible v-model:open="AdminUserOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <UserCheck class="h-4 w-4" />
-                  <span>Subscription</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in SubscriptionItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- users  with submenu -->
-
-          <!-- server   with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="AdminFinanceOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>Finance</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in AdminFinanceItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-
-                    <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Investment">
-            <NuxtLink to="/admin/investment/category">
-              <LayoutGrid class="h-4 w-4" />
-              <span>Investment</span>
-            </NuxtLink>
+            <SidebarMenuButton as-child tooltip="Subscription" class="h-11 rounded-xl transition-all duration-300 hover:bg-amber-500/10 group">
+              <NuxtLink to="/admin/subscription" class="flex items-center gap-3 w-full">
+                <UserCheck class="h-4 w-4 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-500/70 group-hover:text-amber-500">Langganan</span>
+              </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
-
-
-
-          <!-- server month  with submenu -->
-
-          <!-- server payas with submenu -->
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Finance Admin" class="h-11 rounded-xl transition-all duration-300 hover:bg-amber-500/10 group">
+              <NuxtLink to="/admin/finance/category" class="flex items-center gap-3 w-full">
+                <Server class="h-4 w-4 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-500/70 group-hover:text-amber-500">Finance Master</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
 
-      <!-- warehouse Area -->
-      
-        <SidebarGroup v-if="isMounted && canAccesswarehouse">
-        <SidebarGroupLabel>Warehouse</SidebarGroupLabel>
-        <SidebarMenu>
-
-
-
-                    <!-- Staff -->
+      <!-- Warehouse/Staff Area (Conditional) -->
+      <SidebarGroup v-if="isMounted && canAccesswarehouse">
+        <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Operasional</SidebarGroupLabel>
+        <SidebarMenu class="gap-1 px-2">
           <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Staff">
-            <NuxtLink to="/employer/staff">
-              <LayoutGrid class="h-4 w-4" />
-              <span>Staff</span>
-            </NuxtLink>
+            <SidebarMenuButton as-child tooltip="Staff Management" class="h-11 rounded-xl transition-all duration-300 hover:bg-emerald-500/10 group">
+              <NuxtLink to="/employer/staff" class="flex items-center gap-3 w-full">
+                <Users class="h-4 w-4 text-emerald-500/50 group-hover:text-emerald-500 transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-500/70 group-hover:text-emerald-500">Staff & Pegawai</span>
+              </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <!-- month  with submenu -->
-
-          <!-- always  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="ProdukOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>Produk</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in ProdukItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- always  with submenu -->
-
-          <!-- payas  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="SellerpayasOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <Server class="h-4 w-4" />
-                  <span>Pay As</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in SellerServerpayasItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- month  with submenu -->
-        </SidebarMenu>
-
-        <SidebarMenu>
-          <!-- users  with submenu -->
-          <SidebarMenuItem>
-            <Collapsible v-model:open="SellerWdOpen" class="group/collapsible">
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  <CreditCard class="h-4 w-4" />
-                  <span>Withdraw</span>
-                  <ChevronDown
-                    class="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem v-for="item in SellerWidthdrawItems" :key="item.title">
-                    <SidebarMenuSubButton as-child>
-                      <NuxtLink :to="item.url">
-                        <span>{{ item.title }}</span>
-                      </NuxtLink>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenuItem>
-          <!-- users  with submenu -->
         </SidebarMenu>
       </SidebarGroup>
     </SidebarContent>
+
+
+
 
     <SidebarFooter>
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger as-child />
+            <DropdownMenuTrigger as-child>
+              <SidebarMenuButton
+                size="lg"
+                class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground transition-all duration-300"
+              >
+                <Avatar class="h-9 w-9 rounded-xl shadow-sm border border-sidebar-border/50">
+                  <AvatarImage src="" :alt="name" />
+                  <AvatarFallback class="rounded-xl bg-gradient-to-br from-zinc-800 to-black text-white text-[10px] font-black uppercase">
+                    {{ name.substring(0, 2) }}
+                  </AvatarFallback>
+                </Avatar>
+                <div v-if="state !== 'collapsed'" class="grid flex-1 text-left text-sm leading-tight ml-1">
+                  <span class="truncate font-black tracking-tight text-sidebar-foreground">{{ name }}</span>
+                  <span class="truncate text-[10px] text-sidebar-foreground/50 font-bold uppercase tracking-wider">Akun Aktif</span>
+                </div>
+                <ChevronRight v-if="state !== 'collapsed'" class="ml-auto size-4 text-sidebar-foreground/30" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
             <DropdownMenuContent
-              class="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-              side="bottom"
-              align="end"
-              :side-offset="4"
+              class="w-[--radix-dropdown-menu-trigger-width] min-w-64 rounded-2xl p-2 shadow-2xl border-sidebar-border/50 backdrop-blur-xl bg-sidebar/95"
+              :side="isMobile ? 'bottom' : 'right'"
+              :align="isMobile ? 'end' : 'end'"
+              :side-offset="8"
             >
               <DropdownMenuLabel class="p-0 font-normal">
-                <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar class="h-8 w-8 rounded-lg">
-                    <AvatarImage src="/avatars/dian-pratama.png" alt="@dianpratama" />
-                    <AvatarFallback class="rounded-lg">
-                      DP
+                <div class="flex items-center gap-3 px-3 py-3 text-left text-sm bg-sidebar-accent/30 rounded-xl mb-1">
+                  <Avatar class="h-10 w-10 rounded-xl border-2 border-sidebar-border/20 shadow-lg">
+                    <AvatarImage src="" :alt="name" />
+                    <AvatarFallback class="rounded-xl bg-gradient-to-br from-zinc-800 to-black text-white text-xs font-black uppercase">
+                      {{ name.substring(0, 2) }}
                     </AvatarFallback>
                   </Avatar>
                   <div class="grid flex-1 text-left text-sm leading-tight">
-                    <span class="truncate font-semibold">Dian Pratama</span>
-                    <span class="truncate text-xs">dianpratama2@gmail.com</span>
+                    <span class="truncate font-black tracking-tight text-sidebar-foreground uppercase text-xs">{{ name }}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <User />
-                  Profile
+              <DropdownMenuSeparator class="bg-sidebar-border/30 my-1" />
+              <DropdownMenuGroup class="space-y-0.5">
+                <DropdownMenuItem as-child class="rounded-lg h-10 px-3 focus:bg-sidebar-accent transition-colors cursor-pointer group">
+                  <NuxtLink to="/settings/profile" class="flex w-full items-center gap-3">
+                    <User class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                    <span class="text-xs font-bold text-sidebar-foreground/70 group-hover:text-sidebar-foreground uppercase tracking-wider">Profil</span>
+                  </NuxtLink>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <CreditCard />
-                  Billing
+                <DropdownMenuItem as-child class="rounded-lg h-10 px-3 focus:bg-sidebar-accent transition-colors cursor-pointer group">
+                  <NuxtLink to="/subscription" class="flex w-full items-center gap-3">
+                    <User class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                    <span class="text-xs font-bold text-sidebar-foreground/70 group-hover:text-sidebar-foreground uppercase tracking-wider">Langganan</span>
+                  </NuxtLink>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings2 />
-                  Settings
+                <DropdownMenuItem as-child class="rounded-lg h-10 px-3 focus:bg-sidebar-accent transition-colors cursor-pointer group">
+                   <NuxtLink to="/settings/address" class="flex w-full items-center gap-3">
+                    <CreditCard class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                    <span class="text-xs font-bold text-sidebar-foreground/70 group-hover:text-sidebar-foreground uppercase tracking-wider">Alamat</span>
+                   </NuxtLink>
+                </DropdownMenuItem>
+                <DropdownMenuItem as-child class="rounded-lg h-10 px-3 focus:bg-sidebar-accent transition-colors cursor-pointer group">
+                  <NuxtLink to="/settings" class="flex w-full items-center gap-3">
+                    <Settings2 class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                    <span class="text-xs font-bold text-sidebar-foreground/70 group-hover:text-sidebar-foreground uppercase tracking-wider">Pengaturan</span>
+                  </NuxtLink>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <LogOut />
-                Log out
+              <DropdownMenuSeparator class="bg-sidebar-border/30 my-1" />
+              <DropdownMenuItem @click="logout" class="rounded-lg h-10 px-3 focus:bg-red-500/10 focus:text-red-500 transition-all cursor-pointer group flex items-center gap-3">
+                <LogOut class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-red-500 transition-colors" />
+                <span class="text-xs font-black uppercase tracking-widest text-sidebar-foreground/70 group-hover:text-red-500">Keluar</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -423,7 +273,12 @@ import {
   PieChart,
   TrendingUp,
   Target,
+  ArrowLeftRight,
 } from 'lucide-vue-next'
+
+import {
+  useSidebar,
+} from '~/components/ui/sidebar'
 
 
 
@@ -486,11 +341,11 @@ const UserMonthOpen = ref(false)
 const AdminFinanceItems = [
 
   {
-    title: 'Category',
+    title: 'Kategori',
     url: '/admin/finance/category',
   },
   {
-    title: 'Type',
+    title: 'Tipe',
     url: '/admin/finance/category-type',
   },
   
@@ -523,7 +378,7 @@ const AdminWDItems = [
 const AdminSettingsItems = [
 
   {
-    title: 'Announcement',
+    title: 'Pengumuman',
     url: '/admin/settings/announcement',
   },
 
@@ -704,17 +559,21 @@ const SubscriptionItems = [
 
 const ProfileItems = [
   {
-    title: 'View',
-    url: '/users',
+    title: 'Lihat',
+    url: '/settings/profile',
   },
   {
-    title: 'Setting',
-    url: '/users/settings',
+    title: 'Pengaturan',
+    url: '/settings',
   },
 ]
 
+const { state, isMobile } = useSidebar()
+
 const token = useLocalStorage('token', '')
 const role = useLocalStorage('role', '')
+const name = useLocalStorage('name', 'User')
+const email = useLocalStorage('email', 'user@example.com')
 
 
 // access cashier
@@ -732,11 +591,17 @@ const canAccesswarehouse = computed(() => {
   return ['admin', 'warehouse'].includes(role.value)
 })
 
+// Logout function
+const logout = () => {
+  token.value = ''
+  role.value = ''
+  name.value = ''
+  email.value = ''
+  navigateTo('/auth/login')
+}
+
 // Initialize profile data on component mount
 onMounted(() => {
   isMounted.value = true
-  if (token.value) {
-    // fetchUserProfile()
-  }
 })
 </script>

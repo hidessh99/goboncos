@@ -15,36 +15,6 @@
 
     <!-- Right: Notif + Avatar -->
     <div class="flex items-center gap-2">
-      <!-- Notifications -->
-      <DropdownMenu>
-        <DropdownMenuTrigger as-child>
-          <Button variant="ghost" size="icon" class="relative h-8 w-8 text-gray-400 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800/60">
-            <Bell class="w-4 h-4" />
-            <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-indigo-500 rounded-full ring-1 ring-white dark:ring-[#09090b]" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" class="w-72 bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white">
-          <DropdownMenuLabel class="flex items-center justify-between">
-            <span>Notifikasi</span>
-            <Badge variant="secondary" class="text-xs bg-indigo-500/20 text-indigo-500 dark:text-indigo-400 border-0">3 Baru</Badge>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator class="bg-gray-100 dark:bg-zinc-800" />
-          <div class="space-y-1 p-1">
-            <NotifItem
-              v-for="n in notifications"
-              :key="n.id"
-              :title="n.title"
-              :time="n.time"
-              :desc="n.desc"
-              :unread="n.unread"
-            />
-          </div>
-          <DropdownMenuSeparator class="bg-gray-100 dark:bg-zinc-800" />
-          <DropdownMenuItem class="justify-center text-xs text-gray-400 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 focus:bg-gray-100 dark:focus:bg-zinc-800 cursor-pointer">
-            Lihat semua notifikasi
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
 
       <!-- Theme Toggle -->
       <Button
@@ -78,11 +48,15 @@
             <p class="text-xs text-gray-400 dark:text-zinc-500">{{ isMounted && userEmail ? userEmail : 'admin@gokasir.com' }}</p>
           </DropdownMenuLabel>
           <DropdownMenuSeparator class="bg-gray-100 dark:bg-zinc-800" />
-          <DropdownMenuItem class="hover:bg-gray-100 dark:hover:bg-zinc-800 focus:bg-gray-100 dark:focus:bg-zinc-800 cursor-pointer gap-2 text-sm">
-            <User class="w-4 h-4 text-gray-400 dark:text-zinc-400" /> Profil
+          <DropdownMenuItem as-child class="hover:bg-gray-100 dark:hover:bg-zinc-800 focus:bg-gray-100 dark:focus:bg-zinc-800 cursor-pointer gap-2 text-sm">
+            <NuxtLink to="/settings/profile" class="flex items-center gap-2 w-full">
+              <User class="w-4 h-4 text-gray-400 dark:text-zinc-400" /> Profil
+            </NuxtLink>
           </DropdownMenuItem>
-          <DropdownMenuItem class="hover:bg-gray-100 dark:hover:bg-zinc-800 focus:bg-gray-100 dark:focus:bg-zinc-800 cursor-pointer gap-2 text-sm">
-            <Settings class="w-4 h-4 text-gray-400 dark:text-zinc-400" /> Pengaturan
+          <DropdownMenuItem as-child class="hover:bg-gray-100 dark:hover:bg-zinc-800 focus:bg-gray-100 dark:focus:bg-zinc-800 cursor-pointer gap-2 text-sm">
+            <NuxtLink to="/settings" class="flex items-center gap-2 w-full">
+              <Settings class="w-4 h-4 text-gray-400 dark:text-zinc-400" /> Pengaturan
+            </NuxtLink>
           </DropdownMenuItem>
           <DropdownMenuSeparator class="bg-gray-100 dark:bg-zinc-800" />
           <DropdownMenuItem
@@ -104,7 +78,6 @@ import { useLocalStorage } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
@@ -112,7 +85,7 @@ import {
   DropdownMenuSeparator, DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import {
-  PanelLeft, ChevronRight, Bell, User, Settings, LogOut, Sun, Moon
+  PanelLeft, ChevronRight, User, Settings, LogOut, Sun, Moon
 } from 'lucide-vue-next'
 
 const { isDark, toggle: toggleTheme } = useColorMode()
@@ -125,11 +98,6 @@ const currentPage = computed(() => {
   return segments[segments.length - 1] || 'Dashboard'
 })
 
-const notifications = [
-  { id: 1, title: 'Pesanan Baru #1024', desc: 'Meja 3 memesan Nasi Goreng', time: '2 menit lalu', unread: true },
-  { id: 2, title: 'Pembayaran Berhasil', desc: 'Pesanan #1023 telah dibayar', time: '15 menit lalu', unread: true },
-  { id: 3, title: 'Menu Habis', desc: 'Ayam Bakar sudah habis', time: '1 jam lalu', unread: true },
-]
 
 const token = useLocalStorage<string | null>('token', null)
 const role = useLocalStorage<string | null>('role', null)
@@ -150,29 +118,6 @@ function handleLogout() {
   router.push('/auth/login')
 }
 
-// Inline NotifItem component
-const NotifItem = defineComponent({
-  props: {
-    title: String,
-    desc: String,
-    time: String,
-    unread: Boolean
-  },
-  setup(props) {
-    return () => h('div', {
-      class: 'flex items-start gap-3 p-2 rounded-md hover:bg-zinc-800/60 cursor-pointer transition-colors'
-    }, [
-      props.unread
-        ? h('span', { class: 'mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0' })
-        : h('span', { class: 'mt-1.5 w-1.5 h-1.5 shrink-0' }),
-      h('div', { class: 'flex-1 min-w-0' }, [
-        h('p', { class: 'text-xs font-medium text-white truncate' }, props.title),
-        h('p', { class: 'text-xs text-zinc-500 truncate mt-0.5' }, props.desc),
-        h('p', { class: 'text-[10px] text-zinc-600 mt-1' }, props.time),
-      ])
-    ])
-  }
-})
 </script>
 
 <style scoped>

@@ -1,53 +1,55 @@
 <template>
-  <div class="flex items-center justify-center">
-    <Card class="w-full max-w-2xl bg-white border-gray-200 text-black shadow-lg overflow-hidden">
-      <CardContent class="pt-8 px-6 pb-6">
+  <div class="flex items-center justify-center p-4">
+    <Card class="w-full max-w-2xl bg-white dark:bg-zinc-900 border-none rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-500">
+      <CardContent class="p-10 sm:p-12">
         <!-- Headers -->
-        <div class="mb-6">
-          <h1 class="text-2xl font-bold tracking-tight mb-1 font-heading">Syarat dan Ketentuan</h1>
-          <p class="text-sm text-zinc-500 leading-snug font-medium">
-            Terakhir diperbarui: Maret 2026
-          </p>
+        <div class="mb-10 text-center sm:text-left">
+          <h1 class="text-4xl font-black tracking-tighter mb-2 font-heading uppercase text-zinc-900 dark:text-white leading-tight">
+            Syarat & <span class="text-blue-600">Ketentuan</span>
+          </h1>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+            <p class="text-[10px] text-blue-600 dark:text-blue-400 font-black uppercase tracking-widest leading-none">
+              Efektif Per 05 April 2026
+            </p>
+          </div>
         </div>
         
         <!-- Content -->
-        <div class="space-y-6 text-zinc-600 text-[13px] leading-relaxed h-[55vh] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-zinc-200 scrollbar-track-transparent">
-          <section>
-            <h2 class="text-base font-bold text-black mb-2">1. Persetujuan Ketentuan</h2>
-            <p>Dengan mengakses atau menggunakan GoKasir, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini serta Kebijakan Privasi kami. Jika Anda tidak setuju dengan bagian mana pun dari ketentuan ini, maka Anda tidak diizinkan untuk mengakses platform kami, mendaftarkan akun, atau menggunakan layanan kami. Ketentuan ini berlaku untuk semua individu yang berinteraksi dengan sistem kami.</p>
+        <div class="space-y-8 text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-h-[50vh] overflow-y-auto pr-6 scrollbar-hide antialiased font-medium text-justify sm:text-left">
+          <section class="space-y-3">
+            <h2 class="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight text-left">1. Penggunaan Layanan</h2>
+            <p class="text-left">Dengan mendaftar di GoBoncos, Anda setuju untuk menggunakan platform ini hanya untuk tujuan manajemen keuangan personal yang sah. Anda dilarang menggunakan GoBoncos untuk aktivitas ilegal, penipuan, atau pencucian uang.</p>
           </section>
           
-          <section>
-            <h2 class="text-base font-bold text-black mb-2">2. Lisensi Penggunaan</h2>
-            <p>Izin diberikan untuk mengunduh sementara satu salinan materi (informasi atau perangkat lunak) di situs web GoKasir hanya untuk tampilan transitori pribadi dan non-komersial. Ini adalah pemberian lisensi, bukan transfer hak milik, dan di bawah lisensi ini Anda tidak diperbolehkan untuk:</p>
-            <ul class="list-disc pl-5 mt-3 space-y-2 font-medium">
-              <li>Memodifikasi atau menyalin materi.</li>
-              <li>Menggunakan materi untuk tujuan komersial apa pun, atau untuk tampilan publik apa pun (komersial atau non-komersial).</li>
-              <li>Mencoba mendekompilasi atau merekayasa balik perangkat lunak apa pun yang terkandung di situs web GoKasir.</li>
-              <li>Menghapus hak cipta atau notasi kepemilikan lainnya dari materi.</li>
-            </ul>
+          <section class="space-y-3 text-left">
+            <h2 class="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight">2. Akun & Keamanan</h2>
+            <p class="text-left">Anda bertanggung jawab penuh untuk menjaga kerahasiaan kata sandi dan token akses Anda. GoBoncos tidak bertanggung jawab atas kerugian finansial yang disebabkan oleh kelalaian pengguna dalam mengamankan kredensial akun.</p>
           </section>
           
-          <section>
-            <h2 class="text-base font-bold text-black mb-2">3. Penafian (Disclaimer)</h2>
-            <p>Materi di situs web GoKasir disediakan atas dasar 'apa adanya'. GoKasir tidak memberikan jaminan, baik tersurat maupun tersirat, dan dengan ini menolak serta meniadakan semua jaminan lainnya termasuk, tanpa batasan, jaminan tersirat atau kondisi kelayakan jual, kesesuaian untuk tujuan tertentu, atau non-pelanggaran kekayaan intelektual atau pelanggaran hak lainnya.</p>
+          <section class="space-y-3 text-left">
+            <h2 class="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight">3. Paket Langganan (Subscription)</h2>
+            <p class="text-left">Kami menawarkan berbagai paket langganan (Trial, Basic, Pro, Advanced). Pemilihan paket menentukan kapasitas fitur yang dapat Anda akses, seperti jumlah akun keuangan dan fitur analitik. Pembayaran biaya langganan dilakukan di muka dan tidak dapat dikembalikan (*non-refundable*).</p>
           </section>
           
-          <section>
-            <h2 class="text-base font-bold text-black mb-2">4. Batasan Tanggung Jawab</h2>
-            <p>Dalam keadaan apa pun GoKasir atau pemasoknya tidak bertanggung jawab atas kerusakan apa pun (termasuk, tanpa batasan, kerusakan atas hilangnya data atau keuntungan, atau karena gangguan bisnis) yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan materi di platform GoKasir, bahkan jika GoKasir atau perwakilan resmi GoKasir telah diberitahu secara lisan atau tertulis tentang kemungkinan kerusakan tersebut.</p>
+          <section class="space-y-3 text-left">
+            <h2 class="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight">4. Akurasi Data Transaksi</h2>
+            <p class="text-left">GoBoncos adalah alat pencatatan. Kami tidak menjamin keakuratan laporan jika data yang diinput oleh pengguna tidak sesuai. Anda disarankan untuk melakukan rekonsiliasi data secara berkala antara akun riil dan catatan di aplikasi.</p>
           </section>
-
-          <section>
-            <h2 class="text-base font-bold text-black mb-2">5. Hukum yang Mengatur</h2>
-            <p>Syarat dan ketentuan ini diatur oleh dan ditafsirkan sesuai dengan hukum Republik Indonesia dan Anda tunduk secara tidak dapat ditarik kembali pada yurisdiksi eksklusif pengadilan di Negara atau lokasi tersebut.</p>
+          
+          <section class="space-y-3 text-left">
+            <h2 class="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight">5. Batasan Tanggung Jawab</h2>
+            <p class="text-left">Dalam keadaan apa pun GoBoncos tidak bertanggung jawab atas kerugian tidak langsung, konsekuensial, atau kehilangan keuntungan yang timbul dari penggunaan atau ketidakmampuan untuk menggunakan platform kami.</p>
           </section>
         </div>
 
         <!-- Footer Action -->
-        <div class="mt-8 pt-6 border-t border-zinc-100 text-center">
-          <NuxtLink to="/auth/register" class="text-zinc-600 hover:text-black transition-colors hover:underline underline-offset-4 text-sm font-bold flex items-center justify-center gap-2">
-            &larr; Kembali ke Pendaftaran
+        <div class="mt-10 pt-8 border-t border-zinc-50 dark:border-zinc-800 text-center">
+          <NuxtLink to="/auth/register" class="group flex items-center justify-center gap-3 mx-auto">
+            <div class="w-10 h-10 rounded-xl bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+               <ArrowLeft class="w-4 h-4" />
+            </div>
+            <span class="text-xs font-black uppercase tracking-widest text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Setuju & Kembali</span>
           </NuxtLink>
         </div>
       </CardContent>
@@ -57,39 +59,14 @@
 
 <script setup lang="ts">
 import { Card, CardContent } from '@/components/ui/card'
+import { ArrowLeft } from 'lucide-vue-next'
 
-definePageMeta({
-  layout: 'auth'
-})
+definePageMeta({ layout: 'auth' })
 
-const config = useRuntimeConfig()
-const appName = String(config.public.APP_NAME || 'GoKasir')
-const url = useRequestURL()
+const appName = 'GoBoncos'
 
 useSeoMeta({
   title: `Syarat dan Ketentuan - ${appName}`,
-  description: `Baca syarat dan ketentuan penggunaan layanan ${appName}. Ketahui hak dan kewajiban Anda sebagai pengguna platform kasir pintar kami.`,
-  ogTitle: `Syarat dan Ketentuan - ${appName}`,
-  ogDescription: `Dokumen syarat dan ketentuan resmi penggunaan sistem ${appName}.`,
-  ogImage: config.public.appLogo || '/logo.png',
-  ogUrl: url.href,
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-  twitterTitle: `Syarat dan Ketentuan - ${appName}`,
-  twitterDescription: `Pahami aturan penggunaan ${appName} demi kenyamanan berjualan.`,
-  twitterImage: config.public.appLogo || '/logo.png',
-})
-
-useHead({
-  link: [
-    { rel: 'canonical', href: url.href }
-  ],
-  meta: [
-    { name: 'robots', content: 'index, follow' },
-    { name: 'keywords', content: 'syarat dan ketentuan gokasir, gokasir pos indonesia, aturan pakai gokasir, aplikasi kasir gratis' },
-    { name: 'author', content: 'GoKasir Team' },
-    { property: 'og:locale', content: 'id_ID' },
-    { property: 'og:site_name', content: appName }
-  ]
+  description: `Aturan main dan ketentuan penggunaan layanan manajamen keuangan GoBoncos.`,
 })
 </script>

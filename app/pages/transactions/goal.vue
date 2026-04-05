@@ -2,32 +2,32 @@
   <div class="p-4 sm:p-6 space-y-6">
 
     <!-- Top Summary Card (Premium Responsive Bar) -->
-    <div class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-3xl p-6 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl dark:shadow-2xl transition-all duration-300">
+    <div class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-3xl p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 shadow-xl dark:shadow-2xl transition-all duration-300">
       <!-- Info Left -->
-      <div class="flex items-center gap-5 w-full lg:w-auto">
-        <div class="w-12 h-12 rounded-2xl bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center text-white shadow-inner shrink-0 leading-none">
-          <Wallet class="w-6 h-6" />
+      <div class="flex items-center gap-4 w-full md:w-auto text-left">
+        <div class="w-12 h-12 rounded-2xl bg-zinc-900 dark:bg-zinc-100 flex items-center justify-center text-white dark:text-zinc-900 shadow-lg shrink-0">
+          <Wallet class="w-6 h-6 shrink-0" />
         </div>
-        <div>
-          <h1 class="text-xl font-black text-zinc-900 dark:text-white tracking-tighter antialiased uppercase leading-tight">Target & Impian</h1>
-          <p class="text-zinc-500 text-xs font-medium mt-0.5 max-w-[200px] sm:max-w-none">Wujudkan impian finansial Anda dengan rencana yang terukur.</p>
+        <div class="min-w-0">
+          <h1 class="text-lg md:text-xl font-black text-zinc-900 dark:text-white tracking-widest antialiased uppercase leading-tight truncate">Target & Impian</h1>
+          <p class="text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-wider opacity-60">Rencana Finansial Terukur</p>
         </div>
       </div>
 
       <!-- Data & Action Right -->
-      <div class="flex flex-col sm:flex-row items-center gap-8 w-full lg:w-auto mt-2 lg:mt-0">
+      <div class="flex flex-col sm:flex-row items-center gap-6 md:gap-10 w-full md:w-auto mt-4 md:mt-0">
         <!-- Amounts Section -->
-        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-8 sm:gap-10 w-full sm:w-auto">
-          <div class="text-center sm:text-right">
-            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-1 antialiased">SUDAH TERKUMPUL</p>
-            <p class="text-xl font-black text-zinc-900 dark:text-white tabular-nums antialiased leading-none">Rp {{ formatCurrency(totalSaved) }}</p>
+        <div class="flex items-center justify-center sm:justify-end gap-8 md:gap-12 flex-1 md:flex-none w-full sm:w-auto">
+          <div class="text-center sm:text-right space-y-1">
+            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none">SUDAH TERKUMPUL</p>
+            <p class="text-lg md:text-xl font-black text-zinc-900 dark:text-white tabular-nums leading-none">Rp {{ formatCurrency(totalSaved) }}</p>
           </div>
           
           <div class="hidden sm:block w-px h-10 bg-zinc-100 dark:bg-zinc-800"></div>
 
-          <div class="text-center sm:text-left">
-            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-1 antialiased">SISA TARGET</p>
-            <p class="text-xl font-black text-red-500 tabular-nums antialiased leading-none">
+          <div class="text-center sm:text-left space-y-1">
+            <p class="text-[9px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-none">SISA TARGET</p>
+            <p class="text-lg md:text-xl font-black text-red-500 tabular-nums leading-none">
               Rp {{ formatCurrency(Math.max(0, totalTarget - totalSaved)) }}
             </p>
           </div>
@@ -35,10 +35,10 @@
 
         <!-- Buttons Section -->
         <div class="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
-          <div class="flex items-center gap-1.5 h-12 px-1 bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl border border-zinc-100 dark:border-zinc-800/50 mr-1">
+          <div class="flex items-center gap-1 h-12 px-1 bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl border border-zinc-100 dark:border-zinc-800/50">
             <Button 
               variant="ghost"
-              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all duration-300"
+              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-white dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all shadow-sm"
               title="Export PDF"
               @click="exportToPdf"
             >
@@ -46,7 +46,7 @@
             </Button>
             <Button 
               variant="ghost"
-              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all duration-300"
+              class="w-10 h-10 p-0 rounded-xl text-zinc-400 hover:bg-white dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white transition-all shadow-sm"
               title="Export Excel"
               @click="exportToExcel"
             >
@@ -56,7 +56,7 @@
 
           <Button 
             id="btn-tambah-target"
-            class="bg-zinc-900 dark:bg-white text-white dark:text-black hover:opacity-90 gap-2 h-12 px-8 rounded-2xl font-black text-[11px] uppercase tracking-wider shadow-xl dark:shadow-white/5 transition-all active:scale-95 flex-1 sm:flex-none whitespace-nowrap"
+            class="bg-zinc-900 dark:bg-white text-white dark:text-black hover:opacity-90 gap-2 h-12 px-6 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl transition-all active:scale-95 flex-1 sm:flex-none whitespace-nowrap"
             @click="openCreateModal"
           >
             <Plus class="w-4 h-4" />
