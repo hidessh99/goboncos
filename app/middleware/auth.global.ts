@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
   // ── Daftar prefix/path yang bebas diakses tanpa token ──
   const publicPaths = [
-    '/',           // Landing / Home page
+    '/home',           // Landing / Home page
     '/auth/login',
     '/auth/register',
     '/auth/forgot-password',
