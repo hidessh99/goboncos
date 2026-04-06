@@ -72,13 +72,14 @@ export default defineNuxtConfig({
   experimental: {
     appManifest: false,
   },
-  nitro: {
-    preset: 'cloudflare-pages',
-    // prerender: {
-    //   autoSubfolderIndex: false,
-    // },
-  },sourcemap: {
+  sourcemap: {
     server: false,
     client: false,
+  },
+  nitro: {
+    preset: 'cloudflare-pages',
+    prerender: {
+      autoSubfolderIndex: false,
+    },
   },
 })
