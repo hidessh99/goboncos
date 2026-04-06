@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "nuxt build && npx wrangler pages deploy dist"
+    "deploy": "nuxt build"
   },
   "dependencies": {
     "@tanstack/vue-table": "^8.21.3",
