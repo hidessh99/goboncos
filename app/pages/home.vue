@@ -133,14 +133,14 @@ const faqs = [
         </div>
         
         <div class="hidden md:flex items-center gap-8">
-          <NuxtLink to="#fitur" class="text-sm font-medium text-zinc-600 hover:text-black transition-colors">Fitur</NuxtLink>
-          <NuxtLink to="#solusi" class="text-sm font-medium text-zinc-600 hover:text-black transition-colors">Target</NuxtLink>
-          <NuxtLink to="#testimoni" class="text-sm font-medium text-zinc-600 hover:text-black transition-colors">Cerita</NuxtLink>
+          <NuxtLink to="#fitur" class="text-sm font-medium text-zinc-800 hover:text-black transition-colors">Fitur</NuxtLink>
+          <NuxtLink to="#solusi" class="text-sm font-medium text-zinc-800 hover:text-black transition-colors">Target</NuxtLink>
+          <NuxtLink to="#testimoni" class="text-sm font-medium text-zinc-800 hover:text-black transition-colors">Cerita</NuxtLink>
         </div>
 
         <div class="flex items-center gap-3">
           <Button variant="ghost" class="hidden sm:inline-flex" as-child>
-            <NuxtLink to="/auth/login">Masuk</NuxtLink>
+            <NuxtLink to="/auth/login" class="text-zinc-800 hover:text-black">Masuk</NuxtLink>
           </Button>
           <Button class="rounded-full bg-black px-6 text-white hover:bg-zinc-800" as-child>
             <NuxtLink to="/auth/register">Mulai Catat</NuxtLink>
@@ -162,7 +162,7 @@ const faqs = [
               STOP OVERTHINKING SOAL DUIT
             </div>
             <h1 class="text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl mb-8">
-              Atur Keuangan <br /> Jadi Lebih <span class="relative inline-block text-rose-600">
+              Atur Keuangan <br /> Jadi Lebih <span class="relative inline-block text-rose-700">
                 Chill & Estetik
                 <svg class="absolute -bottom-2 left-0 w-full h-3 text-rose-100/50" fill="currentColor" viewBox="0 0 100 10">
                   <path d="M0 10 Q 50 0 100 10" stroke="currentColor" stroke-width="2" fill="none" />
@@ -185,7 +185,7 @@ const faqs = [
                 </a>
               </Button>
             </div>
-            <div class="mt-8 flex items-center gap-4 text-sm text-zinc-400">
+            <div class="mt-8 flex items-center gap-4 text-sm text-zinc-800">
               <div class="flex -space-x-2">
                 <img v-for="i in 4" :key="i" :src="`https://i.pravatar.cc/100?u=genz${i}`" class="h-8 w-8 rounded-full border-2 border-white shadow-sm" alt="User">
               </div>
@@ -198,30 +198,30 @@ const faqs = [
             <div class="relative rounded-[2.5rem] border border-zinc-100 bg-white p-4 shadow-2xl overflow-hidden">
                <!-- Abstract UI Mockup -->
                <div class="aspect-[16/10] rounded-[2rem] bg-zinc-50 border border-zinc-100 p-6 flex flex-col gap-6">
-                  <div class="flex justify-between items-center text-xs font-bold text-zinc-400">
+                  <div class="flex justify-between items-center text-xs font-bold text-zinc-800">
                     <span class="bg-zinc-200 px-2 py-1 rounded">Budgeting April</span>
                     <span class="bg-black text-white px-2 py-1 rounded">Saldo: Rp 4.250.000</span>
                   </div>
                   <div class="flex gap-4">
                     <div class="h-24 flex-1 bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm">
                       <div class="h-3 w-1/2 bg-rose-50 rounded mb-2"></div>
-                      <div class="text-sm font-bold text-rose-500 italic">Self Reward</div>
+                      <div class="text-sm font-bold text-rose-700 italic">Self Reward</div>
                       <div class="h-4 w-full bg-rose-100 rounded mt-2"></div>
                     </div>
                     <div class="h-24 flex-1 bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm">
                       <div class="h-3 w-1/2 bg-emerald-50 rounded mb-2"></div>
-                      <div class="text-sm font-bold text-emerald-500 italic">Tabungan Konser</div>
+                      <div class="text-sm font-bold text-emerald-700 italic">Tabungan Konser</div>
                       <div class="h-4 w-full bg-emerald-100 rounded mt-2"></div>
                     </div>
                   </div>
                   <div class="flex-1 bg-white border border-zinc-100 rounded-2xl p-6 shadow-sm overflow-hidden flex flex-col gap-4">
                     <div class="flex justify-between border-b pb-2">
-                       <span class="text-[10px] font-bold text-zinc-400">PENGELUARAN TERAKHIR</span>
-                       <span class="text-[10px] font-bold text-zinc-400">LIHAT SEMUA</span>
+                       <span class="text-xs font-bold text-zinc-800">PENGELUARAN TERAKHIR</span>
+                       <span class="text-xs font-bold text-zinc-800">LIHAT SEMUA</span>
                     </div>
                     <div v-for="i in 2" :key="i" class="flex justify-between items-center bg-zinc-50 p-2 rounded-xl">
                       <div class="flex items-center gap-2">
-                        <div class="h-8 w-8 bg-black rounded-lg flex items-center justify-center text-white text-[10px]">☕</div>
+                        <div class="h-8 w-8 bg-black rounded-lg flex items-center justify-center text-white text-xs">☕</div>
                         <div class="h-4 w-24 bg-zinc-200 rounded"></div>
                       </div>
                       <div class="h-4 w-12 bg-rose-100 rounded"></div>
@@ -234,7 +234,7 @@ const faqs = [
               <div class="flex items-center gap-3">
                 <Sparkles class="h-6 w-6 text-yellow-400 fill-yellow-400" />
                 <div>
-                  <div class="text-[10px] opacity-70">Status Akhir Bulan</div>
+                  <div class="text-xs opacity-70">Status Akhir Bulan</div>
                   <div class="font-bold">Masih Bisa Healing! ✨</div>
                 </div>
               </div>
@@ -248,7 +248,7 @@ const faqs = [
         <div class="container mx-auto px-4">
           <div class="text-center max-w-2xl mx-auto mb-16">
             <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4">Relate Sama Masalah Ini?</h2>
-            <p class="text-lg text-zinc-500">Capek dimarahin diri sendiri gara-gara duit gak jelas lari kemana?</p>
+            <p class="text-lg text-zinc-600">Capek dimarahin diri sendiri gara-gara duit gak jelas lari kemana?</p>
           </div>
           <div class="grid gap-8 md:grid-cols-3">
             <Card v-for="(problem, index) in problems" :key="index" :class="[problem.color, 'border-none rounded-[2rem] shadow-none hover:translate-y-[-8px] transition-transform duration-300']">
@@ -322,18 +322,18 @@ const faqs = [
             <p class="text-zinc-600 text-lg leading-relaxed mb-6">
               Produk yang dijual adalah layanan langganan aplikasi pengelolaan keuangan {{ appName }}. Semua paket memiliki manfaat yang sama, dengan perbedaan pada durasi berlangganan. Harga ditampilkan dalam mata uang Rupiah.
             </p>
-            <p class="text-zinc-500 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
+            <p class="text-zinc-600 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
           </div>
 
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-20">
             <!-- Trial Card -->
             <div class="relative rounded-[2rem] border border-zinc-200 bg-white p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
-                <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">14 Hari</span>
-                <span class="bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
+                <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">14 Hari</span>
+                <span class="bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Trial 14 Hari</h3>
-              <div class="text-zinc-500 text-sm line-through mb-1">Rp 19.000</div>
+              <div class="text-zinc-600 text-sm line-through mb-1">Rp 19.000</div>
               <div class="text-4xl font-black mb-6">Rp 0</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
             </div>
@@ -341,11 +341,11 @@ const faqs = [
             <!-- 1 Month Card -->
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
-                 <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">1 Bulan</span>
-                 <span class="bg-white border border-zinc-200 text-zinc-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
+                 <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">1 Bulan</span>
+                 <span class="bg-white border border-zinc-200 text-zinc-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
-              <div class="text-zinc-500 text-sm line-through mb-1">Rp 25.000</div>
+              <div class="text-zinc-600 text-sm line-through mb-1">Rp 25.000</div>
               <div class="text-4xl font-black mb-6">Rp 19.000</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
             </div>
@@ -353,24 +353,24 @@ const faqs = [
             <!-- 3 Months Card (Best Deal) -->
             <div class="relative rounded-[2rem] border-2 border-rose-200 bg-white p-8 flex flex-col h-full shadow-[0_20px_50px_-20px_rgba(251,113,133,0.3)] ring-4 ring-rose-50 ring-offset-0 transition-all hover:scale-[1.02]">
                <div class="flex justify-between items-center mb-6">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">3 Bulan</span>
-                  <span class="bg-rose-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
+                  <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">3 Bulan</span>
+                  <span class="bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
-               <div class="text-zinc-500 text-sm line-through mb-1">Rp 75.000</div>
-               <div class="text-4xl font-black mb-4 text-rose-600">Rp 49.000</div>
-               <div class="inline-flex mb-6 bg-rose-50 text-rose-700 text-[10px] font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
+               <div class="text-zinc-600 text-sm line-through mb-1">Rp 75.000</div>
+               <div class="text-4xl font-black mb-4 text-rose-700">Rp 49.000</div>
+               <div class="inline-flex mb-6 bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
             </div>
 
             <!-- 6 Months Card -->
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
                <div class="flex justify-between items-center mb-6">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">6 Bulan</span>
-                  <span class="bg-rose-50 text-rose-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
+                  <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">6 Bulan</span>
+                  <span class="bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
-               <div class="text-zinc-500 text-sm line-through mb-1">Rp 150.000</div>
+               <div class="text-zinc-600 text-sm line-through mb-1">Rp 150.000</div>
                <div class="text-4xl font-black mb-6">Rp 99.000</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
             </div>
@@ -455,11 +455,11 @@ const faqs = [
           <div class="flex h-6 w-6 items-center justify-center rounded bg-black text-white font-bold text-xs">G</div>
           <span class="font-bold">{{ appName }}</span>
         </div>
-        <p class="text-zinc-500 text-sm">© 2026 {{ appName }}. Dibangun buat kamu yang pengen maju.</p>
+        <p class="text-zinc-600 text-sm">© 2026 {{ appName }}. Dibangun buat kamu yang pengen maju.</p>
         <div class="flex gap-6">
-          <a href="#" class="text-zinc-500 hover:text-black transition-colors">Instagram</a>
-          <a href="#" class="text-zinc-500 hover:text-black transition-colors">TikTok</a>
-          <a href="#" class="text-zinc-500 hover:text-black transition-colors">Twitter</a>
+          <a href="#" class="text-zinc-600 hover:text-black transition-colors">Instagram</a>
+          <a href="#" class="text-zinc-600 hover:text-black transition-colors">TikTok</a>
+          <a href="#" class="text-zinc-600 hover:text-black transition-colors">Twitter</a>
         </div>
       </div>
     </footer>
