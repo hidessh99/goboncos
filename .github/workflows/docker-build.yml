@@ -41,9 +41,9 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/webgokasir:latest
-            ghcr.io/${{ github.repository_owner }}/webgokasir:${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/webgokasir:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/webgokasir:${{ github.sha }}
+            ghcr.io/${{ github.repository_owner }}/goboncos:latest
+            ghcr.io/${{ github.repository_owner }}/goboncos:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/goboncos:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/goboncos:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
