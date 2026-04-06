@@ -35,6 +35,11 @@ useHead({
   },
   meta: [
     { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ],
+  link: [
+    { rel: 'shortcut icon', type: 'image/png', href: 'https://asset.hidessh.com/icon-hidessh2.png' },
+    { rel: 'icon', type: 'image/svg+xml', href: 'https://asset.hidessh.com/icon-hidessh2.png' },
+    { rel: 'apple-touch-icon', href: 'https://asset.hidessh.com/icon-hidessh2.png' }
   ]
 })
 
@@ -149,7 +154,7 @@ const faqs = [
       <section class="container mx-auto px-4 py-20 lg:py-32 overflow-hidden">
         <div class="grid items-center gap-16 lg:grid-cols-2">
           <div class="max-w-2xl">
-            <div class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-600 mb-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 mb-6">
               <span class="relative flex h-2 w-2">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-75"></span>
                 <span class="relative inline-flex h-2 w-2 rounded-full bg-rose-500"></span>
@@ -324,11 +329,11 @@ const faqs = [
             <!-- Trial Card -->
             <div class="relative rounded-[2rem] border border-zinc-200 bg-white p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
-                <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">14 Hari</span>
+                <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">14 Hari</span>
                 <span class="bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Trial 14 Hari</h3>
-              <div class="text-zinc-400 text-sm line-through mb-1">Rp 19.000</div>
+              <div class="text-zinc-500 text-sm line-through mb-1">Rp 19.000</div>
               <div class="text-4xl font-black mb-6">Rp 0</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
             </div>
@@ -336,11 +341,11 @@ const faqs = [
             <!-- 1 Month Card -->
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
-                 <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">1 Bulan</span>
+                 <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">1 Bulan</span>
                  <span class="bg-white border border-zinc-200 text-zinc-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
-              <div class="text-zinc-400 text-sm line-through mb-1">Rp 25.000</div>
+              <div class="text-zinc-500 text-sm line-through mb-1">Rp 25.000</div>
               <div class="text-4xl font-black mb-6">Rp 19.000</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
             </div>
@@ -348,24 +353,24 @@ const faqs = [
             <!-- 3 Months Card (Best Deal) -->
             <div class="relative rounded-[2rem] border-2 border-rose-200 bg-white p-8 flex flex-col h-full shadow-[0_20px_50px_-20px_rgba(251,113,133,0.3)] ring-4 ring-rose-50 ring-offset-0 transition-all hover:scale-[1.02]">
                <div class="flex justify-between items-center mb-6">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">3 Bulan</span>
-                  <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
+                  <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">3 Bulan</span>
+                  <span class="bg-rose-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
-               <div class="text-zinc-400 text-sm line-through mb-1 text-opacity-50">Rp 75.000</div>
+               <div class="text-zinc-500 text-sm line-through mb-1">Rp 75.000</div>
                <div class="text-4xl font-black mb-4 text-rose-600">Rp 49.000</div>
-               <div class="inline-flex mb-6 bg-rose-50 text-rose-600 text-[10px] font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
+               <div class="inline-flex mb-6 bg-rose-50 text-rose-700 text-[10px] font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
             </div>
 
             <!-- 6 Months Card -->
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
                <div class="flex justify-between items-center mb-6">
-                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">6 Bulan</span>
-                  <span class="bg-rose-50 text-rose-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
+                  <span class="text-[10px] font-bold tracking-widest text-zinc-500 uppercase">6 Bulan</span>
+                  <span class="bg-rose-50 text-rose-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
-               <div class="text-zinc-400 text-sm line-through mb-1">Rp 150.000</div>
+               <div class="text-zinc-500 text-sm line-through mb-1">Rp 150.000</div>
                <div class="text-4xl font-black mb-6">Rp 99.000</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
             </div>
@@ -452,9 +457,9 @@ const faqs = [
         </div>
         <p class="text-zinc-500 text-sm">© 2026 {{ appName }}. Dibangun buat kamu yang pengen maju.</p>
         <div class="flex gap-6">
-          <a href="#" class="text-zinc-400 hover:text-black transition-colors">Instagram</a>
-          <a href="#" class="text-zinc-400 hover:text-black transition-colors">TikTok</a>
-          <a href="#" class="text-zinc-400 hover:text-black transition-colors">Twitter</a>
+          <a href="#" class="text-zinc-500 hover:text-black transition-colors">Instagram</a>
+          <a href="#" class="text-zinc-500 hover:text-black transition-colors">TikTok</a>
+          <a href="#" class="text-zinc-500 hover:text-black transition-colors">Twitter</a>
         </div>
       </div>
     </footer>

@@ -90,6 +90,11 @@ useHead({
   },
   meta: [
     { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ],
+  link: [
+    { rel: 'shortcut icon', type: 'image/png', href: 'https://asset.hidessh.com/icon-hidessh2.png' },
+    { rel: 'icon', type: 'image/svg+xml', href: 'https://asset.hidessh.com/icon-hidessh2.png' },
+    { rel: 'apple-touch-icon', href: 'https://asset.hidessh.com/icon-hidessh2.png' }
   ]
 })
 </script>

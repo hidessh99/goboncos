@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     defaultLocale: 'id',
   },
   sitemap: {
-    zeroRuntime: true,
     enabled: true,
     autoLastmod: true,
     exclude: ['/admin/**', '/employer/**', '/dashboard/**'],
@@ -19,6 +18,13 @@ export default defineNuxtConfig({
     enabled: true,
     disallow: ['/admin', '/employer', '/dashboard', '/auth/reset-password'],
     allow: ['/auth/login', '/auth/register', '/subscription', '/auth/privacy-policy', '/auth/terms-and-conditions'],
+  },
+  nitro: {
+    preset: 'cloudflare-pages',
+    prerender: {
+      autoSubfolderIndex: false,
+      routes: ['/sitemap.xml', '/robots.txt']
+    },
   },
   modules: ['@nuxtjs/tailwindcss', 'shadcn-nuxt', '@nuxtjs/sitemap', '@nuxtjs/robots'],
   css: ['~/assets/css/tailwind.css'],
@@ -78,11 +84,5 @@ export default defineNuxtConfig({
   sourcemap: {
     server: false,
     client: false,
-  },
-  nitro: {
-    preset: 'cloudflare-pages',
-    prerender: {
-      autoSubfolderIndex: false,
-    },
   },
 })
