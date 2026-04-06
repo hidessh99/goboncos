@@ -1,4 +1,4 @@
-export const userRegister = async (data: { email: string, password: string, name: string, phone_number: string, company_name: string }) => {
+export const userRegister = async (data: { email: string, password: string, name: string, phone_number: string }) => {
   const config = useRuntimeConfig()
   const baseUrl = config.public.baseUrl
 
@@ -6,7 +6,6 @@ export const userRegister = async (data: { email: string, password: string, name
   formData.append('email', data.email)
   formData.append('password', data.password)
   formData.append('name', data.name)
-  formData.append('company_name', data.company_name)
   formData.append('phone_number', data.phone_number)
 
   return await fetch(`${baseUrl}/api/auth/register`, {
