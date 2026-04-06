@@ -120,7 +120,7 @@ useSeoMeta({
   title: `Masuk - ${appName} | Kelola Bisnis Anda`,
   description: `Masuk ke akun ${appName} Anda. Platform kasir pintar gratis untuk UMKM guna mengelola transaksi, stok, dan laporan keuangan dengan mudah & cepat.`,
   ogTitle: `Login - ${appName}`,
-  ogDescription: `Masuk ke akun ${appName} Anda untuk manajemen POS yang lebih efisien.`,
+  ogDescription: `Masuk ke akun ${appName} Anda untuk manajemen keuangan yang lebih efisien.`,
   ogImage: config.public.appLogo || '/logo.png',
   ogUrl: url.href,
   ogType: 'website',
@@ -136,7 +136,7 @@ useHead({
   ],
   meta: [
     { name: 'robots', content: 'index, follow' },
-    { name: 'keywords', content: 'login gokasir, aplikasi kasir, kasir pintar, pos gratis, manajemen umkm, gokasir indonesia' },
+    { name: 'keywords', content: 'login gokasir, aplikasi kasir, kasir pintar, keuangan gratis, manajemen umkm, gokasir indonesia' },
     { name: 'author', content: 'GoKasir Team' },
     { property: 'og:locale', content: 'id_ID' },
     { property: 'og:site_name', content: appName }
