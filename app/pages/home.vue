@@ -87,7 +87,7 @@ const features = [
 const faqs = [
   {
     question: `Berapa harga langganan ${appName}?`,
-    answer: 'Saat ini tersedia tiga pilihan langganan: 1 bulan Rp 19.000, 3 bulan Rp 49.000, dan 6 bulan Rp 99.000. Seluruh paket punya manfaat fitur yang sama.'
+    answer: `Gratis trial selama 14 hari! Setelah itu, kamu bisa pilih paket mulai dari Rp 19.000/bulan. Seluruh paket punya manfaat fitur yang sama, cuma durasinya aja yang beda.`
   },
   {
     question: 'Apakah data keuangan gue aman di sini?',
@@ -294,6 +294,91 @@ const faqs = [
                  </div>
                </div>
             </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="harga" class="py-24 lg:py-32 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-5xl font-black tracking-tight mb-8">Harga</h2>
+            <p class="text-zinc-500 text-lg leading-relaxed mb-6">
+              Produk yang dijual adalah layanan langganan aplikasi pengelolaan keuangan {{ appName }}. Semua paket memiliki manfaat yang sama, dengan perbedaan pada durasi berlangganan. Harga ditampilkan dalam mata uang Rupiah.
+            </p>
+            <p class="text-zinc-400 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-20">
+            <!-- Trial Card -->
+            <div class="relative rounded-[2rem] border border-zinc-200 bg-white p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
+              <div class="flex justify-between items-center mb-6">
+                <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">14 Hari</span>
+                <span class="bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Trial 14 Hari</h3>
+              <div class="text-zinc-300 text-sm line-through mb-1">Rp 19.000</div>
+              <div class="text-4xl font-black mb-6">Rp 0</div>
+              <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
+            </div>
+
+            <!-- 1 Month Card -->
+            <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
+              <div class="flex justify-between items-center mb-6">
+                 <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">1 Bulan</span>
+                 <span class="bg-white border border-zinc-200 text-zinc-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
+              <div class="text-zinc-300 text-sm line-through mb-1">Rp 25.000</div>
+              <div class="text-4xl font-black mb-6">Rp 19.000</div>
+              <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
+            </div>
+
+            <!-- 3 Months Card (Best Deal) -->
+            <div class="relative rounded-[2rem] border-2 border-rose-200 bg-white p-8 flex flex-col h-full shadow-[0_20px_50px_-20px_rgba(251,113,133,0.3)] ring-4 ring-rose-50 ring-offset-0 transition-all hover:scale-[1.02]">
+               <div class="flex justify-between items-center mb-6">
+                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">3 Bulan</span>
+                  <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
+               </div>
+               <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
+               <div class="text-zinc-300 text-sm line-through mb-1 text-opacity-50">Rp 75.000</div>
+               <div class="text-4xl font-black mb-4 text-rose-600">Rp 49.000</div>
+               <div class="inline-flex mb-6 bg-rose-50 text-rose-600 text-[10px] font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
+               <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
+            </div>
+
+            <!-- 6 Months Card -->
+            <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
+               <div class="flex justify-between items-center mb-6">
+                  <span class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase">6 Bulan</span>
+                  <span class="bg-rose-50 text-rose-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
+               </div>
+               <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
+               <div class="text-zinc-300 text-sm line-through mb-1">Rp 150.000</div>
+               <div class="text-4xl font-black mb-6">Rp 99.000</div>
+               <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
+            </div>
+          </div>
+
+          <!-- Benefits Card -->
+          <div class="max-w-5xl mx-auto rounded-[2.5rem] border border-zinc-100 bg-white p-8 sm:p-14 shadow-sm relative overflow-hidden group">
+            <div class="absolute -right-20 -top-20 h-64 w-64 bg-zinc-50 rounded-full blur-3xl group-hover:bg-rose-50/50 transition-colors duration-500"></div>
+            <h3 class="text-2xl sm:text-3xl font-bold mb-12 relative z-10">Manfaat yang Didapat di Semua Paket</h3>
+            <div class="grid gap-x-16 gap-y-8 md:grid-cols-2 relative z-10">
+              <div v-for="(benefit, b) in [
+                'Akses semua fitur pencatatan keuangan Simetri',
+                'Tracking pemasukan, pengeluaran, aset, hutang, dan goals',
+                'Laporan dan analitik pengeluaran per periode',
+                'Multi-account: bank, e-wallet, dan cash',
+                'Asisten AI Simetri untuk insight keuangan harian',
+                'OCR struk dan invoice dari gambar/PDF'
+              ]" :key="b" class="flex items-start gap-5 group/item">
+                <div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-white group-hover/item:bg-rose-600 transition-colors">
+                  <CheckCircle2 class="h-3.5 w-3.5" />
+                </div>
+                <span class="text-zinc-600 font-medium group-hover/item:text-black transition-colors">{{ benefit }}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
