@@ -58,11 +58,11 @@ export default defineNuxtConfig({
     // baseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
     turnstileSecretKey: process.env.NUXT_TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA',
     public: {
-      baseUrl: process.env.NUXT_PUBLIC_API_BASE || process.env.NUXT_PUBLIC_API_BASE_URL || 'https://api.example.com/api/v1',
-      APP_WEB: process.env.NUXT_PUBLIC_APP_WEB || 'GoBoncos',
-      APP_NAME: process.env.NUXT_PUBLIC_APP_NAME || 'GoBoncos',
+      baseUrl: process.env.NUXT_PUBLIC_API_BASE || process.env.NUXT_PUBLIC_API_BASE_URL || 'https://gomoney.hidessh.com',
+      APP_WEB: process.env.NUXT_PUBLIC_APP_WEB || 'Go Boncos',
+      APP_NAME: process.env.NUXT_PUBLIC_APP_NAME || 'Go Boncos',
       appLogo: process.env.NUXT_PUBLIC_APP_LOGO || '',
-      appFavicon: process.env.NUXT_PUBLIC_APP_FAVICON || '',
+      appFavicon: process.env.NUXT_PUBLIC_APP_FAVICON || 'https://asset.hidessh.com/icon-hidessh2.png',
       APP_SECRETKEY: process.env.NUXT_PUBLIC_APP_SECRETKEY || '',
       turnstile: {
         siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA',
