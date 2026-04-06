@@ -63,10 +63,33 @@ import { ArrowLeft } from 'lucide-vue-next'
 
 definePageMeta({ layout: 'auth' })
 
-const appName = 'GoBoncos'
+const config = useRuntimeConfig()
+const appName = config.public.APP_NAME || 'GoBoncos'
+const url = useRequestURL()
 
 useSeoMeta({
   title: `Kebijakan Privasi - ${appName}`,
   description: `Pelajari bagaimana ${appName} menjaga keamanan data finansial dan investasi Anda.`,
+  ogTitle: `Kebijakan Privasi - ${appName}`,
+  ogDescription: `Pelajari bagaimana ${appName} menjaga keamanan data finansial dan investasi Anda.`,
+  ogImage: 'https://asset.hidessh.com/icon-hidessh2.png',
+  ogUrl: url.href,
+  ogType: 'website',
+  ogLocale: 'id_ID',
+  twitterCard: 'summary_large_image',
+  twitterTitle: `Kebijakan Privasi - ${appName}`,
+  twitterDescription: `Pelajari bagaimana ${appName} menjaga keamanan data finansial dan investasi Anda.`,
+  author: 'HideSSH',
+  keywords: 'pencatatan keuangan, investasi, goboncos',
+  themeColor: '#009eed',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'id'
+  },
+  meta: [
+    { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ]
 })
 </script>

@@ -64,6 +64,9 @@ export default defineNuxtConfig({
       appLogo: process.env.NUXT_PUBLIC_APP_LOGO || '',
       appFavicon: process.env.NUXT_PUBLIC_APP_FAVICON || 'https://asset.hidessh.com/icon-hidessh2.png',
       APP_SECRETKEY: process.env.NUXT_PUBLIC_APP_SECRETKEY || '',
+      SITE_KEYWORDS: process.env.NUXT_PUBLIC_SITE_KEYWORDS || 'pencatatan keuangan, investasi, goboncos',
+      SITE_URL: process.env.NUXT_PUBLIC_SITE_URL || 'https://goboncos.hidessh.com',
+      THEME_COLOR: process.env.NUXT_PUBLIC_THEME_COLOR || '#009eed',
       turnstile: {
         siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA',
       },

@@ -17,13 +17,25 @@ useSeoMeta({
   ogTitle: `${appName} - Catat Keuangan Tanpa Overthinking`,
   description: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z.`,
   ogDescription: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z.`,
-  ogImage: '/og-image.png',
+  ogImage: 'https://asset.hidessh.com/icon-hidessh2.png',
   twitterCard: 'summary_large_image',
   twitterTitle: `${appName} - Catat Keuangan Tanpa Overthinking`,
   twitterDescription: `Atur duit jadi lebih chill. Dari e-wallet sampai tabungan healing, semua terpantau di ${appName}.`,
-  author: 'GO Boncos Team',
+  author: 'HideSSH',
   ogType: 'website',
   ogLocale: 'id_ID',
+  keywords: 'pencatatan keuangan, investasi, goboncos',
+  ogUrl: 'https://goboncos.hidessh.com',
+  themeColor: '#009eed',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'id'
+  },
+  meta: [
+    { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ]
 })
 
 
@@ -152,7 +164,7 @@ const faqs = [
                 </svg>
               </span>
             </h1>
-            <p class="mb-10 text-xl leading-relaxed text-zinc-500 max-w-lg">
+            <p class="mb-10 text-xl leading-relaxed text-zinc-600 max-w-lg">
               Satu-satunya aplikasi pengelola keuangan yang paham gaya hidupmu. Gak cuma catat, tapi bantu kamu biar gak boncos di akhir bulan.
             </p>
             <div class="flex flex-col sm:flex-row items-center gap-4">
@@ -240,7 +252,7 @@ const faqs = [
                   <HelpCircle class="h-6 w-6" />
                 </div>
                 <h3 class="text-2xl font-bold mb-4">{{ problem.title }}</h3>
-                <p class="text-zinc-600 leading-relaxed">{{ problem.description }}</p>
+                <p class="text-zinc-700 leading-relaxed">{{ problem.description }}</p>
               </CardContent>
             </Card>
           </div>
@@ -253,7 +265,7 @@ const faqs = [
           <div class="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
             <div class="max-w-2xl">
               <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mb-6">Fitur Yang Bikin Hidup <br /> Jadi Gak Ribet</h2>
-              <p class="text-lg text-zinc-500">Didesain khusus buat kita yang pengen hidup balance: tetep bisa gaya, tapi saldo tetep aman.</p>
+              <p class="text-lg text-zinc-600">Didesain khusus buat kita yang pengen hidup balance: tetep bisa gaya, tapi saldo tetep aman.</p>
             </div>
             <Button variant="link" class="text-black font-semibold text-lg p-0 h-auto rounded-none border-b-2 border-zinc-200 flex items-center gap-2 hover:border-black transition-all">
               Semua Fitur Chill
@@ -267,7 +279,7 @@ const faqs = [
                 <component :is="feature.icon" class="h-7 w-7" />
               </div>
               <h3 class="text-2xl font-bold mb-4 transition-colors group-hover:text-black">{{ feature.title }}</h3>
-              <p class="text-zinc-500 leading-relaxed group-hover:text-zinc-600">{{ feature.description }}</p>
+              <p class="text-zinc-600 leading-relaxed group-hover:text-zinc-700">{{ feature.description }}</p>
             </div>
           </div>
         </div>
@@ -275,7 +287,7 @@ const faqs = [
 
       <!-- High Contrast Section -->
       <section class="bg-black text-white py-24 lg:py-32 overflow-hidden relative">
-        <div class="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+        <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23noiseFilter)%22%2F%3E%3C%2Fsvg%3E')]"></div>
         <div class="container mx-auto px-4 relative z-10 text-center">
             <div class="inline-flex items-center gap-2 rounded-full bg-zinc-800 px-4 py-1.5 text-xs font-semibold mb-8 border border-zinc-700">
               🌈 GAYA HIDUP VS SALDO
@@ -283,13 +295,13 @@ const faqs = [
             <h2 class="text-4xl lg:text-6xl font-extrabold mb-8 max-w-4xl mx-auto leading-tight">
               Bisa Makan Enak <span class="text-rose-500 italic">Tanpa Perasaan</span> Bersalah Di Akhir Bulan
             </h2>
-            <p class="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-xl text-zinc-200 mb-12 max-w-2xl mx-auto leading-relaxed">
               {{ appName }} bantuin kamu membagi budget buat hal yang kamu suka dan hal yang kamu butuhin. Gak perlu lagi takut liat saldo di tanggal tua.
             </p>
             <div class="flex justify-center flex-wrap gap-12 text-center">
                <div v-for="stat in ['98%', 'Rp 0', '24 Jam']" :key="stat" class="flex flex-col gap-2">
                  <div class="text-4xl font-bold">{{ stat }}</div>
-                 <div class="text-sm text-zinc-500 font-medium tracking-widest uppercase">
+                 <div class="text-sm text-zinc-300 font-medium tracking-widest uppercase">
                     {{ stat === '98%' ? 'Pengguna Puas' : stat === 'Rp 0' ? 'Biaya Admin' : 'Siap Pantau' }}
                  </div>
                </div>
@@ -302,10 +314,10 @@ const faqs = [
         <div class="container mx-auto px-4">
           <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-5xl font-black tracking-tight mb-8">Harga</h2>
-            <p class="text-zinc-500 text-lg leading-relaxed mb-6">
+            <p class="text-zinc-600 text-lg leading-relaxed mb-6">
               Produk yang dijual adalah layanan langganan aplikasi pengelolaan keuangan {{ appName }}. Semua paket memiliki manfaat yang sama, dengan perbedaan pada durasi berlangganan. Harga ditampilkan dalam mata uang Rupiah.
             </p>
-            <p class="text-zinc-400 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
+            <p class="text-zinc-500 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
           </div>
 
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-20">
@@ -316,9 +328,9 @@ const faqs = [
                 <span class="bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Trial 14 Hari</h3>
-              <div class="text-zinc-300 text-sm line-through mb-1">Rp 19.000</div>
+              <div class="text-zinc-400 text-sm line-through mb-1">Rp 19.000</div>
               <div class="text-4xl font-black mb-6">Rp 0</div>
-              <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
+              <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
             </div>
 
             <!-- 1 Month Card -->
@@ -328,9 +340,9 @@ const faqs = [
                  <span class="bg-white border border-zinc-200 text-zinc-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
-              <div class="text-zinc-300 text-sm line-through mb-1">Rp 25.000</div>
+              <div class="text-zinc-400 text-sm line-through mb-1">Rp 25.000</div>
               <div class="text-4xl font-black mb-6">Rp 19.000</div>
-              <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
+              <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
             </div>
 
             <!-- 3 Months Card (Best Deal) -->
@@ -340,10 +352,10 @@ const faqs = [
                   <span class="bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
-               <div class="text-zinc-300 text-sm line-through mb-1 text-opacity-50">Rp 75.000</div>
+               <div class="text-zinc-400 text-sm line-through mb-1 text-opacity-50">Rp 75.000</div>
                <div class="text-4xl font-black mb-4 text-rose-600">Rp 49.000</div>
                <div class="inline-flex mb-6 bg-rose-50 text-rose-600 text-[10px] font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
-               <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
+               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
             </div>
 
             <!-- 6 Months Card -->
@@ -353,9 +365,9 @@ const faqs = [
                   <span class="bg-rose-50 text-rose-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
-               <div class="text-zinc-300 text-sm line-through mb-1">Rp 150.000</div>
+               <div class="text-zinc-400 text-sm line-through mb-1">Rp 150.000</div>
                <div class="text-4xl font-black mb-6">Rp 99.000</div>
-               <p class="text-zinc-500 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
+               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
             </div>
           </div>
 
@@ -375,7 +387,7 @@ const faqs = [
                 <div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-white group-hover/item:bg-rose-600 transition-colors">
                   <CheckCircle2 class="h-3.5 w-3.5" />
                 </div>
-                <span class="text-zinc-600 font-medium group-hover/item:text-black transition-colors">{{ benefit }}</span>
+                <span class="text-zinc-700 font-medium group-hover/item:text-black transition-colors">{{ benefit }}</span>
               </div>
             </div>
           </div>
@@ -389,7 +401,7 @@ const faqs = [
             <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900">
               Frequently Asked <span class="text-rose-600">Questions.</span>
             </h2>
-            <p class="text-zinc-500 text-sm sm:text-base max-w-2xl mx-auto font-medium">
+            <p class="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto font-medium">
               Masih ragu buat pakai {{ appName }}? Cek jawaban dari pertanyaan yang sering ditanyain ini.
             </p>
           </div>
@@ -401,7 +413,7 @@ const faqs = [
                class="bg-white border border-zinc-100 rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 shadow-sm hover:shadow-md transition-all duration-300 group"
              >
                 <h3 class="text-lg sm:text-xl font-bold text-zinc-900 mb-4 group-hover:text-rose-600 transition-colors">{{ faq.question }}</h3>
-                <p class="text-zinc-500 text-sm sm:text-base leading-relaxed font-medium">{{ faq.answer }}</p>
+                <p class="text-zinc-600 text-sm sm:text-base leading-relaxed font-medium">{{ faq.answer }}</p>
              </div>
           </div>
         </div>
@@ -449,7 +461,10 @@ const faqs = [
 
     <!-- FAB for Support (Chat AI style) -->
     <div class="fixed bottom-8 right-8 z-[60]">
-       <Button class="h-16 w-16 rounded-full bg-black text-white shadow-2xl hover:scale-110 transition-transform active:scale-95 group">
+       <Button 
+         class="h-16 w-16 rounded-full bg-black text-white shadow-2xl hover:scale-110 transition-transform active:scale-95 group"
+         aria-label="Tanya Asisten AI"
+       >
           <Sparkles class="h-7 w-7 group-hover:rotate-12 transition-transform" />
        </Button>
     </div>

@@ -89,10 +89,25 @@ useSeoMeta({
   description: `Reset password akun ${appName} lo biar bisa lanjut pantau saldo healing lo. Gak pake ribet!`,
   ogTitle: `Lupa Kata Sandi - ${appName}`,
   ogDescription: `Layanan pemulihan akun buat lo yang lupa sandinya. Tarang aja kita bantu.`,
-  ogImage: '/og-image.png',
+  ogImage: 'https://asset.hidessh.com/icon-hidessh2.png',
   ogUrl: url.href,
   ogType: 'website',
+  ogLocale: 'id_ID',
   twitterCard: 'summary_large_image',
+  twitterTitle: `Lupa Kata Sandi - ${appName} | Atur Duit Jadi Chill`,
+  twitterDescription: `Reset password akun ${appName} lo biar bisa lanjut pantau saldo healing lo.`,
+  author: 'HideSSH',
+  keywords: 'pencatatan keuangan, investasi, goboncos',
+  themeColor: '#009eed',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'id'
+  },
+  meta: [
+    { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ]
 })
 
 const handleResetRequest = async () => {

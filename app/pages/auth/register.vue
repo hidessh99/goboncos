@@ -146,10 +146,25 @@ useSeoMeta({
   description: `Daftar di ${appName} sekarang. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z. Biar gak boncos terus!`,
   ogTitle: `Daftar Akun Baru - ${appName}`,
   ogDescription: `Gabung bareng 50rb+ teman lainnya yang udah mulai hidup teratur tanpa kehilangan momen seru.`,
-  ogImage: '/og-image.png',
+  ogImage: 'https://asset.hidessh.com/icon-hidessh2.png',
   ogUrl: url.href,
   ogType: 'website',
+  ogLocale: 'id_ID',
   twitterCard: 'summary_large_image',
+  twitterTitle: `Daftar Akun Baru - ${appName} | Mulai Hidup Mindful`,
+  twitterDescription: `Gabung bareng 50rb+ teman lainnya yang udah mulai hidup teratur tanpa kehilangan momen seru.`,
+  author: 'HideSSH',
+  keywords: 'pencatatan keuangan, investasi, goboncos',
+  themeColor: '#009eed',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'id'
+  },
+  meta: [
+    { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ]
 })
 
 const form = ref({

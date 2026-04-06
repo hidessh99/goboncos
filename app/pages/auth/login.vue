@@ -136,10 +136,25 @@ useSeoMeta({
   description: `Masuk ke akun ${appName} lo. Satu-satunya aplikasi pengelola keuangan yang paham gaya hidup Gen Z. Biar gak boncos terus!`,
   ogTitle: `Masuk - ${appName}`,
   ogDescription: `Gak pake overthinking, masuk ke ${appName} buat pantau saldo healing lo.`,
-  ogImage: '/og-image.png',
+  ogImage: 'https://asset.hidessh.com/icon-hidessh2.png',
   ogUrl: url.href,
   ogType: 'website',
+  ogLocale: 'id_ID',
   twitterCard: 'summary_large_image',
+  twitterTitle: `Masuk - ${appName} | Atur Duit Jadi Chill`,
+  twitterDescription: `Gak pake overthinking, masuk ke ${appName} buat pantau saldo healing lo.`,
+  author: 'HideSSH',
+  keywords: 'pencatatan keuangan, investasi, goboncos',
+  themeColor: '#009eed',
+})
+
+useHead({
+  htmlAttrs: {
+    lang: 'id'
+  },
+  meta: [
+    { name: 'google-site-verification', content: 'upWtkn9Ubcvz1-9qrUWsJcFs2TkFkshvmMfsgdhLf2k' }
+  ]
 })
 
 const form = ref({
