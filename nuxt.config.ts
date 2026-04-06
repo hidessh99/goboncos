@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  
   site: {
     url: 'https://goboncos.hidessh.com',
     name: 'GoBoncos - Manajemen Keuangan & Investasi',
@@ -71,4 +72,7 @@ export default defineNuxtConfig({
   experimental: {
     appManifest: false,
   },
+  nitro: {
+    preset: 'cloudflare-pages'
+  }
 })
