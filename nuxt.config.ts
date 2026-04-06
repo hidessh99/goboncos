@@ -73,6 +73,9 @@ export default defineNuxtConfig({
     appManifest: false,
   },
   nitro: {
-    preset: 'cloudflare-pages'
-  }
+    preset: 'cloudflare-pages',
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
 })
