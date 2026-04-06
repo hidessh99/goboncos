@@ -1,4 +1,4 @@
-name: Dockerize Nuxt App
+name: Dockerize goboncos
 
 on:
   push:
