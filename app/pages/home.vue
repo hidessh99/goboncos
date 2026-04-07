@@ -342,7 +342,7 @@ const faqs = [
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
                  <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">1 Bulan</span>
-                 <span class="bg-white border border-zinc-200 text-zinc-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
+                 <span class="bg-white border border-zinc-200 text-zinc-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 60.000</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
               <div class="text-zinc-600 text-sm line-through mb-1">Rp 65.000</div>
@@ -367,7 +367,7 @@ const faqs = [
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
                <div class="flex justify-between items-center mb-6">
                   <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">6 Bulan</span>
-                  <span class="bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
+                  <span class="bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 45.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
                <div class="text-zinc-600 text-sm line-through mb-1">Rp 50.000</div>
