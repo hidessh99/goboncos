@@ -124,3 +124,38 @@ export const getPublicInvestmentCategories = async (token: string, page: number 
     },
   })
 }
+
+/**
+ * PATCH /public/investment/:id/change-amount
+ */
+export const updateInvestmentAmount = async (id: string, amount: number, token: string) => {
+  const config = useRuntimeConfig()
+  const baseUrl = config.public.baseUrl
+
+  return await fetch(`${baseUrl}/public/investment/${id}/change-amount`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+}
+
+/**
+ * PATCH /public/investment/:id/profit
+ */
+export const investmentProfit = async (id: string, amount: number, token: string) => {
+  const config = useRuntimeConfig()
+  const baseUrl = config.public.baseUrl
+
+  return await fetch(`${baseUrl}/public/investment/${id}/profit`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id, amount }),
+  })
+}

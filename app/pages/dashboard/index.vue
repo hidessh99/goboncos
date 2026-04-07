@@ -1,58 +1,84 @@
 <template>
-  <div class="px-4 py-8 sm:px-8 space-y-8 max-w-7xl mx-auto min-h-screen bg-black text-white">
+  <div class="px-4 py-8 sm:px-8 space-y-8 max-w-7xl mx-auto min-h-screen bg-background text-foreground transition-colors duration-500">
+    <!-- Header Section for Mobile -->
+    <div class="flex flex-col gap-1 md:hidden mb-6">
+      <h1 class="text-2xl font-black tracking-tight">Ringkasan Dashboard</h1>
+      <p class="text-xs text-muted-foreground font-medium">Pantau aktivitas keuangan Anda secara real-time.</p>
+    </div>
+
     <!-- Stats Row -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       <!-- Total Saldo -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Total Saldo</span>
-          <DollarSign class="w-4 h-4 text-zinc-500" />
-        </div>
-        <div>
-          <h2 class="text-2xl font-black tabular-nums tracking-tighter">Rp {{ formatCurrency(totalBalance) }}</h2>
-          <p class="text-[10px] text-zinc-500 font-medium mt-1">Total saldo dari semua akun</p>
+      <div class="group relative bg-card border border-border rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div class="relative space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Total Saldo</span>
+            <div class="p-2 bg-secondary rounded-lg">
+              <DollarSign class="w-4 h-4 text-primary" />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black tabular-nums tracking-tighter">Rp {{ formatCurrency(totalBalance) }}</h2>
+            <p class="text-[10px] text-muted-foreground font-bold mt-1 uppercase">Total dari {{ financials.length }} akun</p>
+          </div>
         </div>
       </div>
 
       <!-- Pemasukan Bulan Ini -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Pemasukan Bulan Ini</span>
-          <TrendingUp class="w-4 h-4 text-zinc-500" />
-        </div>
-        <div>
-          <h2 class="text-2xl font-black text-emerald-400 tabular-nums tracking-tighter">Rp {{ formatCurrency(totalIncome) }}</h2>
-          <div class="flex items-center gap-1 mt-1">
-            <MoveUpRight class="w-3 h-3 text-emerald-400" />
-            <span class="text-[10px] text-emerald-400 font-bold">100% dari bulan lalu</span>
+      <div class="group relative bg-card border border-border rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/5 hover:-translate-y-1">
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div class="relative space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Pemasukan</span>
+            <div class="p-2 bg-emerald-500/10 rounded-lg">
+              <TrendingUp class="w-4 h-4 text-emerald-500" />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black text-emerald-600 dark:text-emerald-400 tabular-nums tracking-tighter">Rp {{ formatCurrency(totalIncome) }}</h2>
+            <div class="flex items-center gap-1 mt-1">
+              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-black uppercase">Transaksi Aktif</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Pengeluaran Bulan Ini -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Pengeluaran Bulan Ini</span>
-          <TrendingDown class="w-4 h-4 text-zinc-500" />
-        </div>
-        <div>
-          <h2 class="text-2xl font-black text-red-500 tabular-nums tracking-tighter">Rp {{ formatCurrency(totalExpense) }}</h2>
-          <div class="flex items-center gap-1 mt-1">
-            <MoveUpRight class="w-3 h-3 text-red-500" />
-            <span class="text-[10px] text-red-500 font-bold">100% dari bulan lalu</span>
+      <div class="group relative bg-card border border-border rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-red-500/5 hover:-translate-y-1">
+        <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div class="relative space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Pengeluaran</span>
+            <div class="p-2 bg-red-500/10 rounded-lg">
+              <TrendingDown class="w-4 h-4 text-red-500" />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black text-red-600 dark:text-red-500 tabular-nums tracking-tighter">Rp {{ formatCurrency(totalExpense) }}</h2>
+            <div class="flex items-center gap-1 mt-1">
+              <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              <span class="text-[10px] text-red-600 dark:text-red-500 font-black uppercase">Pengeluaran Berjalan</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Saldo Bersih -->
-      <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-4">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Saldo Bersih</span>
-          <Target class="w-4 h-4 text-zinc-500" />
-        </div>
-        <div>
-          <h2 class="text-2xl font-black text-emerald-400 tabular-nums tracking-tighter">Rp {{ formatCurrency(netIncome) }}</h2>
-          <p class="text-[10px] text-zinc-500 font-medium mt-1">Tingkat tabungan: {{ savingsRate }}%</p>
+      <div class="group relative bg-card border border-border rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div class="relative space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Saldo Bersih</span>
+            <div class="p-2 bg-blue-500/10 rounded-lg">
+              <Target class="w-4 h-4 text-blue-500" />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black text-blue-600 dark:text-blue-400 tabular-nums tracking-tighter">Rp {{ formatCurrency(netIncome) }}</h2>
+            <p class="text-[10px] text-muted-foreground font-bold mt-1 uppercase tracking-wider">Tabungan: {{ savingsRate }}%</p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,76 +87,88 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 space-y-6">
         <!-- Akun Anda -->
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-          <div class="p-6 flex items-center justify-between border-b border-zinc-800">
+        <div class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
+          <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border bg-muted/30">
             <div>
-              <h3 class="text-base font-black tracking-tight">Akun Anda</h3>
-              <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">{{ financials.length }} akun dengan total saldo Rp {{ formatCurrency(totalBalance) }}</p>
+              <h3 class="text-lg font-black tracking-tight">Akun Keuangan</h3>
+              <p class="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">{{ financials.length }} akun terdaftar aktif</p>
             </div>
             <NuxtLink to="/finance">
-              <Button variant="outline" size="sm" class="bg-zinc-950 border-zinc-800 text-[10px] font-black uppercase tracking-widest gap-2">
-                <Eye class="w-3 h-3" />
-                Lihat Semua
+              <Button variant="outline" size="sm" class="w-full sm:w-auto text-[10px] font-black uppercase tracking-widest gap-2 h-9 rounded-xl border-border px-4 transition-all hover:bg-primary hover:text-primary-foreground">
+                <Eye class="w-3.5 h-3.5" />
+                Semua Akun
               </Button>
             </NuxtLink>
           </div>
-          <div class="divide-y divide-zinc-800">
+          <div class="divide-y divide-border">
             <div v-if="isLoading" class="p-12 flex justify-center">
-              <Loader2 class="w-6 h-6 animate-spin text-zinc-600" />
+              <Loader2 class="w-8 h-8 animate-spin text-primary/50" />
             </div>
-            <div v-else-if="financials.length === 0" class="p-12 text-center text-zinc-500 text-xs font-bold uppercase tracking-widest">
-              Belum ada akun terdaftar
+            <div v-else-if="financials.length === 0" class="p-12 text-center text-muted-foreground text-[10px] font-black uppercase tracking-widest">
+              Belum ada data akun
             </div>
-            <div v-for="item in financials.slice(0, 3)" :key="item.id" class="p-6 flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+            <div v-for="item in financials.slice(0, 3)" :key="item.id" class="p-6 flex items-center justify-between hover:bg-muted/50 transition-all cursor-pointer group">
               <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-blue-500">
-                  <CreditCard class="w-5 h-5" />
+                <div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center text-primary border border-border transition-transform group-hover:scale-110">
+                  <CreditCard class="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 class="text-sm font-black tracking-tight">{{ item.name }}</h4>
-                  <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{{ item.financial_category?.name || 'Tabungan' }}</p>
+                  <h4 class="text-sm font-black tracking-tight group-hover:text-primary transition-colors text-foreground">{{ item.name }}</h4>
+                  <p class="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-0.5">{{ item.financial_category?.name || 'Tabungan' }}</p>
                 </div>
               </div>
-              <span class="text-sm font-black tabular-nums text-emerald-400">Rp {{ formatCurrency(item.saldo) }}</span>
+              <div class="text-right">
+                <span class="text-sm font-black tabular-nums text-foreground group-hover:text-primary transition-colors">Rp {{ formatCurrency(item.saldo) }}</span>
+                <p class="text-[8px] text-muted-foreground font-bold uppercase tracking-tighter mt-0.5">Saldo Tersedia</p>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Transaksi Terbaru -->
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-          <div class="p-6 flex items-center justify-between border-b border-zinc-800">
+        <div class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
+          <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border bg-muted/30">
             <div>
-              <h3 class="text-base font-black tracking-tight">Transaksi Terbaru</h3>
-              <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">{{ transactions.length }} transaksi terakhir Anda</p>
+              <h3 class="text-lg font-black tracking-tight">Transaksi Terakhir</h3>
+              <p class="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Daftar aktivitas terbaru dari semua akun</p>
             </div>
             <NuxtLink to="/transactions">
-              <Button variant="outline" size="sm" class="bg-zinc-950 border-zinc-800 text-[10px] font-black uppercase tracking-widest gap-2">
-                <Eye class="w-3 h-3" />
-                Lihat Semua
+              <Button variant="outline" size="sm" class="w-full sm:w-auto text-[10px] font-black uppercase tracking-widest gap-2 h-9 rounded-xl border-border px-4 transition-all hover:bg-primary hover:text-primary-foreground">
+                <Eye class="w-3.5 h-3.5" />
+                Lihat Riwayat
               </Button>
             </NuxtLink>
           </div>
-          <div class="divide-y divide-zinc-800">
+          <div class="divide-y divide-border">
             <div v-if="isLoading" class="p-12 flex justify-center">
-              <Loader2 class="w-6 h-6 animate-spin text-zinc-600" />
+              <Loader2 class="w-8 h-8 animate-spin text-primary/50" />
             </div>
-            <div v-else-if="transactions.length === 0" class="p-12 text-center text-zinc-500 text-xs font-bold uppercase tracking-widest">
-              Belum ada transaksi
+            <div v-else-if="transactions.length === 0" class="p-12 text-center text-muted-foreground text-[10px] font-black uppercase tracking-widest">
+              Tidak ada transaksi tercatat
             </div>
-            <div v-for="item in transactions.slice(0, 5)" :key="item.id" class="p-6 space-y-4 hover:bg-zinc-800/50 transition-colors">
+            <div v-for="item in transactions.slice(0, 5)" :key="item.id" class="p-4 sm:p-6 space-y-4 hover:bg-muted/50 transition-all cursor-pointer group">
               <div class="flex items-start justify-between">
-                <div class="space-y-1">
-                  <span :class="`inline-block px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest ${item.category_types?.name === 'pemasukan' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-500'}`">
-                    {{ item.category_types?.name }}
-                  </span>
-                  <h4 class="text-sm font-black tracking-tight">{{ item.description || 'Tanpa deskripsi' }}</h4>
-                  <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{{ item.financial?.name }} • {{ item.category?.name }}</p>
+                <div class="flex gap-4">
+                  <div :class="`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center border transition-transform group-hover:scale-105 ${item.category_types?.name === 'pemasukan' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-500'}`">
+                    <TrendingUp v-if="item.category_types?.name === 'pemasukan'" class="w-5 h-5" />
+                    <TrendingDown v-else class="w-5 h-5" />
+                  </div>
+                  <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                       <span :class="`inline-block px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest ${item.category_types?.name === 'pemasukan' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-red-500/10 text-red-600 dark:text-red-500'}`">
+                        {{ item.category_types?.name }}
+                      </span>
+                      <span class="text-[8px] font-black text-muted-foreground uppercase tracking-widest">{{ item.category?.name }}</span>
+                    </div>
+                    <h4 class="text-sm font-black tracking-tight text-foreground">{{ item.description || 'Tanpa deskripsi' }}</h4>
+                    <p class="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">{{ item.financial?.name }}</p>
+                  </div>
                 </div>
                 <div class="text-right">
-                  <p :class="`text-base font-black tabular-nums tracking-tighter ${item.category_types?.name === 'pemasukan' ? 'text-emerald-400' : 'text-red-500'}`">
+                  <p :class="`text-sm sm:text-base font-black tabular-nums tracking-tighter ${item.category_types?.name === 'pemasukan' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-500'}`">
                     {{ item.category_types?.name === 'pemasukan' ? '+' : '-' }}Rp {{ formatCurrency(item.amount) }}
                   </p>
-                  <p class="text-[10px] text-zinc-500 font-bold mt-1">{{ formatDate(item.date) }}</p>
+                  <p class="text-[9px] text-muted-foreground font-black mt-1 uppercase">{{ formatDate(item.date) }}</p>
                 </div>
               </div>
             </div>
@@ -140,66 +178,73 @@
 
       <div class="space-y-6">
         <!-- Kesehatan Keuangan -->
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-6">
-          <h3 class="text-base font-black tracking-tight">Kesehatan Keuangan</h3>
+        <div class="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-sm relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Target class="w-12 h-12 text-primary" />
+          </div>
+          <h3 class="text-lg font-black tracking-tight relative z-10 text-foreground">Kesehatan Keuangan</h3>
           
-          <div class="space-y-4">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
-                <span class="text-zinc-400">Tingkat Tabungan</span>
-                <span class="text-white">{{ savingsRate }}%</span>
+          <div class="space-y-6 relative z-10">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em]">
+                <span class="text-muted-foreground">Tingkat Tabungan</span>
+                <span class="text-foreground bg-secondary px-2 py-0.5 rounded">{{ savingsRate }}%</span>
               </div>
-              <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                <div class="h-full bg-emerald-500 transition-all duration-500" :style="{ width: `${savingsRate}%` }" />
+              <div class="h-2.5 bg-secondary rounded-full overflow-hidden p-0.5">
+                <div class="h-full bg-emerald-500 rounded-full transition-all duration-1000 shadow-[0_0_8px_rgba(16,185,129,0.4)]" :style="{ width: `${savingsRate}%` }" />
               </div>
-              <p class="text-[10px] font-bold text-emerald-400">{{ getFinancialStatus(savingsRate).message }}</p>
+              <p class="text-[10px] font-black uppercase tracking-wide px-1" :class="getFinancialStatus(savingsRate).color">
+                // {{ getFinancialStatus(savingsRate).message }}
+              </p>
             </div>
 
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-[10px] font-black uppercase tracking-widest">
-                <span class="text-zinc-400">Rasio Pengeluaran</span>
-                <span class="text-white">{{ expenseRatio }}%</span>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em]">
+                <span class="text-muted-foreground">Rasio Pengeluaran</span>
+                <span class="text-foreground bg-secondary px-2 py-0.5 rounded">{{ expenseRatio }}%</span>
               </div>
-              <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                <div class="h-full bg-emerald-500 transition-all duration-500" :style="{ width: `${expenseRatio}%` }" />
+              <div class="h-2.5 bg-secondary rounded-full overflow-hidden p-0.5">
+                <div :class="`h-full rounded-full transition-all duration-1000 ${expenseRatio > 70 ? 'bg-red-500' : 'bg-blue-500'}`" :style="{ width: `${expenseRatio}%` }" />
               </div>
-              <p class="text-[10px] font-bold text-emerald-400">{{ getExpenseStatus(expenseRatio).message }}</p>
+              <p class="text-[10px] font-black uppercase tracking-wide px-1" :class="getExpenseStatus(expenseRatio).color">
+                // {{ getExpenseStatus(expenseRatio).message }}
+              </p>
             </div>
           </div>
         </div>
 
         <!-- Kategori Teratas -->
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-6">
+        <div class="bg-card border border-border rounded-2xl p-6 space-y-6 shadow-sm">
           <div>
-            <h3 class="text-base font-black tracking-tight">Kategori Teratas</h3>
-            <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Dikelompokkan berdasarkan tipe transaksi bulan ini</p>
+            <h3 class="text-lg font-black tracking-tight text-foreground">Distribusi Kategori</h3>
+            <p class="text-[10px] text-muted-foreground font-bold uppercase tracking-widest mt-1">Berdasarkan aktivitas transaksi bulan ini</p>
           </div>
 
           <div class="space-y-6">
             <!-- Pengeluaran -->
-            <div class="space-y-3">
-              <h4 class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">PENGELUARAN</h4>
-              <div class="space-y-2">
-                <div v-for="cat in topExpenseCategories" :key="cat.name" class="flex items-center justify-between group">
-                  <div class="flex items-center gap-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-red-500" />
-                    <span class="text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">{{ cat.name }}</span>
-                  </div>
-                  <span class="text-xs font-black tabular-nums text-red-500">Rp {{ formatCurrency(cat.total) }}</span>
+            <div v-if="topExpenseCategories.length > 0" class="space-y-3">
+              <h4 class="text-[10px] font-black text-red-600 dark:text-red-500 uppercase tracking-[0.3em] flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-red-500" />
+                PENGELUARAN
+              </h4>
+              <div class="space-y-1">
+                <div v-for="cat in topExpenseCategories" :key="cat.name" class="flex items-center justify-between p-2 rounded-xl hover:bg-muted transition-colors group">
+                  <span class="text-xs font-bold text-muted-foreground group-hover:text-foreground">{{ cat.name }}</span>
+                  <span class="text-xs font-black tabular-nums text-red-600 dark:text-red-500">Rp {{ formatCurrency(cat.total) }}</span>
                 </div>
               </div>
             </div>
 
             <!-- Pemasukan -->
-            <div class="space-y-3">
-              <h4 class="text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em]">PEMASUKAN</h4>
-              <div class="space-y-2">
-                <div v-for="cat in topIncomeCategories" :key="cat.name" class="flex items-center justify-between group">
-                  <div class="flex items-center gap-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span class="text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">{{ cat.name }}</span>
-                  </div>
-                  <span class="text-xs font-black tabular-nums text-emerald-400">Rp {{ formatCurrency(cat.total) }}</span>
+            <div v-if="topIncomeCategories.length > 0" class="space-y-3">
+              <h4 class="text-[10px] font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.3em] flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                PEMASUKAN
+              </h4>
+              <div class="space-y-1">
+                <div v-for="cat in topIncomeCategories" :key="cat.name" class="flex items-center justify-between p-2 rounded-xl hover:bg-muted transition-colors group">
+                  <span class="text-xs font-bold text-muted-foreground group-hover:text-foreground">{{ cat.name }}</span>
+                  <span class="text-xs font-black tabular-nums text-emerald-600 dark:text-emerald-400">Rp {{ formatCurrency(cat.total) }}</span>
                 </div>
               </div>
             </div>
@@ -207,16 +252,16 @@
         </div>
 
         <!-- Statistik Cepat -->
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-          <h3 class="text-base font-black tracking-tight">Statistik Cepat</h3>
+        <div class="bg-card border border-border rounded-2xl p-6 shadow-sm bg-gradient-to-br from-primary/5 via-transparent to-transparent">
+          <h3 class="text-lg font-black tracking-tight text-foreground">Analisa Cepat</h3>
           <div class="mt-4 grid grid-cols-2 gap-4">
-            <div class="p-4 bg-zinc-950 rounded-xl border border-zinc-800">
-              <p class="text-[8px] font-black text-zinc-500 uppercase tracking-widest mb-1">Total Transaksi</p>
-              <p class="text-lg font-black text-white">{{ transactions.length }}</p>
+            <div class="p-4 bg-muted/50 rounded-2xl border border-border transition-all hover:border-primary/50">
+              <p class="text-[8px] font-black text-muted-foreground uppercase tracking-widest mb-1.5">Total Aktivitas</p>
+              <p class="text-2xl font-black text-foreground">{{ transactions.length }}</p>
             </div>
-            <div class="p-4 bg-zinc-950 rounded-xl border border-zinc-800">
-              <p class="text-[8px] font-black text-zinc-500 uppercase tracking-widest mb-1">Rata-rata Transaksi</p>
-              <p class="text-lg font-black text-white">Rp {{ formatCurrency(avgTransaction) }}</p>
+            <div class="p-4 bg-muted/50 rounded-2xl border border-border transition-all hover:border-primary/50">
+              <p class="text-[8px] font-black text-muted-foreground uppercase tracking-widest mb-1.5">Rerata Nilai</p>
+              <p class="text-sm font-black text-foreground">Rp {{ formatCurrency(avgTransaction) }}</p>
             </div>
           </div>
         </div>
@@ -317,15 +362,15 @@ const formatDate = (dateStr: string) => {
 }
 
 const getFinancialStatus = (rate: number) => {
-  if (rate >= 50) return { message: 'Sangat baik!', color: 'text-emerald-400' }
-  if (rate >= 20) return { message: 'Bagus!', color: 'text-emerald-400' }
-  return { message: 'Perlu ditingkatkan', color: 'text-red-500' }
+  if (rate >= 50) return { message: 'Sangat baik!', color: 'text-emerald-600 dark:text-emerald-400' }
+  if (rate >= 20) return { message: 'Bagus!', color: 'text-emerald-600 dark:text-emerald-400' }
+  return { message: 'Perlu ditingkatkan', color: 'text-red-600 dark:text-red-500' }
 }
 
 const getExpenseStatus = (ratio: number) => {
-  if (ratio <= 40) return { message: 'Sangat sehat!', color: 'text-emerald-400' }
-  if (ratio <= 70) return { message: 'Wajar', color: 'text-zinc-400' }
-  return { message: 'Boros!', color: 'text-red-500' }
+  if (ratio <= 40) return { message: 'Sangat sehat!', color: 'text-emerald-600 dark:text-emerald-400' }
+  if (ratio <= 70) return { message: 'Wajar', color: 'text-muted-foreground' }
+  return { message: 'Boros!', color: 'text-red-600 dark:text-red-500' }
 }
 
 const fetchData = async () => {

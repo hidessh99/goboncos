@@ -126,10 +126,13 @@
                     {{ sub.status }}
                   </span>
                 </TableCell>
-                <TableCell class="py-2.5 pr-4 text-center">
-                  <div class="flex items-center justify-center gap-1.5" @click.stop>
-                    <button @click="openSubDetail(sub)" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-indigo-50 hover:text-indigo-600 transition-all">
+                 <TableCell class="py-2.5 pr-4 text-center">
+                  <div class="flex items-center justify-center gap-1" @click.stop>
+                    <button @click="openSubDetail(sub)" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-indigo-50 hover:text-indigo-600 transition-all" title="Detail">
                       <Eye class="w-[15px] h-[15px]" />
+                    </button>
+                    <button @click="openChangePlanModal(sub)" class="w-8 h-8 flex items-center justify-center rounded-lg text-indigo-500 hover:bg-indigo-50 hover:text-indigo-600 transition-all" title="Ganti Paket">
+                      <RefreshCw class="w-[14px] h-[14px]" />
                     </button>
                     <!-- Icon Status Ganti -->
                     <button 
@@ -138,6 +141,10 @@
                       :title="sub.status.toUpperCase() === 'ACTIVE' ? 'Nonaktifkan' : 'Aktifkan'"
                     >
                       <Power class="w-[15px] h-[15px]" />
+                    </button>
+                    <!-- Icon Delete -->
+                    <button @click="confirmDelete(sub.id)" class="w-8 h-8 flex items-center justify-center rounded-lg text-rose-400 hover:bg-rose-50 hover:text-rose-600 transition-all shadow-sm" title="Hapus Langganan">
+                      <Trash2 class="w-[15px] h-[15px]" />
                     </button>
                   </div>
                 </TableCell>
@@ -188,11 +195,11 @@
                <span class="text-[9px] font-black text-gray-400 uppercase tracking-tighter">Masa Berlaku</span>
                <span class="text-[11px] font-bold text-gray-700 dark:text-zinc-300 font-mono">{{ formatDate(sub.end_date) }}</span>
              </div>
-             <div class="flex gap-2 mt-2" @click.stop>
+             <div class="flex flex-wrap gap-2 mt-2" @click.stop>
                 <Button 
                   size="sm"
                   variant="outline"
-                  class="flex-1 py-4 text-[10px] uppercase font-black tracking-widest gap-2 bg-indigo-50/50 border-indigo-100 text-indigo-600"
+                  class="flex-1 min-w-[80px] py-4 text-[10px] uppercase font-black tracking-widest gap-2 bg-indigo-50/50 border-indigo-100 text-indigo-600"
                   @click="openSubDetail(sub)"
                 >
                   <Eye class="w-3 h-3" />
@@ -201,11 +208,20 @@
                 <Button 
                   size="sm"
                   variant="outline"
-                  :class="`flex-1 py-4 text-[10px] uppercase font-black tracking-widest gap-2 ${sub.status.toUpperCase() === 'ACTIVE' ? 'bg-amber-50 border-amber-100 text-amber-600' : 'bg-emerald-50 border-emerald-100 text-emerald-600'}`"
+                  :class="`flex-1 min-w-[80px] py-4 text-[10px] uppercase font-black tracking-widest gap-2 ${sub.status.toUpperCase() === 'ACTIVE' ? 'bg-amber-50 border-amber-100 text-amber-600' : 'bg-emerald-50 border-emerald-100 text-emerald-600'}`"
                   @click="confirmStatusChange(sub)"
                 >
                   <Power class="w-3 h-3" />
                   Status
+                </Button>
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  class="flex-1 min-w-[80px] py-4 text-[10px] uppercase font-black tracking-widest gap-2 bg-rose-50 border-rose-100 text-rose-600 shadow-sm"
+                  @click="confirmDelete(sub.id)"
+                >
+                  <Trash2 class="w-3 h-3" />
+                  Hapus
                 </Button>
              </div>
           </div>
@@ -272,10 +288,21 @@
             </div>
           </div>
 
-          <div class="flex gap-3">
-             <Button variant="outline" class="flex-1 py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-gray-500" @click="isDetailModalOpen = false">Tutup</Button>
+          <div class="grid grid-cols-1 gap-3">
              <Button 
-                :class="`flex-1 py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-white shadow-lg shadow-indigo-500/10 ${selectedSub.status.toUpperCase() === 'ACTIVE' ? 'bg-amber-400 hover:bg-amber-500 shadow-amber-500/20' : 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20'}`" 
+                variant="outline" 
+                class="w-full py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-indigo-600 border-indigo-100 hover:bg-indigo-50" 
+                @click="openChangePlanModal(selectedSub)"
+             >
+                <RefreshCw class="w-4 h-4 mr-2" />
+                Ganti Paket Langganan
+             </Button>
+             <div class="grid grid-cols-2 gap-3">
+                <Button variant="outline" class="py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-gray-500" @click="isDetailModalOpen = false">Tutup</Button>
+                <Button variant="outline" class="py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-rose-500 border-rose-100 hover:bg-rose-50 shadow-sm" @click="confirmDelete(selectedSub.id)">Hapus</Button>
+             </div>
+             <Button 
+                :class="`w-full py-7 rounded-3xl font-black text-xs uppercase tracking-widest text-white shadow-lg shadow-indigo-500/10 ${selectedSub.status.toUpperCase() === 'ACTIVE' ? 'bg-amber-400 hover:bg-amber-500 shadow-amber-500/20' : 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20'}`" 
                 @click="confirmStatusChange(selectedSub)"
              >
                 {{ selectedSub.status.toUpperCase() === 'ACTIVE' ? 'Nonaktifkan' : 'Aktifkan' }}
@@ -313,13 +340,85 @@
       </AlertDialogContent>
     </AlertDialog>
 
+    <!-- Delete Confirmation Alert -->
+    <AlertDialog :open="isDeleteModalOpen" @update:open="isDeleteModalOpen = $event">
+      <AlertDialogContent class="bg-white dark:bg-zinc-900 rounded-[2.5rem] border-none shadow-2xl p-10 max-w-[90vw] sm:max-w-md outline-none">
+        <AlertDialogHeader class="space-y-6">
+          <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-inner bg-rose-50 text-rose-500">
+             <Trash2 class="w-10 h-10" />
+          </div>
+          <div class="space-y-2 text-center">
+            <AlertDialogTitle class="text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+               Hapus Langganan?
+            </AlertDialogTitle>
+            <AlertDialogDescription class="text-[13px] font-medium text-gray-500 leading-relaxed px-2">
+              Tindakan ini permanen. Langganan tenant ini akan dihapus dari sistem secara menyeluruh. Tindakan ini tidak dapat dibatalkan.
+            </AlertDialogDescription>
+          </div>
+        </AlertDialogHeader>
+        <AlertDialogFooter class="gap-4 mt-10">
+          <AlertDialogCancel class="flex-1 rounded-2xl h-14 font-black text-xs uppercase tracking-widest bg-gray-50 hover:bg-gray-100 dark:bg-zinc-800 border-none transition-all outline-none">Batal</AlertDialogCancel>
+          <AlertDialogAction 
+            @click="executeDelete" 
+            class="flex-1 text-white rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-xl transition-all bg-rose-500 hover:bg-rose-600 shadow-rose-500/20 active:scale-95 outline-none border-none"
+          >
+            Ya, Hapus Data
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+
+    <!-- Change Plan Modal -->
+    <Dialog :open="isChangePlanModalOpen" @update:open="isChangePlanModalOpen = $event">
+      <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 rounded-[2.5rem] p-0 overflow-hidden outline-none shadow-2xl border-none">
+        <div v-if="selectedSub" class="p-10 space-y-8">
+           <div class="flex items-center gap-6 p-4 rounded-3xl bg-indigo-50/50 dark:bg-indigo-900/20 border border-indigo-100/50 dark:border-indigo-800/30">
+              <div :class="`w-14 h-14 rounded-2xl flex items-center justify-center text-xl font-black text-white shrink-0 shadow-lg ${getAvatarColor(selectedSub.auth?.Name)}`">
+                 {{ (selectedSub.auth?.Name || 'U').charAt(0).toUpperCase() }}
+              </div>
+              <div class="min-w-0">
+                 <h4 class="text-sm font-black text-gray-900 dark:text-white truncate uppercase">{{ selectedSub.auth?.Name }}</h4>
+                 <p class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mt-0.5">{{ selectedSub.subscription_plan?.name }}</p>
+              </div>
+           </div>
+
+           <div class="space-y-4">
+              <div class="space-y-2">
+                 <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest block px-2">Pilih Paket Baru</label>
+                 <div class="relative group">
+                    <select v-model="targetPlanId" class="w-full h-16 pl-6 pr-12 rounded-3xl bg-gray-50 dark:bg-zinc-800/40 border-2 border-gray-100 dark:border-zinc-800 font-bold text-gray-700 dark:text-zinc-200 outline-none focus:border-indigo-500 transition-all appearance-none cursor-pointer">
+                       <option value="" disabled>Pilih paket langganan...</option>
+                       <option v-for="plan in availablePlans" :key="plan.id" :value="plan.id" :disabled="plan.id === selectedSub.subscription_plan?.id">
+                          {{ plan.name }} - Rp {{ (plan.price || 0).toLocaleString('id-ID') }}
+                       </option>
+                    </select>
+                    <ChevronDown class="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none transition-transform group-focus-within:rotate-180" />
+                 </div>
+              </div>
+           </div>
+
+           <div class="flex gap-4">
+              <Button variant="outline" class="flex-1 h-16 rounded-3xl font-black uppercase text-[10px] tracking-widest text-zinc-400 border-gray-100 dark:border-zinc-800 transition-all hover:bg-zinc-50" @click="isChangePlanModalOpen = false">Batal</Button>
+              <Button 
+                class="flex-1 h-16 rounded-3xl bg-indigo-600 text-white font-black uppercase text-[10px] tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-500/20 active:scale-95 transition-all" 
+                :disabled="isSubmitting || !targetPlanId"
+                @click="executeChangePlan"
+              >
+                 <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin mr-2" />
+                 Update Paket
+              </Button>
+           </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import {
-  Search, Eye, Loader2, Zap, FileText, FileSpreadsheet, Power
+  Search, Eye, Loader2, Zap, FileText, FileSpreadsheet, Power, RefreshCw, ChevronDown, Trash2
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import {
@@ -331,7 +430,8 @@ import {
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { getSubscriptions, updateSubscriptionStatus, type SubscriptionItem } from '@/server/api/admin/subscription'
+import { getSubscriptions, updateSubscriptionStatus, changeSubscriptionPlan, deleteSubscription, type SubscriptionItem } from '@/server/api/admin/subscription'
+import { getPlans, type PlanItem } from '@/server/api/admin/plan'
 import { alertSuccess, alertError, alertInfo } from '@/lib/alert'
 import * as XLSX from 'xlsx'
 import { jsPDF } from 'jspdf'
@@ -360,6 +460,16 @@ const selectedSub = ref<SubscriptionItem | null>(null)
 const isStatusModalOpen = ref(false)
 const selectedSubId = ref<string | null>(null)
 const selectedSubStatus = ref<string>('')
+
+// Change Plan State
+const isChangePlanModalOpen = ref(false)
+const availablePlans = ref<PlanItem[]>([])
+const targetPlanId = ref('')
+const isSubmitting = ref(false)
+
+// Delete State
+const isDeleteModalOpen = ref(false)
+const subIdToDelete = ref<string | null>(null)
 
 // ─── Avatar & Theme ────────────────────────────────────────────────────────
 const gradients = [
@@ -513,6 +623,75 @@ const executeStatusChange = async () => {
     alertError('Kesalahan jaringan.')
   } finally {
     isStatusModalOpen.value = false
+  }
+}
+
+const openChangePlanModal = async (sub: SubscriptionItem | null) => {
+  if (!sub) return
+  selectedSub.value = sub
+  isChangePlanModalOpen.value = true
+  targetPlanId.value = ''
+  
+  if (availablePlans.value.length === 0) {
+    try {
+      const token = localStorage.getItem('token') || ''
+      const res = await getPlans(token, 1, 100)
+      const data = await res.json()
+      if (data.success) {
+        availablePlans.value = data.payload || []
+      }
+    } catch (e) {
+      console.error('Error fetching plans:', e)
+    }
+  }
+}
+
+const executeChangePlan = async () => {
+  if (!selectedSub.value || !targetPlanId.value) return
+  isSubmitting.value = true
+  try {
+    const token = localStorage.getItem('token') || ''
+    const response = await changeSubscriptionPlan(selectedSub.value.auth.ID, targetPlanId.value, token)
+    const result = await response.json()
+    
+    if (response.ok && result.success) {
+      alertSuccess('Paket langganan berhasil diperbarui.')
+      isChangePlanModalOpen.value = false
+      isDetailModalOpen.value = false
+      fetchSubscriptions()
+    } else {
+      alertError(result.message || 'Gagal mengubah paket.')
+    }
+  } catch (error) {
+    alertError('Kesalahan sistem.')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+const confirmDelete = (id: string) => {
+  subIdToDelete.value = id
+  isDeleteModalOpen.value = true
+}
+
+const executeDelete = async () => {
+  if (!subIdToDelete.value) return
+  isSubmitting.value = true
+  try {
+    const token = localStorage.getItem('token') || ''
+    const response = await deleteSubscription(subIdToDelete.value, token)
+    if (response.ok) {
+      alertSuccess('Data langganan berhasil dihapus permanen.')
+      isDeleteModalOpen.value = false
+      isDetailModalOpen.value = false
+      fetchSubscriptions()
+    } else {
+      alertError('Gagal menghapus data langganan.')
+    }
+  } catch (error) {
+    alertError('Kesalahan server.')
+  } finally {
+    isSubmitting.value = false
   }
 }
 

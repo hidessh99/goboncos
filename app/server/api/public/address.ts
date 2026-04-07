@@ -31,3 +31,15 @@ export const getAddress = async (token: string) => {
     }
   })
 }
+
+export const getPublicAddress = async (token: string) => {
+  const config = useRuntimeConfig()
+  const baseUrl = config.public.baseUrl
+  return await fetch(`${baseUrl}/public/address`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+}

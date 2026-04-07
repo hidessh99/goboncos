@@ -187,8 +187,8 @@
                       <div class="relative group">
                          <div class="absolute left-5 sm:left-6 top-1/2 -translate-y-1/2 text-lg sm:text-2xl font-black text-zinc-300 dark:text-zinc-700 transition-colors group-focus-within:dark:text-white group-focus-within:text-zinc-900">Rp</div>
                          <input 
-                           v-model="form.amount" 
-                           type="number" 
+                           v-model="formattedAmount" 
+                           type="text" 
                            placeholder="0" 
                            class="w-full bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-100 dark:border-zinc-800 rounded-2xl sm:rounded-[32px] pl-14 sm:pl-20 pr-6 sm:pr-8 py-4 sm:py-8 text-xl sm:text-4xl font-black outline-none focus:border-zinc-900 dark:focus:border-white transition-all tabular-nums text-zinc-900 dark:text-white placeholder-zinc-200 dark:placeholder-zinc-800 shadow-inner"
                            required
@@ -219,7 +219,10 @@
                          </div>
                       </div>
                       <div class="space-y-2">
-                         <label class="text-[9px] sm:text-[11px] font-black text-zinc-500 uppercase tracking-widest px-1">Kategori</label>
+                         <div class="flex items-center justify-between px-1">
+                            <label class="text-[9px] sm:text-[11px] font-black text-zinc-500 uppercase tracking-widest">Kategori</label>
+                            <NuxtLink to="/finance/category" class="text-[9px] font-black text-blue-600 hover:text-blue-700 dark:text-blue-400 uppercase tracking-widest hover:underline transition-all">Kelola +</NuxtLink>
+                         </div>
                          <div class="relative">
                            <select v-model="form.category_id" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 text-xs sm:text-sm font-bold outline-none focus:border-zinc-900 dark:focus:border-zinc-600 appearance-none cursor-pointer" required>
                              <option value="" disabled>Pilih Kategori</option>
@@ -416,6 +419,14 @@ const form = ref({
   category_id: '',
   financial_id: '',
   date: new Date().toISOString().split('T')[0]
+})
+
+const formattedAmount = computed({
+  get: () => form.value.amount ? form.value.amount.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    form.value.amount = numeric ? parseInt(numeric, 10) : 0
+  }
 })
 
 // ─── Helpers ───────────────────────────────────────────────────────────────

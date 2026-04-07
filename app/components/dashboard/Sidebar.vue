@@ -121,11 +121,27 @@
               </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
+                    <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="subscription Plan" class="h-11 rounded-xl transition-all duration-300 hover:bg-amber-500/10 group">
+              <NuxtLink to="/admin/subscription/plan" class="flex items-center gap-3 w-full">
+                <Server class="h-4 w-4 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-500/70 group-hover:text-amber-500">Subscription Plan</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="User" class="h-11 rounded-xl transition-all duration-300 hover:bg-amber-500/10 group">
+              <NuxtLink to="/admin/user" class="flex items-center gap-3 w-full">
+                <Server class="h-4 w-4 text-amber-500/50 group-hover:text-amber-500 transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-500/70 group-hover:text-amber-500">User</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
 
       <!-- Warehouse/Staff Area (Conditional) -->
-      <SidebarGroup v-if="isMounted && canAccesswarehouse">
+      <SidebarGroup v-if="isMounted && canAccesswarehouse"  >
         <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-6 mb-2">Operasional</SidebarGroupLabel>
         <SidebarMenu class="gap-1 px-2">
  

@@ -55,136 +55,81 @@
       </div>
     </section>
 
-    <!-- Main Content: Data Table & Grid -->
-    <main class="space-y-6">
-      <!-- Desktop Data Grid -->
-      <div class="hidden md:block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl shadow-blue-500/5 overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
-        <Table>
-          <TableHeader>
-            <TableRow class="hover:bg-transparent border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30">
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 px-8 flex items-center gap-2">
-                 Nama Aset / Emiten
-                 <ChevronsUpDown class="w-3 h-3 opacity-30" />
-              </TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Kategori</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Sumber Dana</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Nilai Investasi</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Tanggal Beli</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 text-center">Aksi</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow v-if="isLoading">
-              <TableCell colspan="6" class="h-64 text-center">
-                <Loader2 class="w-10 h-10 animate-spin mx-auto text-blue-600 opacity-20" />
-              </TableCell>
-            </TableRow>
-            <TableRow v-else-if="investments.length === 0">
-              <TableCell colspan="6" class="h-64 text-center">
-                <div class="flex flex-col items-center gap-4 grayscale opacity-40">
-                  <Grid2X2 class="w-12 h-12 text-zinc-400" />
-                  <p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-500">Portofolio Kosong</p>
-                </div>
-              </TableCell>
-            </TableRow>
-            <TableRow 
-              v-else 
-              v-for="item in investments" 
-              :key="item.id" 
-              class="border-zinc-100 dark:border-zinc-800/60 hover:bg-blue-50/30 dark:hover:bg-blue-900/10 cursor-pointer transition-all duration-300 group" 
-              @click="openDetailModal(item)"
-            >
-              <TableCell class="py-6 px-8">
-                <div class="flex items-center gap-4">
-                  <div :class="`w-12 h-12 rounded-2xl flex items-center justify-center text-sm font-black text-white shrink-0 shadow-lg ${getAvatarColor(item.name)}`">
-                    {{ item.name.charAt(0).toUpperCase() }}
-                  </div>
-                  <span class="text-[15px] font-black text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 transition-colors leading-none uppercase">{{ item.name }}</span>
-                </div>
-              </TableCell>
-              <TableCell class="py-6">
-                <span class="inline-flex items-center h-7 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100/50 dark:border-blue-800/50">
-                  {{ item.investment_category?.name }}
-                </span>
-              </TableCell>
-              <TableCell class="py-6 text-[13px] font-bold text-zinc-400 italic">
-                {{ item.financial?.name }}
-              </TableCell>
-              <TableCell class="py-6 font-black text-zinc-900 dark:text-white tabular-nums">
-                Rp {{ formatCurrency(item.amount) }}
-              </TableCell>
-              <TableCell class="py-6 text-[13px] font-bold text-zinc-400 dark:text-zinc-500">
-                {{ formatDate(item.purchase_date) }}
-              </TableCell>
-              <TableCell class="py-6 text-center pr-8">
-                <div class="flex items-center justify-center gap-2" @click.stop>
-                  <button @click="openDetailModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/20 transition-all">
-                    <Eye class="w-5 h-5" />
-                  </button>
-                  <button @click="openEditModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-900/20 transition-all">
-                    <Pencil class="w-5 h-5" />
-                  </button>
-                  <button @click="confirmDelete(item.id)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20 transition-all">
-                    <Trash2 class="w-5 h-5" />
-                  </button>
-                </div>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+    <!-- Investment Card Grid (Unified Responsive View) -->
+    <main class="space-y-8 pb-20 sm:pb-10">
+      <div v-if="isLoading" class="flex flex-col items-center justify-center py-24 gap-4">
+         <Loader2 class="w-10 h-10 animate-spin text-blue-600/30" />
+         <p class="text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em] animate-pulse">Sinkronisasi Portfolio...</p>
       </div>
 
-      <!-- Mobile/Tablet Adaptive Grid -->
-      <div class="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 animate-in fade-in duration-700 delay-200">
-        <div 
-          v-for="item in investments" 
-          :key="item.id"
-          class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] p-8 shadow-xl shadow-blue-500/5 active:scale-[0.98] transition-all space-y-6 relative overflow-hidden group"
-          @click="openDetailModal(item)"
-        >
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-4">
-              <div :class="`w-14 h-14 rounded-3xl flex items-center justify-center text-lg font-black text-white shrink-0 shadow-xl ${getAvatarColor(item.name)}`">
-                {{ item.name.charAt(0).toUpperCase() }}
-              </div>
-              <div class="min-w-0">
-                <h4 class="text-[17px] font-black text-zinc-900 dark:text-white truncate leading-tight tracking-tight uppercase">{{ item.name }}</h4>
-                <p class="text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase mt-1 tracking-widest">{{ item.investment_category?.name }}</p>
-              </div>
+      <div v-else-if="investments.length === 0" class="flex flex-col items-center justify-center py-32 border-2 border-dashed border-zinc-100 dark:border-zinc-800/60 rounded-[3rem] gap-6">
+         <div class="w-20 h-20 rounded-full bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center">
+            <TrendingUp class="w-10 h-10 text-zinc-300 dark:text-zinc-800" />
+         </div>
+         <p class="text-zinc-400 font-black text-[11px] uppercase tracking-widest text-center">Belum ada catatan investasi.<br/><span class="opacity-40 font-bold lowercase italic text-xs">Mulai catat pertumbuhan aset Anda hari ini.</span></p>
+      </div>
+
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+         <div 
+           v-for="item in investments" 
+           :key="item.id"
+           class="group bg-white dark:bg-zinc-900/40 border border-zinc-100 dark:border-zinc-800 rounded-[32px] p-6 sm:p-8 hover:shadow-2xl hover:shadow-blue-500/5 dark:hover:bg-zinc-900/60 hover:border-blue-100/50 dark:hover:border-blue-900/30 transition-all flex flex-col justify-between gap-8 relative overflow-hidden"
+           @click="openDetailModal(item)"
+         >
+            <!-- Hover Action Overlay -->
+            <div class="absolute right-6 top-6 flex items-center gap-2 sm:opacity-0 group-hover:opacity-100 transition-all duration-300" @click.stop>
+               <button @click="openEditModal(item)" class="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-900/20 transition-all">
+                  <Pencil class="w-4 h-4" />
+               </button>
+               <button @click="confirmDelete(item.id)" class="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20 transition-all">
+                  <Trash2 class="w-4 h-4" />
+               </button>
             </div>
-            <button class="w-12 h-12 rounded-2xl bg-blue-50/50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
-               <Eye class="w-5 h-5" />
-            </button>
-          </div>
 
-          <div class="bg-zinc-50 dark:bg-zinc-800/40 rounded-[1.5rem] p-5 flex flex-col items-center border border-zinc-100 dark:border-zinc-800/50">
-             <span class="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-1">Nilai Investasi</span>
-             <h3 class="text-xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter antialiased">Rp {{ formatCurrency(item.amount) }}</h3>
-             <div class="flex items-center gap-1.5 mt-2 opacity-50">
-                <div class="w-1 h-1 rounded-full bg-zinc-400"></div>
-                <span class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{{ item.financial?.name }}</span>
-             </div>
-          </div>
+            <div class="space-y-6">
+               <div class="flex items-center gap-5">
+                  <div :class="`w-14 h-14 rounded-3xl flex items-center justify-center text-lg font-black text-white shrink-0 shadow-xl transition-transform group-hover:scale-105 duration-500 ${getAvatarColor(item.name)}`">
+                    {{ item.name.charAt(0).toUpperCase() }}
+                  </div>
+                  <div class="min-w-0 pr-10 sm:pr-0">
+                    <h4 class="text-[17px] font-black text-zinc-900 dark:text-white truncate tracking-tight uppercase leading-none">{{ item.name }}</h4>
+                    <span class="inline-flex mt-2 px-3 py-1 rounded-xl text-[9px] font-black uppercase tracking-widest bg-blue-50 dark:bg-blue-900/30 text-blue-600 border border-blue-100/50 dark:border-blue-900/20">
+                      {{ item.investment_category?.name }}
+                    </span>
+                  </div>
+               </div>
 
-          <div class="flex gap-3 pt-6 border-t border-zinc-50 dark:border-zinc-800/60" @click.stop>
-             <Button 
-              variant="outline" 
-              class="flex-1 h-12 rounded-2xl border-amber-100 dark:border-amber-900/30 text-amber-600 text-[10px] font-black uppercase tracking-widest gap-2" 
-              @click="openEditModal(item)"
-             >
-               <Pencil class="w-4 h-4" />
-               Edit
-             </Button>
-             <Button 
-              variant="outline" 
-              class="flex-1 h-12 rounded-2xl border-red-100 dark:border-red-900/30 text-red-500 text-[10px] font-black uppercase tracking-widest gap-2" 
-              @click="confirmDelete(item.id)"
-             >
-               <Trash2 class="w-4 h-4" />
-               Hapus
-             </Button>
-          </div>
-        </div>
+               <div class="space-y-1.5">
+                  <span class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Total Nilai</span>
+                  <h3 class="text-3xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter leading-none">Rp {{ formatCurrency(item.amount) }}</h3>
+                  <div class="flex items-center gap-2 mt-3 text-zinc-400 font-bold text-[11px] px-1">
+                     <Wallet class="w-3.5 h-3.5 text-zinc-300" />
+                     {{ item.financial?.name }}
+                  </div>
+               </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-6 border-t border-zinc-50 dark:border-zinc-800/50">
+               <div class="flex items-center gap-2 text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+                  <CalendarDays class="w-4 h-4 opacity-50" />
+                  {{ formatDate(item.purchase_date) }}
+               </div>
+               <div class="flex items-center gap-2" @click.stop>
+                  <!-- Take Profit Button -->
+                  <button @click="openProfitModal(item)" class="h-10 px-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-all border border-emerald-100/30 dark:border-emerald-900/30 shadow-sm" title="Take Profit">
+                    <ArrowUpRight class="w-3.5 h-3.5" />
+                    TP / Sell
+                  </button>
+                  <button @click="openAmountModal(item)" class="h-10 px-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-all shadow-sm">
+                    <History class="w-3.5 h-3.5" />
+                    Price
+                  </button>
+                  <button @click="openDetailModal(item)" class="w-10 h-10 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 flex items-center justify-center text-zinc-400 hover:text-blue-600 transition-all border border-zinc-100 dark:border-zinc-800/60 shadow-sm">
+                    <Eye class="w-4 h-4" />
+                  </button>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!-- Pagination Hub -->
@@ -321,8 +266,8 @@
                  <div class="space-y-3">
                     <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Nilai Investasi <span class="text-blue-600">*</span></label>
                     <input 
-                      v-model="form.amount" 
-                      type="number" 
+                      v-model="formattedAmount" 
+                      type="text" 
                       placeholder="0" 
                       class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-black text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500 tabular-nums" 
                       required
@@ -379,18 +324,82 @@
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+
+    <!-- Change Amount Modal -->
+    <Dialog :open="isAmountModalOpen" @update:open="val => { if (!isSubmitting) isAmountModalOpen = val }">
+       <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+          <DialogTitle class="sr-only">Update Harga Pasar Investasi</DialogTitle>
+          <div class="p-10 space-y-8 text-center">
+             <div class="w-16 h-16 rounded-[1.5rem] bg-indigo-600 text-white flex items-center justify-center mx-auto shadow-2xl">
+                <TrendingUp class="w-8 h-8" />
+             </div>
+             
+             <div class="space-y-1">
+                <h3 class="text-xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter">Update Harga Pasar</h3>
+                <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest italic truncate">{{ selectedInvestment?.name }}</p>
+             </div>
+
+             <div class="space-y-3 text-left">
+                <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Harga Pasar Terbaru (Rp)</label>
+                <div class="relative group">
+                   <div class="absolute left-6 top-1/2 -translate-y-1/2 text-xl font-black text-zinc-300 dark:text-zinc-700 group-focus-within:text-indigo-600">Rp</div>
+                   <input v-model="amountFormatted" type="text" placeholder="0" class="w-full h-18 pl-16 pr-8 rounded-2xl border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-2xl font-black tabular-nums transition-all outline-none focus:border-indigo-500 shadow-inner" autofocus />
+                </div>
+             </div>
+
+             <div class="flex gap-4">
+                <Button variant="outline" class="flex-1 h-14 rounded-2xl font-black uppercase text-[10px] tracking-widest text-zinc-400 border-zinc-100 dark:border-zinc-800" @click="isAmountModalOpen = false">Batal</Button>
+                <Button class="flex-1 h-14 rounded-2xl bg-indigo-600 text-white font-black uppercase text-[10px] tracking-widest hover:bg-indigo-700 shadow-xl shadow-indigo-500/10" :disabled="isSubmitting" @click="submitAmountChange">
+                   <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin mr-2" />
+                   Update Harga
+                </Button>
+             </div>
+          </div>
+       </DialogContent>
+    </Dialog>
+
+     <!-- Take Profit Modal -->
+     <Dialog :open="isProfitModalOpen" @update:open="val => { if (!isSubmitting) isProfitModalOpen = val }">
+        <DialogContent class="w-[calc(100%-2rem)] sm:max-w-md bg-white dark:bg-zinc-900 border-none shadow-2xl rounded-[3rem] p-0 overflow-hidden outline-none">
+           <DialogTitle class="sr-only">Cairkan Profit Investasi</DialogTitle>
+           <div class="p-10 space-y-8 text-center">
+              <div class="w-20 h-20 rounded-[2rem] bg-emerald-500 text-white flex items-center justify-center mx-auto shadow-2xl shadow-emerald-500/20">
+                 <ArrowUpRight class="w-10 h-10" />
+              </div>
+              
+              <div class="space-y-1">
+                 <h3 class="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter leading-none">Take Profit</h3>
+                 <p class="text-[11px] font-black text-zinc-400 uppercase tracking-widest italic truncate">{{ selectedInvestment?.name }}</p>
+              </div>
+ 
+              <div class="space-y-3 text-left">
+                 <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-2">Nominal Pencairan (Rp)</label>
+                 <div class="relative group">
+                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-2xl font-black text-zinc-300 dark:text-zinc-700 group-focus-within:text-emerald-500 transition-colors">Rp</div>
+                    <input v-model="profitAmountFormatted" type="text" placeholder="0" class="w-full h-20 pl-18 pr-8 rounded-[1.5rem] border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-3xl font-black tabular-nums transition-all outline-none focus:border-emerald-500 focus:ring-8 focus:ring-emerald-500/5 shadow-inner" autofocus />
+                 </div>
+              </div>
+ 
+              <div class="flex gap-4">
+                 <Button variant="outline" class="flex-1 h-16 rounded-[1.25rem] font-black uppercase text-[10px] tracking-widest text-zinc-400 border-zinc-100 dark:border-zinc-800 transition-all hover:bg-zinc-50" @click="isProfitModalOpen = false">Batal</Button>
+                 <Button class="flex-1 h-16 rounded-[1.25rem] bg-emerald-600 text-white font-black uppercase text-[10px] tracking-widest hover:bg-emerald-700 shadow-xl shadow-emerald-500/10 transition-all" :disabled="isSubmitting || profitAmount <= 0" @click="submitProfit">
+                    <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin mr-2" />
+                    Ambil Cuan
+                 </Button>
+              </div>
+           </div>
+        </DialogContent>
+     </Dialog>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import {
-  Search, Eye, Pencil, Trash2, Loader2, Plus, Grid2X2, FileText, FileSpreadsheet, TrendingUp, ChevronDown, ChevronsUpDown
+  Search, Eye, Pencil, Trash2, Loader2, Plus, FileText, FileSpreadsheet, TrendingUp, ChevronDown, History, Coins, Wallet, CalendarDays, ArrowUpRight
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from '@/components/ui/table'
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle
 } from '@/components/ui/dialog'
@@ -399,7 +408,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { 
   getInvestments, createInvestment, updateInvestment, deleteInvestment, 
-  getPublicInvestmentCategories, type InvestmentItem 
+  getPublicInvestmentCategories, updateInvestmentAmount, investmentProfit, type InvestmentItem 
 } from '~/server/api/public/investment'
 import { getFinancials } from '~/server/api/public/finance'
 import { alertSuccess, alertError, alertInfo } from '@/lib/alert'
@@ -432,6 +441,28 @@ const isSubmitting = ref(false)
 const isDeleteDialogOpen = ref(false)
 const deleteItemId = ref<string | null>(null)
 
+// Change Amount State
+const isAmountModalOpen = ref(false)
+const amountToChange = ref(0)
+const amountFormatted = computed({
+  get: () => amountToChange.value ? amountToChange.value.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    amountToChange.value = numeric ? parseInt(numeric, 10) : 0
+  }
+})
+
+// Take Profit State
+const isProfitModalOpen = ref(false)
+const profitAmount = ref(0)
+const profitAmountFormatted = computed({
+  get: () => profitAmount.value ? profitAmount.value.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    profitAmount.value = numeric ? parseInt(numeric, 10) : 0
+  }
+})
+
 const form = ref({
   name: '',
   investment_category_id: '',
@@ -439,6 +470,14 @@ const form = ref({
   purchase_date: new Date().toISOString().split('T')[0],
   transaction_date: new Date().toISOString().split('T')[0],
   amount: 0
+})
+
+const formattedAmount = computed({
+  get: () => form.value.amount ? form.value.amount.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    form.value.amount = numeric ? parseInt(numeric, 10) : 0
+  }
 })
 
 // ─── Theme: Investment Blue ───────────────────────────────────────────────────
@@ -654,8 +693,66 @@ const executeDelete = async () => {
   }
 }
 
+const openAmountModal = (item: InvestmentItem) => {
+  selectedInvestment.value = item
+  amountToChange.value = item.amount
+  isAmountModalOpen.value = true
+}
+
+const submitAmountChange = async () => {
+  if (!selectedInvestment.value) return
+  isSubmitting.value = true
+  try {
+    const token = localStorage.getItem('token') || ''
+    const response = await updateInvestmentAmount(selectedInvestment.value.id, amountToChange.value, token)
+    if (response.ok) {
+      alertSuccess('Harga pasar investasi diperbarui.')
+      isAmountModalOpen.value = false
+      fetchInvestments()
+    } else {
+      alertError('Gagal memperbarui nilai investasi.')
+    }
+  } catch (error) {
+    alertError('Kesalahan server.')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+const openProfitModal = (item: InvestmentItem) => {
+  selectedInvestment.value = item
+  profitAmount.value = 0
+  isProfitModalOpen.value = true
+}
+
+const submitProfit = async () => {
+  if (!selectedInvestment.value || profitAmount.value <= 0) return
+  isSubmitting.value = true
+  try {
+    const token = localStorage.getItem('token') || ''
+    const response = await investmentProfit(selectedInvestment.value.id, Number(profitAmount.value), token)
+    const result = await response.json()
+    if (response.ok) {
+      alertSuccess('Profit berhasil dicairkan! Cuan masuk saldo.')
+      isProfitModalOpen.value = false
+      fetchInvestments()
+    } else {
+      alertError(result.message)
+    }
+  } catch (error) {
+    alertError('Kesalahan server.')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
 onMounted(() => {
   fetchInvestments()
   fetchDependencies()
 })
 </script>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

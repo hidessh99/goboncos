@@ -82,3 +82,22 @@ export const deleteSubscription = async (id: string, token: string) => {
     },
   })
 }
+
+/**
+ * POST /admin/subscription/change-plan
+ * Ganti paket langganan user
+ */
+export const changeSubscriptionPlan = async (auth_id: string, subscription_plan_id: string, token: string) => {
+  const config = useRuntimeConfig()
+  const baseUrl = config.public.baseUrl
+
+  return await fetch(`${baseUrl}/admin/subscription/change-plan`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ auth_id, subscription_plan_id }),
+  })
+}

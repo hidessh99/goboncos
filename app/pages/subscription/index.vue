@@ -102,6 +102,7 @@ import {
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { getSubscriptionPlans, type SubscriptionPlan } from '~/server/api/public/subscription'
+import { getPublicAddress } from '~/server/api/public/address'
 import { alertSuccess, alertError, alertInfo } from '@/lib/alert'
 
 definePageMeta({ layout: 'dashboard' })
@@ -171,7 +172,25 @@ const subscribePlan = (plan: SubscriptionPlan) => {
   // Implementation for subscription logic here
 }
 
-onMounted(() => {
+onMounted(async () => {
+  const token = localStorage.getItem('token') || ''
+  
+  // Requirement: Check address before allowing subscription
+  try {
+    const addrRes = await getPublicAddress(token)
+    const addrData = await addrRes.json()
+    
+    // If address is null or missing, redirect to settings
+    if (addrRes.ok && addrData.success) {
+      if (!addrData.payload) {
+        alertInfo('Silakan lengkapi alamat pengiriman Anda sebelum melanjutkan berlangganan.')
+        return navigateTo('/settings/address')
+      }
+    }
+  } catch (err) {
+    console.error('Address check failed:', err)
+  }
+
   fetchPlans()
 })
 </script>

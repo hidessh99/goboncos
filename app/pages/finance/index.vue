@@ -303,8 +303,8 @@
                  <div class="space-y-3">
                     <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Saldo Awal <span class="text-blue-600">*</span></label>
                     <input 
-                      v-model="form.saldo" 
-                      type="number" 
+                      v-model="formattedSaldo" 
+                      type="text" 
                       placeholder="0" 
                       class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-bold text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500" 
                       required
@@ -367,7 +367,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import {
   Search, Eye, Pencil, Trash2, Loader2, Plus, Grid2X2, FileText, FileSpreadsheet, ChevronDown, ChevronsUpDown
 } from 'lucide-vue-next'
@@ -420,6 +420,15 @@ const form = ref({
   financial_category_id: '',
   saldo: 0,
   description: ''
+})
+
+const formattedSaldo = computed({
+  get: () => form.value.saldo ? form.value.saldo.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    // Only extract numerical values from string
+    const numeric = val.replace(/[^0-9]/g, '')
+    form.value.saldo = numeric ? parseInt(numeric, 10) : 0
+  }
 })
 
 // ─── Theme: Blue Harmony ─────────────────────────────────────────────────────

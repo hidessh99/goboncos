@@ -61,124 +61,94 @@
       </div>
     </section>
 
-    <!-- Content: Adaptive Data Display -->
-    <main class="space-y-6">
-      <!-- Desktop Performance View -->
-      <div class="hidden lg:block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl shadow-blue-500/5 overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-        <Table>
-          <TableHeader>
-            <TableRow class="hover:bg-transparent border-zinc-50 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30">
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 pl-10 flex items-center gap-2">
-                 Nama Impian <ChevronsUpDown class="w-3 h-3 opacity-30" />
-              </TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Saldo Terkumpul</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Pencapaian</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16">Batas Waktu</TableHead>
-              <TableHead class="text-[10px] font-black text-zinc-400 uppercase tracking-widest h-16 text-center pr-10">Aksi</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow v-if="isLoading">
-               <TableCell colspan="5" class="h-64 text-center">
-                  <Loader2 class="w-10 h-10 animate-spin mx-auto text-blue-600 opacity-20" />
-               </TableCell>
-            </TableRow>
-            <TableRow v-else-if="goals.length === 0">
-               <TableCell colspan="5" class="h-64 text-center">
-                  <div class="flex flex-col items-center gap-4 grayscale opacity-40">
-                    <Target class="w-12 h-12 text-zinc-400" />
-                    <p class="text-[11px] font-black uppercase tracking-widest text-zinc-500">Belum Ada Target Finansial</p>
-                  </div>
-               </TableCell>
-            </TableRow>
-            <TableRow 
-              v-else 
-              v-for="item in goals" 
-              :key="item.id" 
-              class="border-zinc-50 dark:border-zinc-800/60 hover:bg-blue-50/20 dark:hover:bg-blue-900/10 cursor-pointer transition-all duration-300 group"
-              @click="openDetailModal(item)"
-            >
-              <TableCell class="py-7 pl-10">
-                <div class="flex items-center gap-5">
-                  <div :class="`w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-black text-white shrink-0 shadow-lg ${getAvatarColor(item.name)}`">
-                    {{ item.name.charAt(0).toUpperCase() }}
-                  </div>
-                  <div class="min-w-0">
-                    <span class="text-[15px] font-black text-zinc-900 dark:text-white tracking-tight group-hover:text-blue-600 transition-colors block leading-none antialiased">{{ item.name }}</span>
-                    <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mt-2 block">Sasaran: Rp {{ formatCurrency(item.total_goal) }}</span>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell class="py-7 font-black text-blue-600 dark:text-blue-400 tabular-nums text-base">
-                Rp {{ formatCurrency(item.amount) }}
-              </TableCell>
-              <TableCell class="py-7 min-w-[200px]">
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center px-1">
-                    <span class="text-[10px] font-black text-zinc-500 dark:text-zinc-400 uppercase">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
-                  </div>
-                  <div class="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden shadow-inner">
-                    <div 
-                      class="h-full bg-blue-600 dark:bg-blue-500 rounded-full transition-all duration-1000 ease-out"
-                      :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"
-                    ></div>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell class="py-7 text-[13px] font-bold text-zinc-400 dark:text-zinc-500">
-                {{ formatDate(item.goal_date) }}
-              </TableCell>
-              <TableCell class="py-7 text-center pr-10">
-                <div class="flex items-center justify-center gap-2" @click.stop>
-                   <button @click="openFundModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-all shadow-sm" title="Tabung"><PlusCircle class="w-5 h-5" /></button>
-                   <button @click="openEditModal(item)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-500/10 transition-all"><Pencil class="w-5 h-5" /></button>
-                   <button @click="confirmDelete(item.id)" class="w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-500/10 transition-all"><Trash2 class="w-5 h-5" /></button>
-                </div>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+    <!-- Goal Card Grid (Unified Responsive View) -->
+    <main class="space-y-8 pb-20 sm:pb-10">
+      <div v-if="isLoading" class="flex flex-col items-center justify-center py-24 gap-4">
+         <Loader2 class="w-10 h-10 animate-spin text-blue-600/30" />
+         <p class="text-[10px] font-black text-zinc-400 uppercase tracking-[0.2em] animate-pulse">Menghitung Impian...</p>
       </div>
 
-      <!-- Tablet/Mobile Grid View -->
-      <div class="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-700 delay-300">
-        <div 
-          v-for="item in goals" 
-          :key="item.id"
-          class="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] p-8 shadow-xl shadow-blue-500/5 active:scale-[0.98] transition-all space-y-6 relative overflow-hidden group"
-          @click="openDetailModal(item)"
-        >
-          <div class="flex items-start justify-between">
-            <div class="flex items-center gap-5">
-              <div :class="`w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-xl font-black text-white shrink-0 shadow-lg ${getAvatarColor(item.name)}`">
-                {{ item.name.charAt(0).toUpperCase() }}
-              </div>
-              <div class="min-w-0">
-                <h4 class="text-lg font-black text-zinc-900 dark:text-white truncate uppercase tracking-tighter leading-none">{{ item.name }}</h4>
-                <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-2">Target: {{ formatDate(item.goal_date) }}</p>
-              </div>
+      <div v-else-if="goals.length === 0" class="flex flex-col items-center justify-center py-32 border-2 border-dashed border-zinc-100 dark:border-zinc-800/60 rounded-[3rem] gap-6">
+         <div class="w-20 h-20 rounded-full bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center">
+            <Target class="w-10 h-10 text-zinc-300 dark:text-zinc-800" />
+         </div>
+         <p class="text-zinc-400 font-black text-[11px] uppercase tracking-widest text-center">Belum ada target impian.<br/><span class="opacity-40 font-bold lowercase italic text-xs">Mulai rencanakan masa depan Anda sekarang.</span></p>
+      </div>
+
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+         <div 
+           v-for="item in goals" 
+           :key="item.id"
+           class="group bg-white dark:bg-zinc-900/40 border border-zinc-100 dark:border-zinc-800 rounded-[32px] p-6 sm:p-8 hover:shadow-2xl hover:shadow-blue-500/5 dark:hover:bg-zinc-900/60 hover:border-blue-100/50 dark:hover:border-blue-900/30 transition-all flex flex-col justify-between gap-8 relative overflow-hidden"
+           @click="openDetailModal(item)"
+         >
+            <!-- Hover Action Overlay (Top Right) -->
+            <div class="absolute right-6 top-6 flex items-center gap-2 sm:opacity-0 group-hover:opacity-100 transition-all duration-300" @click.stop>
+               <button @click="openEditModal(item)" class="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-900/20 transition-all">
+                  <Pencil class="w-4 h-4" />
+               </button>
+               <button @click="confirmDelete(item.id)" class="w-9 h-9 flex items-center justify-center rounded-xl text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-900/20 transition-all">
+                  <Trash2 class="w-4 h-4" />
+               </button>
             </div>
-            <span class="text-xl font-black text-blue-600 dark:text-blue-400 tabular-nums leading-none">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
-          </div>
 
-          <div class="space-y-4">
-             <div class="bg-zinc-50 dark:bg-zinc-800/40 rounded-[1.5rem] p-5 flex flex-col items-center border border-zinc-100 dark:border-zinc-800/50">
-               <span class="text-[9px] font-black text-zinc-400 uppercase tracking-widest mb-1.5">Terkumpul Sekarang</span>
-               <h3 class="text-2xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter">Rp {{ formatCurrency(item.amount) }}</h3>
-               <span class="text-[11px] font-medium text-zinc-400 mt-1 italic">/ Rp {{ formatCurrency(item.total_goal) }}</span>
-             </div>
+            <div class="space-y-6">
+               <div class="flex items-center justify-between gap-5 pr-10 sm:pr-0">
+                  <div class="flex items-center gap-5 min-w-0">
+                    <div :class="`w-14 h-14 rounded-3xl flex items-center justify-center text-lg font-black text-white shrink-0 shadow-xl transition-transform group-hover:scale-105 duration-500 ${getAvatarColor(item.name)}`">
+                      {{ item.name.charAt(0).toUpperCase() }}
+                    </div>
+                    <div class="min-w-0">
+                      <h4 class="text-[17px] font-black text-zinc-900 dark:text-white truncate tracking-tight uppercase leading-none">{{ item.name }}</h4>
+                      <div class="flex items-center gap-1.5 mt-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                        <span class="text-[9px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400">Target Aktif</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-xl font-black text-zinc-900 dark:text-white tabular-nums tracking-tighter">{{ calculatePercent(item.amount, item.total_goal) }}%</span>
+               </div>
 
-             <div class="h-2.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden shadow-inner">
-               <div class="h-full bg-blue-600 dark:bg-blue-500 rounded-full transition-all duration-1000 ease-out" :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"></div>
-             </div>
-          </div>
+               <div class="space-y-4">
+                  <!-- Progress Bar Container -->
+                  <div class="space-y-2">
+                    <div class="h-2.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden shadow-inner flex">
+                      <div 
+                        class="h-full bg-blue-600 dark:bg-blue-500 rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                        :style="{ width: `${calculatePercent(item.amount, item.total_goal)}%` }"
+                      ></div>
+                    </div>
+                  </div>
 
-          <div class="flex gap-3 pt-6 border-t border-zinc-50 dark:border-zinc-800/60" @click.stop>
-             <Button variant="outline" class="flex-1 h-12 rounded-2xl border-emerald-100 dark:border-emerald-900/30 text-emerald-600 text-[10px] font-black uppercase tracking-widest gap-2" @click="openFundModal(item)"><PlusCircle class="w-4 h-4" />Tabung</Button>
-             <Button variant="outline" class="w-12 h-12 p-0 rounded-2xl border-zinc-100 dark:border-zinc-800 text-zinc-400" @click="openEditModal(item)"><Pencil class="w-4 h-4" /></Button>
-             <Button variant="outline" class="w-12 h-12 p-0 rounded-2xl border-red-50 dark:border-red-900/10 text-red-400" @click="confirmDelete(item.id)"><Trash2 class="w-4 h-4" /></Button>
-          </div>
-        </div>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800/50">
+                       <span class="text-[8px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Terkumpul</span>
+                       <p class="text-[13px] font-black text-zinc-900 dark:text-white tabular-nums">Rp {{ formatCurrency(item.amount) }}</p>
+                    </div>
+                    <div class="bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl p-4 border border-zinc-100 dark:border-zinc-800/50">
+                       <span class="text-[8px] font-black text-zinc-400 uppercase tracking-widest block mb-1">Total Target</span>
+                       <p class="text-[13px] font-black text-zinc-900 dark:text-white tabular-nums opacity-60">Rp {{ formatCurrency(item.total_goal) }}</p>
+                    </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-6 border-t border-zinc-50 dark:border-zinc-800/50">
+               <div class="flex items-center gap-2 text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+                  <CalendarDays class="w-4 h-4 opacity-50" />
+                  {{ formatDate(item.goal_date) }}
+               </div>
+               <div class="flex items-center gap-3" @click.stop>
+                  <button @click="openFundModal(item)" class="h-10 px-4 rounded-xl bg-blue-600 text-white flex items-center gap-2 text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all">
+                    <PlusCircle class="w-3.5 h-3.5" />
+                    Tabung
+                  </button>
+                  <button @click="openDetailModal(item)" class="w-10 h-10 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 flex items-center justify-center text-zinc-400 hover:text-blue-600 transition-all border border-zinc-100 dark:border-zinc-800/60 shadow-sm">
+                    <Eye class="w-4 h-4" />
+                  </button>
+               </div>
+            </div>
+         </div>
       </div>
 
       <!-- Pagination Hub -->
@@ -261,7 +231,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="space-y-3">
                     <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Total Target (Rp) <span class="text-blue-600">*</span></label>
-                    <input v-model="form.total_goal" type="number" placeholder="0" class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-black text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500 tabular-nums" required />
+                    <input v-model="formattedTotalGoal" type="text" placeholder="0" class="w-full h-15 px-6 py-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border-zinc-100 dark:border-zinc-800 font-black text-zinc-900 dark:text-white transition-all outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-500 tabular-nums" required />
                 </div>
                 <div class="space-y-3">
                     <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-1">Batas Waktu Target <span class="text-blue-600">*</span></label>
@@ -301,7 +271,7 @@
                 <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest block px-2">Masukkan Nominal (Rp)</label>
                 <div class="relative group">
                    <div class="absolute left-6 top-1/2 -translate-y-1/2 text-xl font-black text-zinc-300 dark:text-zinc-700 group-focus-within:text-blue-600 transition-colors">Rp</div>
-                   <input v-model="fundAmount" type="number" placeholder="0" class="w-full h-20 pl-16 pr-8 rounded-[1.5rem] border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-3xl font-black tabular-nums transition-all outline-none focus:border-blue-500 focus:ring-8 focus:ring-blue-500/5" autofocus />
+                   <input v-model="formattedFundAmount" type="text" placeholder="0" class="w-full h-20 pl-16 pr-8 rounded-[1.5rem] border-2 border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 text-3xl font-black tabular-nums transition-all outline-none focus:border-blue-500 focus:ring-8 focus:ring-blue-500/5" autofocus />
                 </div>
              </div>
 
@@ -341,12 +311,9 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from 'vue'
 import {
-  Search, Eye, Pencil, Trash2, Loader2, Plus, Target, FileText, FileSpreadsheet, PlusCircle, Wallet, ChevronsUpDown
+  Search, Eye, Pencil, Trash2, Loader2, Plus, Target, FileText, FileSpreadsheet, PlusCircle, Wallet, CalendarDays
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from '@/components/ui/table'
 import {
   Dialog, DialogContent, DialogDescription, DialogTitle
 } from '@/components/ui/dialog'
@@ -392,6 +359,22 @@ const form = ref<CreateGoalPayload>({
   name: '',
   total_goal: 0,
   goal_date: new Date().toISOString().split('T')[0] || ''
+})
+
+const formattedTotalGoal = computed({
+  get: () => form.value.total_goal ? form.value.total_goal.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    form.value.total_goal = numeric ? parseInt(numeric, 10) : 0
+  }
+})
+
+const formattedFundAmount = computed({
+  get: () => fundAmount.value ? fundAmount.value.toLocaleString('id-ID') : '',
+  set: (val: string) => {
+    const numeric = val.replace(/[^0-9]/g, '')
+    fundAmount.value = numeric ? parseInt(numeric, 10) : 0
+  }
 })
 
 // Summary Calculations

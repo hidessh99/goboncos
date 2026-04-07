@@ -333,7 +333,7 @@ const faqs = [
                 <span class="bg-black text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Free Trial</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Trial 14 Hari</h3>
-              <div class="text-zinc-600 text-sm line-through mb-1">Rp 19.000</div>
+              <div class="text-zinc-600 text-sm line-through mb-1">Rp 1.000</div>
               <div class="text-4xl font-black mb-6">Rp 0</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Akses penuh semua fitur selama 14 hari, tanpa bayar di awal.</p>
             </div>
@@ -345,8 +345,8 @@ const faqs = [
                  <span class="bg-white border border-zinc-200 text-zinc-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Hemat Rp 6.000</span>
               </div>
               <h3 class="text-2xl font-bold mb-2">Paket 1 Bulan</h3>
-              <div class="text-zinc-600 text-sm line-through mb-1">Rp 25.000</div>
-              <div class="text-4xl font-black mb-6">Rp 19.000</div>
+              <div class="text-zinc-600 text-sm line-through mb-1">Rp 65.000</div>
+              <div class="text-4xl font-black mb-6">Rp 2.000</div>
               <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Cocok untuk coba penuh semua fitur {{ appName }}.</p>
             </div>
 
@@ -358,7 +358,7 @@ const faqs = [
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
                <div class="text-zinc-600 text-sm line-through mb-1">Rp 75.000</div>
-               <div class="text-4xl font-black mb-4 text-rose-700">Rp 49.000</div>
+               <div class="text-4xl font-black mb-4 text-rose-700">Rp 3.000</div>
                <div class="inline-flex mb-6 bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
             </div>
@@ -370,8 +370,8 @@ const faqs = [
                   <span class="bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 51.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
-               <div class="text-zinc-600 text-sm line-through mb-1">Rp 150.000</div>
-               <div class="text-4xl font-black mb-6">Rp 99.000</div>
+               <div class="text-zinc-600 text-sm line-through mb-1">Rp 50.000</div>
+               <div class="text-4xl font-black mb-6">Rp 5.000</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Pilihan paling stabil untuk bangun kebiasaan finansial.</p>
             </div>
           </div>
@@ -382,11 +382,11 @@ const faqs = [
             <h3 class="text-2xl sm:text-3xl font-bold mb-12 relative z-10">Manfaat yang Didapat di Semua Paket</h3>
             <div class="grid gap-x-16 gap-y-8 md:grid-cols-2 relative z-10">
               <div v-for="(benefit, b) in [
-                'Akses semua fitur pencatatan keuangan Simetri',
+                'Akses semua fitur pencatatan keuangan Goboncos',
                 'Tracking pemasukan, pengeluaran, aset, hutang, dan goals',
                 'Laporan dan analitik pengeluaran per periode',
                 'Multi-account: bank, e-wallet, dan cash',
-                'Asisten AI Simetri untuk insight keuangan harian',
+                'Asisten AI Goboncos untuk insight keuangan harian',
                 'OCR struk dan invoice dari gambar/PDF'
               ]" :key="b" class="flex items-start gap-5 group/item">
                 <div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-white group-hover/item:bg-rose-600 transition-colors">
