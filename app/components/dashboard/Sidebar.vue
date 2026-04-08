@@ -27,15 +27,6 @@
       <SidebarGroup>
         <SidebarGroupLabel class="px-4 text-[10px] font-black uppercase tracking-[0.2em] text-sidebar-foreground/40 mt-4 mb-2">Akuntansi</SidebarGroupLabel>
         <SidebarMenu class="gap-1 px-2">
-          <!-- Transaksi -->
-          <SidebarMenuItem>
-            <SidebarMenuButton as-child tooltip="Transaksi" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
-              <NuxtLink to="/transactions" class="flex items-center gap-3 w-full">
-                <ArrowLeftRight class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
-                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Transaksi</span>
-              </NuxtLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
 
           <!-- Akun Finance -->
           <SidebarMenuItem>
@@ -56,8 +47,19 @@
               </NuxtLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
+
+                    <SidebarMenuItem>
+            <SidebarMenuButton as-child tooltip="Transaksi" class="h-11 rounded-xl transition-all duration-300 hover:bg-sidebar-accent group">
+              <NuxtLink to="/transactions" class="flex items-center gap-3 w-full">
+                <ArrowLeftRight class="h-4 w-4 text-sidebar-foreground/50 group-hover:text-sidebar-foreground transition-colors" />
+                <span class="text-xs font-bold uppercase tracking-wider text-sidebar-foreground/70 group-hover:text-sidebar-foreground">Transaksi</span>
+              </NuxtLink>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
+
+
 
       <!-- Perencanaan Group -->
       <SidebarGroup>
@@ -231,6 +233,63 @@
       </SidebarMenu>
     </SidebarFooter>
   </Sidebar>
+
+  <!-- Mobile Bottom Navigation -->
+  <div 
+    v-if="isMounted && isMobile" 
+    class="md:hidden fixed bottom-0 left-0 w-full z-[100] bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 pt-3 pb-[env(safe-area-inset-bottom,1.5rem)]"
+  >
+    <div class="flex items-center justify-between w-full px-6 text-gray-500 dark:text-gray-400">
+      <!-- Dasbor -->
+      <NuxtLink 
+        to="/dashboard" 
+        class="flex flex-col items-center gap-1.5 flex-1 transition-all duration-300"
+        :class="$route.path === '/dashboard' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
+      >
+        <LayoutGrid class="size-5" />
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dashboard</p>
+      </NuxtLink>
+
+      <!-- Transaksi -->
+      <NuxtLink 
+        to="/transactions" 
+        class="flex flex-col items-center gap-1.5 flex-1 transition-all duration-300"
+        :class="$route.path.startsWith('/transactions') && $route.path !== '/transactions/goal' && $route.path !== '/transactions/report' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
+      >
+        <Receipt class="size-5" />
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Transaksi</p>
+      </NuxtLink>
+
+      <!-- Quick Add Button -->
+      <div class="flex-1 flex justify-center -mt-12">
+        <button 
+          class="flex size-14 items-center justify-center rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl ring-4 ring-black dark:ring-gray-600 transform active:scale-95 transition-all duration-200"
+        >
+          <Plus class="size-7" stroke-width="3" />
+        </button>
+      </div>
+
+      <!-- Target -->
+      <NuxtLink 
+        to="/transactions/goal" 
+        class="flex flex-col items-center gap-1.5 flex-1 transition-all duration-300"
+        :class="$route.path === '/transactions/goal' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
+      >
+        <Target class="size-5" />
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Target</p>
+      </NuxtLink>
+
+      <!-- Laporan -->
+      <NuxtLink 
+        to="/transactions/report" 
+        class="flex flex-col items-center gap-1.5 flex-1 transition-all duration-300"
+        :class="$route.path === '/transactions/report' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
+      >
+        <BarChart3 class="size-5" />
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Laporan</p>
+      </NuxtLink>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -283,6 +342,9 @@ import {
   TrendingUp,
   Target,
   ArrowLeftRight,
+  Plus,
+  BarChart3,
+  Receipt,
 } from 'lucide-vue-next'
 
 import {
