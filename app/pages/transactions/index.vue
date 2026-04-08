@@ -95,6 +95,14 @@
             Export
           </Button>
           <Button 
+            variant="outline"
+            class="flex-1 sm:flex-none h-11 sm:h-12 border-zinc-200 dark:border-zinc-800 rounded-2xl text-emerald-600 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 dark:hover:bg-zinc-900/50"
+            @click="exportToExcel"
+          >
+            <FileSpreadsheet class="w-4 h-4 mr-2" />
+            Excel
+          </Button>
+          <Button 
             id="btn-tambah-transaksi"
             class="flex-[2] sm:flex-none bg-zinc-900 dark:bg-white hover:bg-black dark:hover:bg-zinc-100 text-white dark:text-black font-black text-[10px] sm:text-xs uppercase tracking-widest gap-2 sm:gap-3 px-6 h-11 sm:h-12 rounded-2xl shadow-xl transition-all"
             @click="openCreateModal"
@@ -324,7 +332,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import {
   TrendingUp, TrendingDown, ArrowUpRight, Plus, Loader2, ReceiptText, 
-  Pencil, Trash2, CalendarDays, Wallet, ArrowRightLeft, Search, Eye, FileText, ChevronDown
+  Pencil, Trash2, CalendarDays, Wallet, ArrowRightLeft, Search, Eye, FileText, FileSpreadsheet, ChevronDown
 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import {
@@ -342,6 +350,7 @@ import { getFinancials, type FinancialItem } from '~/server/api/public/finance'
 import { alertSuccess, alertError, alertInfo } from '@/lib/alert'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import * as XLSX from 'xlsx'
 
 definePageMeta({ layout: 'dashboard' })
 
@@ -590,6 +599,26 @@ const exportToPdf = () => {
       headStyles: { fillColor: [39, 39, 42] }
     })
     doc.save(`jurnal-${selectedMonth.value}-${selectedYear.value}.pdf`)
+    alertSuccess('Downloaded')
+  } catch (err) {}
+}
+
+const exportToExcel = () => {
+  if (records.value.length === 0) return alertError('Tidak ada data.')
+  alertInfo('Menyiapkan file Excel...')
+  try {
+    const flatData = records.value.map(item => ({
+      'Tanggal': formatDate(item.date),
+      'Tipe': item.category_types?.name?.toUpperCase() || '-',
+      'Kategori': item.category?.name || '-',
+      'Keterangan': item.description || '-',
+      'Akun': item.financial?.name || '-',
+      'Nominal': item.amount
+    }))
+    const worksheet = XLSX.utils.json_to_sheet(flatData)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Transaksi')
+    XLSX.writeFile(workbook, `jurnal-${selectedMonth.value}-${selectedYear.value}.xlsx`)
     alertSuccess('Downloaded')
   } catch (err) {}
 }

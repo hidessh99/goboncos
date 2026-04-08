@@ -247,26 +247,27 @@
         :class="$route.path === '/dashboard' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
       >
         <LayoutGrid class="size-5" />
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dashboard</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dasbor</p>
       </NuxtLink>
 
-      <!-- Transaksi -->
+      <!-- dompet -->
       <NuxtLink 
-        to="/transactions" 
+        to="/finance" 
         class="flex flex-col items-center gap-1.5 flex-1 transition-all duration-300"
-        :class="$route.path.startsWith('/transactions') && $route.path !== '/transactions/goal' && $route.path !== '/transactions/report' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
+        :class="$route.path === '/finance' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'"
       >
         <Receipt class="size-5" />
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Transaksi</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Dompet</p>
       </NuxtLink>
 
       <!-- Quick Add Button -->
       <div class="flex-1 flex justify-center -mt-12">
-        <button 
+        <NuxtLink 
+          to="/transactions"
           class="flex size-14 items-center justify-center rounded-full bg-white dark:bg-gray-800 text-black dark:text-white shadow-2xl ring-4 ring-black dark:ring-gray-600 transform active:scale-95 transition-all duration-200"
         >
           <Plus class="size-7" stroke-width="3" />
-        </button>
+        </NuxtLink>
       </div>
 
       <!-- Target -->

@@ -50,8 +50,8 @@ const problems = [
   {
     title: 'Self-Reward Berujung Boncos?',
     description: 'Niatnya healing cuma segelas kopi, kok tiba-tiba saldo ludes? Mari kita tracking!',
-    color: 'bg-rose-50',
-    iconColor: 'text-rose-500'
+    color: 'bg-blue-50',
+    iconColor: 'text-blue-500'
   },
   {
     title: 'Lupa Langganan Apa Saja?',
@@ -123,7 +123,7 @@ const faqs = [
 
 
 <template>
-  <div class="min-h-screen bg-white font-sans text-zinc-900 selection:bg-rose-100 selection:text-rose-900">
+  <div class="min-h-screen bg-white font-sans text-zinc-900 selection:bg-blue-100 selection:text-blue-900">
     <!-- Sticky Navbar -->
     <nav class="sticky top-0 z-50 w-full border-b border-zinc-100 bg-white/80 backdrop-blur-md">
       <div class="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
@@ -151,20 +151,20 @@ const faqs = [
 
     <!-- Hero Section -->
     <main>
-      <section class="container mx-auto px-4 py-20 lg:py-32 overflow-hidden">
+      <section class="container mx-auto px-4 py-12 lg:py-16 overflow-hidden">
         <div class="grid items-center gap-16 lg:grid-cols-2">
           <div class="max-w-2xl">
-            <div class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 mb-6">
+            <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 mb-6">
               <span class="relative flex h-2 w-2">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-400 opacity-75"></span>
-                <span class="relative inline-flex h-2 w-2 rounded-full bg-rose-500"></span>
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
               </span>
               STOP OVERTHINKING SOAL DUIT
             </div>
             <h1 class="text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl mb-8">
-              Atur Keuangan <br /> Jadi Lebih <span class="relative inline-block text-rose-700">
+              Atur Keuangan <br /> Jadi Lebih <span class="relative inline-block text-blue-700">
                 Chill & Estetik
-                <svg class="absolute -bottom-2 left-0 w-full h-3 text-rose-100/50" fill="currentColor" viewBox="0 0 100 10">
+                <svg class="absolute -bottom-2 left-0 w-full h-3 text-blue-100/50" fill="currentColor" viewBox="0 0 100 10">
                   <path d="M0 10 Q 50 0 100 10" stroke="currentColor" stroke-width="2" fill="none" />
                 </svg>
               </span>
@@ -194,7 +194,7 @@ const faqs = [
           </div>
           
           <div class="relative">
-            <div class="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-rose-50/50 blur-[100px] pointer-events-none"></div>
+            <div class="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-blue-50/50 blur-[100px] pointer-events-none"></div>
             <div class="relative rounded-[2.5rem] border border-zinc-100 bg-white p-4 shadow-2xl overflow-hidden">
                <!-- Abstract UI Mockup -->
                <div class="aspect-[16/10] rounded-[2rem] bg-zinc-50 border border-zinc-100 p-6 flex flex-col gap-6">
@@ -204,9 +204,9 @@ const faqs = [
                   </div>
                   <div class="flex gap-4">
                     <div class="h-24 flex-1 bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm">
-                      <div class="h-3 w-1/2 bg-rose-50 rounded mb-2"></div>
-                      <div class="text-sm font-bold text-rose-700 italic">Self Reward</div>
-                      <div class="h-4 w-full bg-rose-100 rounded mt-2"></div>
+                      <div class="h-3 w-1/2 bg-blue-50 rounded mb-2"></div>
+                      <div class="text-sm font-bold text-blue-700 italic">Self Reward</div>
+                      <div class="h-4 w-full bg-blue-100 rounded mt-2"></div>
                     </div>
                     <div class="h-24 flex-1 bg-white border border-zinc-100 rounded-2xl p-4 shadow-sm">
                       <div class="h-3 w-1/2 bg-emerald-50 rounded mb-2"></div>
@@ -224,7 +224,7 @@ const faqs = [
                         <div class="h-8 w-8 bg-black rounded-lg flex items-center justify-center text-white text-xs">☕</div>
                         <div class="h-4 w-24 bg-zinc-200 rounded"></div>
                       </div>
-                      <div class="h-4 w-12 bg-rose-100 rounded"></div>
+                      <div class="h-4 w-12 bg-blue-100 rounded"></div>
                     </div>
                   </div>
                </div>
@@ -244,9 +244,9 @@ const faqs = [
       </section>
 
       <!-- Problems Section -->
-      <section class="bg-zinc-50 py-24 lg:py-32">
+      <section class="bg-zinc-50 py-12 lg:py-16">
         <div class="container mx-auto px-4">
-          <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="text-center max-w-2xl mx-auto mb-8">
             <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4">Relate Sama Masalah Ini?</h2>
             <p class="text-lg text-zinc-600">Capek dimarahin diri sendiri gara-gara duit gak jelas lari kemana?</p>
           </div>
@@ -265,9 +265,9 @@ const faqs = [
       </section>
 
       <!-- Features Section -->
-      <section id="fitur" class="py-24 lg:py-32">
+      <section id="fitur" class="py-12 lg:py-16">
         <div class="container mx-auto px-4">
-          <div class="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
+          <div class="flex flex-col lg:flex-row justify-between items-end gap-8 mb-8">
             <div class="max-w-2xl">
               <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl mb-6">Fitur Yang Bikin Hidup <br /> Jadi Gak Ribet</h2>
               <p class="text-lg text-zinc-600">Didesain khusus buat kita yang pengen hidup balance: tetep bisa gaya, tapi saldo tetep aman.</p>
@@ -291,14 +291,14 @@ const faqs = [
       </section>
 
       <!-- High Contrast Section -->
-      <section class="bg-black text-white py-24 lg:py-32 overflow-hidden relative">
+      <section class="bg-black text-white py-12 lg:py-16 overflow-hidden relative">
         <div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20200%20200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter%20id%3D%22noiseFilter%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23noiseFilter)%22%2F%3E%3C%2Fsvg%3E')]"></div>
         <div class="container mx-auto px-4 relative z-10 text-center">
             <div class="inline-flex items-center gap-2 rounded-full bg-zinc-800 px-4 py-1.5 text-xs font-semibold mb-8 border border-zinc-700">
               🌈 GAYA HIDUP VS SALDO
             </div>
             <h2 class="text-4xl lg:text-6xl font-extrabold mb-8 max-w-4xl mx-auto leading-tight">
-              Bisa Makan Enak <span class="text-rose-500 italic">Tanpa Perasaan</span> Bersalah Di Akhir Bulan
+              Bisa Makan Enak <span class="text-blue-500 italic">Tanpa Perasaan</span> Bersalah Di Akhir Bulan
             </h2>
             <p class="text-xl text-zinc-200 mb-12 max-w-2xl mx-auto leading-relaxed">
               {{ appName }} bantuin kamu membagi budget buat hal yang kamu suka dan hal yang kamu butuhin. Gak perlu lagi takut liat saldo di tanggal tua.
@@ -315,9 +315,9 @@ const faqs = [
       </section>
 
       <!-- Pricing Section -->
-      <section id="harga" class="py-24 lg:py-32 bg-white">
+      <section id="harga" class="py-12 lg:py-16 bg-white">
         <div class="container mx-auto px-4">
-          <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-center max-w-3xl mx-auto mb-8">
             <h2 class="text-5xl font-black tracking-tight mb-8">Harga</h2>
             <p class="text-zinc-600 text-lg leading-relaxed mb-6">
               Produk yang dijual adalah layanan langganan aplikasi pengelolaan keuangan {{ appName }}. Semua paket memiliki manfaat yang sama, dengan perbedaan pada durasi berlangganan. Harga ditampilkan dalam mata uang Rupiah.
@@ -325,7 +325,7 @@ const faqs = [
             <p class="text-zinc-600 font-medium">Mulai dari trial gratis 14 hari, lalu pilih paket yang paling cocok.</p>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-20">
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-10">
             <!-- Trial Card -->
             <div class="relative rounded-[2rem] border border-zinc-200 bg-white p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
               <div class="flex justify-between items-center mb-6">
@@ -351,15 +351,15 @@ const faqs = [
             </div>
 
             <!-- 3 Months Card (Best Deal) -->
-            <div class="relative rounded-[2rem] border-2 border-rose-200 bg-white p-8 flex flex-col h-full shadow-[0_20px_50px_-20px_rgba(251,113,133,0.3)] ring-4 ring-rose-50 ring-offset-0 transition-all hover:scale-[1.02]">
+            <div class="relative rounded-[2rem] border-2 border-blue-200 bg-white p-8 flex flex-col h-full shadow-[0_20px_50px_-20px_rgba(96,165,250,0.3)] ring-4 ring-blue-50 ring-offset-0 transition-all hover:scale-[1.02]">
                <div class="flex justify-between items-center mb-6">
                   <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">3 Bulan</span>
-                  <span class="bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
+                  <span class="bg-blue-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider animate-pulse">Best Deal</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 3 Bulan</h3>
                <div class="text-zinc-600 text-sm line-through mb-1">Rp 75.000</div>
-               <div class="text-4xl font-black mb-4 text-rose-700">Rp 3.000</div>
-               <div class="inline-flex mb-6 bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
+               <div class="text-4xl font-black mb-4 text-blue-700">Rp 3.000</div>
+               <div class="inline-flex mb-6 bg-blue-50 text-blue-800 text-xs font-bold px-3 py-1 rounded-full self-start">Paling direkomendasikan</div>
                <p class="text-zinc-600 text-sm leading-relaxed mt-auto">Lebih hemat untuk penggunaan rutin setiap hari.</p>
             </div>
 
@@ -367,7 +367,7 @@ const faqs = [
             <div class="relative rounded-[2rem] border border-zinc-100 bg-zinc-50/50 p-8 flex flex-col h-full shadow-sm transition-all hover:shadow-md">
                <div class="flex justify-between items-center mb-6">
                   <span class="text-xs font-bold tracking-widest text-zinc-600 uppercase">6 Bulan</span>
-                  <span class="bg-rose-50 text-rose-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-rose-100">Hemat Rp 45.000</span>
+                  <span class="bg-blue-50 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-blue-100">Hemat Rp 45.000</span>
                </div>
                <h3 class="text-2xl font-bold mb-2">Paket 6 Bulan</h3>
                <div class="text-zinc-600 text-sm line-through mb-1">Rp 50.000</div>
@@ -378,7 +378,7 @@ const faqs = [
 
           <!-- Benefits Card -->
           <div class="max-w-5xl mx-auto rounded-[2.5rem] border border-zinc-100 bg-white p-8 sm:p-14 shadow-sm relative overflow-hidden group">
-            <div class="absolute -right-20 -top-20 h-64 w-64 bg-zinc-50 rounded-full blur-3xl group-hover:bg-rose-50/50 transition-colors duration-500"></div>
+            <div class="absolute -right-20 -top-20 h-64 w-64 bg-zinc-50 rounded-full blur-3xl group-hover:bg-blue-50/50 transition-colors duration-500"></div>
             <h3 class="text-2xl sm:text-3xl font-bold mb-12 relative z-10">Manfaat yang Didapat di Semua Paket</h3>
             <div class="grid gap-x-16 gap-y-8 md:grid-cols-2 relative z-10">
               <div v-for="(benefit, b) in [
@@ -389,7 +389,7 @@ const faqs = [
                 'Asisten AI Goboncos untuk insight keuangan harian',
                 'OCR struk dan invoice dari gambar/PDF'
               ]" :key="b" class="flex items-start gap-5 group/item">
-                <div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-white group-hover/item:bg-rose-600 transition-colors">
+                <div class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-white group-hover/item:bg-blue-600 transition-colors">
                   <CheckCircle2 class="h-3.5 w-3.5" />
                 </div>
                 <span class="text-zinc-700 font-medium group-hover/item:text-black transition-colors">{{ benefit }}</span>
@@ -400,11 +400,11 @@ const faqs = [
       </section>
 
       <!-- FAQ Section -->
-      <section class="py-24 lg:py-32 bg-white">
+      <section class="py-12 lg:py-16 bg-white">
         <div class="container mx-auto px-4 max-w-5xl">
-          <div class="text-center mb-16 space-y-4">
+          <div class="text-center mb-8 space-y-4">
             <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900">
-              Frequently Asked <span class="text-rose-600">Questions.</span>
+              Frequently Asked <span class="text-blue-600">Questions.</span>
             </h2>
             <p class="text-zinc-600 text-sm sm:text-base max-w-2xl mx-auto font-medium">
               Masih ragu buat pakai {{ appName }}? Cek jawaban dari pertanyaan yang sering ditanyain ini.
@@ -417,7 +417,7 @@ const faqs = [
                :key="i" 
                class="bg-white border border-zinc-100 rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 shadow-sm hover:shadow-md transition-all duration-300 group"
              >
-                <h3 class="text-lg sm:text-xl font-bold text-zinc-900 mb-4 group-hover:text-rose-600 transition-colors">{{ faq.question }}</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-zinc-900 mb-4 group-hover:text-blue-600 transition-colors">{{ faq.question }}</h3>
                 <p class="text-zinc-600 text-sm sm:text-base leading-relaxed font-medium">{{ faq.answer }}</p>
              </div>
           </div>
@@ -426,7 +426,7 @@ const faqs = [
 
 
       <!-- CTA Footer Section -->
-      <section id="testimoni" class="container mx-auto px-4 pb-24">
+      <section id="testimoni" class="container mx-auto px-4 pb-12">
         <div class="rounded-[3rem] bg-indigo-600 p-12 lg:p-24 text-center text-white relative overflow-hidden">
           <!-- Decoration -->
           <div class="absolute top-0 right-0 h-64 w-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
@@ -477,8 +477,8 @@ const faqs = [
 </template>
 
 <style scoped>
-.selection\:bg-rose-100 ::selection { background-color: rgb(255 241 242); }
-.selection\:text-rose-900 ::selection { color: rgb(136 19 55); }
+.selection\:bg-blue-100 ::selection { background-color: rgb(219 234 254); }
+.selection\:text-blue-900 ::selection { color: rgb(30 58 138); }
 
 @keyframes ping {
   75%, 100% {
